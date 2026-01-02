@@ -1,416 +1,217 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
-using Unity.Burst;
-using Unity.Collections;
 using UnityEngine;
-using UnityEngine.Assertions;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using Debug = UnityEngine.Debug;
-using Object = UnityEngine.Object;
-
-// RAAJJE VAGU AUTO: THE ALBAKO CHRONICLES
-// MainGameManager.cs - Core Game Controller & System Orchestrator
-// Optimized for Mali-G72 GPU, 30fps locked mobile performance
-// Maldivian cultural integration with prayer time awareness
-// Version: 1.0.0 (Production Build)
+using System;
+using System.IO;
+using UnityEngine.Audio;
+using MaldivianCulturalSDK;
 
 namespace RVA.TAC.Core
 {
     /// <summary>
-    /// Central game state enumerator reflecting Maldives-appropriate game flow
+    /// Central game controller for RAAJJE VAGU AUTO: THE ALBAKO CHRONICLES
+    /// Mobile-optimized singleton with Maldivian cultural integration
+    /// Unity Third-Party Integration: Unity Audio Mixer, Burst Compiler
+    /// Cultural Compliance: Islamic prayer time sensitivity, Maldivian business hours
+    /// Performance Target: <1ms initialization, 30fps locked on Mali-G72 GPU
     /// </summary>
-    public enum GameState
-    {
-        BOOT = 0,           // Initial application startup
-        MAIN_MENU = 1,      // Main menu (culturally appropriate music/theme)
-        LOADING = 2,        // Scene loading with Maldivian trivia
-        PLAYING = 3,        // Active gameplay (prayer-aware)
-        PAUSED = 4,         // Game paused (prayer time auto-pause)
-        PRAYER_PAUSE = 5,   // Auto-pause during prayer times
-        SAVING = 6,         // Save in progress
-        QUITTING = 7        // Graceful shutdown
-    }
-
-    /// <summary>
-    /// Critical system initialization priority for deterministic startup order
-    /// </summary>
-    public enum SystemPriority
-    {
-        CRITICAL = 0,   // SaveSystem, EventManager, PoolManager
-        HIGH = 1,       // InputSystem, AudioManager, PrayerTimeSystem
-        MEDIUM = 2,     // WeatherSystem, TimeSystem, IslandManager
-        LOW = 3,        // UI, NPC, Vehicles, Missions
-        BACKGROUND = 4  // Analytics, Achievements, Non-critical
-    }
-
-    [BurstCompile]
-    public struct PerformanceMetrics : IDisposable
-    {
-        public float DeltaTimeAvg;
-        public float FrameTimeMS;
-        public float MemoryUsageMB;
-        public int ActiveObjectCount;
-        public int DrawCalls;
-        public int SystemLoadPercent;
-
-        public void Dispose() { }
-    }
-
-    /// <summary>
-    /// MainGameManager - The beating heart of RVA:TAC
-    /// Persistent singleton orchestrating all game systems with cultural sensitivity
-    /// </summary>
-    [DisallowMultipleComponent]
+    [RequireComponent(typeof(PrayerTimeSystem))]
+    [RequireComponent(typeof(TimeSystem))]
+    [RequireComponent(typeof(SaveSystem))]
+    [RequireComponent(typeof(VersionControlSystem))]
+    [RequireComponent(typeof(DebugSystem))]
+    [RequireComponent(typeof(AudioManager))]
     public class MainGameManager : MonoBehaviour
     {
-        #region SINGLETON_PATTERN
+        #region Singleton Pattern
         private static MainGameManager _instance;
-        private static readonly object _lock = new object();
-        private static bool _applicationIsQuitting = false;
-
         public static MainGameManager Instance
         {
             get
             {
-                if (_applicationIsQuitting)
+                if (_instance == null)
                 {
-                    Debug.LogWarning("[MainGameManager] Instance accessed during application quit. Returning null.");
-                    return null;
+                    Debug.LogError("[RVA:TAC] MainGameManager instance is null. Ensure GameManager prefab exists in initial scene.");
                 }
-
-                lock (_lock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = FindObjectOfType<MainGameManager>();
-                        if (_instance == null)
-                        {
-                            GameObject singleton = new GameObject("MainGameManager");
-                            _instance = singleton.AddComponent<MainGameManager>();
-                            Debug.Log("[MainGameManager] Singleton created dynamically.");
-                        }
-                    }
-                    return _instance;
-                }
+                return _instance;
             }
         }
         #endregion
 
-        #region SERIALIZED_FIELDS
-        [Header("=== RVA:TAC CORE SETTINGS ===")]
-        [Tooltip("Enable for production mobile builds (disables verbose logging)")]
-        [SerializeField] private bool _isProductionBuild = true;
+        #region Unity Inspector Fields
+        [Header("Maldivian Game World Configuration")]
+        [Tooltip("Total number of islands in the archipelago")]
+        public int TotalIslands = 41;
+        
+        [Tooltip("Main island where player starts (refer to MaldivesData.txt)")]
+        public int StartingIslandID = 11; // Male (capital)
+        
+        [Tooltip("Maximum concurrent gangs active in world")]
+        public int MaxActiveGangs = 83;
+        
+        [Tooltip("Cultural difficulty affects prayer sensitivity")]
+        public CulturalDifficultyLevel CulturalDifficulty = CulturalDifficultyLevel.Authentic;
 
-        [Tooltip("Target frame rate for mobile optimization")]
-        [SerializeField] private int _targetFrameRate = 30;
+        [Header("Mobile Performance Settings")]
+        [Tooltip("Target frame rate for mobile devices")]
+        public int TargetFrameRate = 30;
+        
+        [Tooltip("Master volume control respecting prayer times")]
+        [Range(0f, 1f)]
+        public float MasterVolume = 0.7f;
 
-        [Tooltip("Enable burst compilation for performance-critical sections")]
-        [SerializeField] private bool _enableBurstCompilation = true;
-
-        [Header("MALDIVIAN CULTURAL SETTINGS")]
+        [Header("Cultural Sensitivity")]
         [Tooltip("Automatically pause gameplay during prayer times")]
-        [SerializeField] private bool _respectPrayerTimes = true;
+        public bool RespectPrayerTimes = true;
+        
+        [Tooltip("Pause during Friday Jumu'ah (12:00-14:00)")]
+        public bool RespectFridayPrayer = true;
+        
+        [Tooltip("Maldivian business hours enforcement (9AM-5PM for missions)")]
+        public bool EnforceBusinessHours = true;
 
-        [Tooltip("Prayer reminder UI notification enabled")]
-        [SerializeField] private bool _prayerNotifications = true;
-
-        [Tooltip ("Male, Maldives GPS coordinates for accurate prayer calculation")]
-        [SerializeField] private Vector2 _maldivesCoordinates = new Vector2(4.1755f, 73.5093f);
-
-        [Header("SYSTEM INITIALIZATION")]
-        [Tooltip ("Systems will initialize in priority order (CRITICAL → BACKGROUND)")]
-        [SerializeField] private List<SystemInitializer> _systemInitializers = new List<SystemInitializer>
-        {
-            // CRITICAL PRIORITY (Order matters!)
-            new SystemInitializer("SaveSystem", SystemPriority.CRITICAL, true),
-            new SystemInitializer("EventManager", SystemPriority.CRITICAL, true),
-            new SystemInitializer("PoolManager", SystemPriority.CRITICAL, true),
-            new SystemInitializer("VersionControlSystem", SystemPriority.CRITICAL, true),
-            
-            // HIGH PRIORITY
-            new SystemInitializer("PrayerTimeSystem", SystemPriority.HIGH, true),
-            new SystemInitializer("AudioManager", SystemPriority.HIGH, true),
-            new SystemInitializer("InputSystem", SystemPriority.HIGH, true),
-            new SystemInitializer ("TimeSystem", SystemPriority.HIGH, true),
-            
-            // MEDIUM PRIORITY
-            new SystemInitializer("WeatherSystem", SystemPriority.MEDIUM, true),
-            new SystemInitializer("IslandManager", SystemPriority.MEDIUM, true),
-            new SystemInitializer("IslamicCalendar", SystemPriority.MEDIUM, false), // Optional
-            
-            // LOW PRIORITY (Gameplay)
-            new SystemInitializer("PlayerController", SystemPriority.LOW, true),
-            new SystemInitializer("VehicleSpawnManager", SystemPriority.LOW, true),
-            new SystemInitializer("NPCSpawner", SystemPriority.LOW, true),
-            new SystemInitializer("GangManager", SystemPriority.LOW, true),
-            
-            // BACKGROUND (Non-critical)
-            new SystemInitializer("UIManager", SystemPriority.BACKGROUND, true),
-            new SystemInitializer("MissionSystem", SystemPriority.BACKGROUND, true),
-            new SystemInitializer("AchievementSystem", SystemPriority.BACKGROUND, false),
-            new SystemInitializer("AnalyticsSystem", SystemPriority.BACKGROUND, false)
-        };
-
-        [Header("MOBILE PERFORMANCE")]
-        [Tooltip("Low memory threshold for mobile devices (MB)")]
-        [SerializeField] private int _lowMemoryThresholdMB = 200;
-
-        [Tooltip ("Enable dynamic quality adjustment based on performance")]
-        [SerializeField] private bool _adaptiveQuality = true;
-
-        [Tooltip ("Max concurrent audio sources for mobile")]
-        [SerializeField] private int _maxAudioSources = 16;
+        [Header("Debug Configuration")]
+        [Tooltip("Enable comprehensive logging for development")]
+        public bool EnableDebugLogging = true;
+        
+        [Tooltip("Skip cultural restrictions for testing")]
+        public bool DebugSkipCulturalRules = false;
         #endregion
 
-        #region PRIVATE_FIELDS
-        private GameState _currentState = GameState.BOOT;
-        private GameState _previousState = GameState.BOOT;
-        private readonly Dictionary<string, IGameSystem> _registeredSystems = new Dictionary<string, IGameSystem>(64);
-        private readonly Dictionary<SystemPriority, List<string>> _systemsByPriority = new Dictionary<SystemPriority, List<string>>
-        {
-            { SystemPriority.CRITICAL, new List<string>(8) },
-            { SystemPriority.HIGH, new List<string>(8) },
-            { SystemPriority.MEDIUM, new List<string>(8) },
-            { SystemPriority.LOW, new List<string>(16) },
-            { SystemPriority.BACKGROUND, new List<string>(16) }
-        };
-
-        // Performance tracking
-        private readonly Queue<float> _frameTimeHistory = new Queue<float>(60);
-        private PerformanceMetrics _currentMetrics;
-        private bool _isPerformanceCritical = false;
-
-        // Cultural state
-        private bool _isPrayerTimeActive = false;
-        private string _nextPrayerName = string.Empty;
-        private DateTime _nextPrayerTime;
-
-        // Initialization
-        private bool _isInitialized = false;
-        private bool _isShuttingDown = false;
-        private int _initializedSystemCount = 0;
-        private float _initializationStartTime = 0f;
-
-        // Mobile lifecycle
-        private bool _isAppPaused = false;
-        private float _pauseTime = 0f;
-        private const float MAX_PAUSE_DURATION_BEFORE_SAVE = 300f; // 5 minutes
+        #region Private Core Systems
+        private PrayerTimeSystem _prayerTimeSystem;
+        private TimeSystem _timeSystem;
+        private SaveSystem _saveSystem;
+        private VersionControlSystem _versionControl;
+        private DebugSystem _debugSystem;
+        private AudioManager _audioManager;
+        private GameSceneManager _sceneManager;
+        private InputSystem _inputSystem;
         #endregion
 
-        #region PUBLIC_PROPERTIES
-        public GameState CurrentState => _currentState;
-        public bool IsInitialized => _isInitialized;
-        public bool IsPrayerTimeActive => _isPrayerTimeActive;
-        public PerformanceMetrics PerformanceMetrics => _currentMetrics;
-        public Vector2 MaldivesCoordinates => _maldivesCoordinates;
-        public bool IsProductionBuild => _isProductionBuild;
+        #region Game State Properties
+        public bool IsGameInitialized { get; private set; }
+        public bool IsPaused { get; private set; }
+        public bool IsPrayerTimeActive { get; private set; }
+        public bool IsFridayJumuah { get; private set; }
+        public GameState CurrentGameState { get; private set; } = GameState.MainMenu;
+        public MaldivesDateTime CurrentMaldivianTime { get; private set; }
         #endregion
 
-        #region UNITY_LIFECYCLE
+        #region Cultural Events
+        public event Action<PrayerName> OnPrayerTimeBegins;
+        public event Action<PrayerName> OnPrayerTimeEnds;
+        public event Action OnFridayJumuahBegins;
+        public event Action OnFridayJumuahEnds;
+        public event Action<float> OnMasterVolumeChanged;
+        #endregion
+
+        #region Unity Lifecycle
         private void Awake()
         {
-            // ENFORCE SINGLETON
-            lock (_lock)
+            #region Singleton Enforcement
+            if (_instance != null && _instance != this)
             {
-                if (_instance != null && _instance != this)
-                {
-                    Debug.LogWarning($"[MainGameManager] Duplicate instance destroyed on {gameObject.name}");
-                    Destroy(gameObject);
-                    return;
-                }
-
-                _instance = this;
-                transform.SetParent(null);
-                DontDestroyOnLoad(gameObject);
+                Debug.LogWarning($"[RVA:TAC] Duplicate MainGameManager detected on {gameObject.name}. Destroying duplicate.");
+                Destroy(gameObject);
+                return;
             }
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+            #endregion
 
-            // BOOTSTRAP PERFORMANCE
-            Application.targetFrameRate = _targetFrameRate;
-            QualitySettings.vSyncCount = 0;
-            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+            #region System References
+            _prayerTimeSystem = GetComponent<PrayerTimeSystem>();
+            _timeSystem = GetComponent<TimeSystem>();
+            _saveSystem = GetComponent<SaveSystem>();
+            _versionControl = GetComponent<VersionControlSystem>();
+            _debugSystem = GetComponent<DebugSystem>();
+            _audioManager = GetComponent<AudioManager>();
+            _sceneManager = GetComponent<GameSceneManager>() ?? gameObject.AddComponent<GameSceneManager>();
+            _inputSystem = GetComponent<InputSystem>();
+            #endregion
 
-            // MOBILE PERFORMANCE TUNING
-            if (Application.isMobilePlatform)
-            {
-                _maxAudioSources = Mathf .Min(_maxAudioSources, 16);
-                QualitySettings.SetQualityLevel(2, false); // Medium quality
-                Application.backgroundLoadingPriority = ThreadPriority.Low;
-            }
-
-            // BURST COMPILATION
-            if (_enableBurstCompilation)
-            {
-                BurstCompiler.Enable();
-            }
-
-            // INITIALIZE STATE
-            _currentState = GameState.BOOT;
-            _initializationStartTime = Time.realtimeSinceStartup;
-
-            Log("=== RAAJJE VAGU AUTO: THE ALBAKO CHRONICLES ===", LogType.Important);
-            Log($"Build: {Application.version} | Platform: {Application.platform} | Unity: {Application.unityVersion}", LogType.Important);
-            Log($"Maldives Coordinates: {_maldivesCoordinates.x}°N, {_maldivesCoordinates.y}°E", LogType.Info);
+            #region Performance Initialization
+            QualitySettings.vSyncCount = 1;
+            Application.targetFrameRate = TargetFrameRate;
             
-            // PRE-ALLOCATE COLLECTIONS
-            _registeredSystems.Clear();
-            foreach (var priority in _systemsByPriority.Keys)
+            // Mali-G72 GPU optimization
+            QualitySettings.SetQualityLevel(2, true); // Medium quality for mobile
+            Shader.globalMaximumLOD = 200;
+            #endregion
+
+            #region Cultural Shielding
+            if (RespectPrayerTimes && !DebugSkipCulturalRules)
             {
-                _systemsByPriority[priority].Clear();
+                Application.lowMemory += HandleLowMemoryDuringPrayer;
+            }
+            #endregion
+
+            if (EnableDebugLogging)
+            {
+                Debug.Log($"[RVA:TAC] MainGameManager initialized. Build: {VersionControlSystem.VERSION}");
             }
         }
 
         private void Start()
         {
-            // BEGIN INITIALIZATION PIPELINE
-            StartCoroutine(InitializeSystemsAsync());
+            InitializeGameCore();
+        }
+
+        private void OnEnable()
+        {
+            if (_prayerTimeSystem != null)
+            {
+                _prayerTimeSystem.OnPrayerTimeReached += HandlePrayerTimeReached;
+                _prayerTimeSystem.OnPrayerTimeEnded += HandlePrayerTimeEnded;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (_prayerTimeSystem != null)
+            {
+                _prayerTimeSystem.OnPrayerTimeReached -= HandlePrayerTimeReached;
+                _prayerTimeSystem.OnPrayerTimeEnded -= HandlePrayerTimeEnded;
+            }
         }
 
         private void Update()
         {
-            if (!_isInitialized || _isShuttingDown) return;
+            if (!IsGameInitialized) return;
 
-            // UPDATE ALL ACTIVE SYSTEMS
-            foreach (var system in _registeredSystems.Values)
-            {
-                if (system.IsEnabled && !system.IsPaused)
-                {
-                    try
-                    {
-                        system.OnUpdate(Time.deltaTime);
-                    }
-                    catch (Exception e)
-                    {
-                        LogError($"[Update] System '{system.SystemName}' failed: {e.Message}", system.SystemName);
-                        if (!_isProductionBuild) throw;
-                    }
-                }
-            }
-
-            // PERFORMANCE MONITORING (Every 60 frames)
-            if (Time.frameCount % 60 == 0)
-            {
-                UpdatePerformanceMetrics();
-            }
-
-            // PRAYER TIME CHECK (Every 30 seconds)
-            if (Time.frameCount % (30 * _targetFrameRate) == 0 && _respectPrayerTimes)
-            {
-                CheckPrayerTimes();
-            }
-
-            // MOBILE MEMORY PRESSURE
-            if (Application.isMobilePlatform && Time.frameCount % 120 == 0)
-            {
-                CheckMemoryPressure();
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            if (!_isInitialized || _isShuttingDown) return;
-
-            foreach (var system in _registeredSystems.Values)
-            {
-                if (system.IsEnabled && !system.IsPaused)
-                {
-                    try
-                    {
-                        system.OnFixedUpdate(Time.fixedDeltaTime);
-                    }
-                    catch (Exception e)
-                    {
-                        LogError($"[FixedUpdate] System '{system.SystemName}' failed: {e.Message}", system.SystemName);
-                        if (!_isProductionBuild) throw;
-                    }
-                }
-            }
-        }
-
-        private void LateUpdate()
-        {
-            if (!_isInitialized || _isShuttingDown) return;
-
-            foreach (var system in _registeredSystems.Values)
-            {
-                if (system.IsEnabled && !system.IsPaused)
-                {
-                    try
-                    {
-                        system.OnLateUpdate(Time.deltaTime);
-                    }
-                    catch (Exception e)
-                    {
-                        LogError($"[LateUpdate] System '{system.SystemName}' failed: {e.Message}", system.SystemName);
-                        if (!_isProductionBuild) throw;
-                    }
-                }
-            }
-        }
-
-        private void OnApplicationPause(bool pauseStatus)
-        {
-            _isAppPaused = pauseStatus;
+            // Cultural time checks
+            CheckFridayJumuahPeriod();
+            CheckMaldivianBusinessHours();
             
-            if (pauseStatus)
+            // Mobile input back button handling
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _pauseTime = Time.realtimeSinceStartup;
-                Log("Application paused - entering background mode", LogType.Warning);
-                
-                // PAUSE ALL SYSTEMS
-                SetAllSystemsPause(true);
-                
-                // AUTO-SAVE IF PAUSED TOO LONG
-                StartCoroutine(DelayedSaveOnPause());
-            }
-            else
-            {
-                float pauseDuration = Time.realtimeSinceStartup - _pauseTime;
-                Log($"Application resumed after {pauseDuration:F1}s", LogType.Info);
-                
-                // RESUME SYSTEMS
-                SetAllSystemsPause(false);
-                
-                // ADJUST PRAYER TIMES AFTER BACKGROUNDING
-                if (_registeredSystems.TryGetValue("PrayerTimeSystem", out var prayerSystem))
-                {
-                    (prayerSystem as PrayerTimeSystem)?.ForceRecalculation();
-                }
+                HandleMobileBackButton();
             }
         }
 
         private void OnApplicationFocus(bool hasFocus)
         {
-            // Handle mobile focus loss/gain
-            if (!hasFocus && Application.isMobilePlatform)
+            if (!IsGameInitialized) return;
+            
+            if (RespectPrayerTimes && !DebugSkipCulturalRules && IsPrayerTimeActive)
             {
-                Log("Application lost focus", LogType.Warning);
+                // Auto-pause when app loses focus during prayer
+                SetPausedState(!hasFocus || IsPaused);
             }
         }
 
-        private void OnApplicationQuit()
+        private void OnApplicationPause(bool pauseStatus)
         {
-            _applicationIsQuitting = true;
-            _isShuttingDown = true;
+            if (!IsGameInitialized) return;
             
-            Log("=== APPLICATION QUITTING ===", LogType.Important);
-            
-            // GRACEFUL SHUTDOWN
-            ShutdownAllSystems();
-            
-            // FINAL SAVE
-            if (_registeredSystems.TryGetValue("SaveSystem", out var saveSystem))
+            // Handle mobile call interruptions during gameplay
+            if (pauseStatus && CurrentGameState == GameState.Playing)
             {
-                (saveSystem as SaveSystem)?.ForceSave();
+                SetPausedState(true);
+                _saveSystem?.AutoSave();
             }
-            
-            _registeredSystems.Clear();
         }
 
         private void OnDestroy()
@@ -420,758 +221,441 @@ namespace RVA.TAC.Core
                 _instance = null;
             }
         }
-
-        private void OnLowMemory()
-        {
-            Log("LOW MEMORY WARNING - Clearing non-critical caches", LogType.Critical);
-            
-            // EMERGENCY MEMORY CLEARING
-            Resources.UnloadUnusedAssets();
-            
-            // NOTIFY ALL SYSTEMS
-            foreach (var system in _registeredSystems.Values)
-            {
-                system.OnLowMemory();
-            }
-            
-            GC.Collect();
-        }
         #endregion
 
-        #region INITIALIZATION
-        private IEnumerator InitializeSystemsAsync()
+        #region Core Initialization
+        [ContextMenu("Initialize Game Core")]
+        public void InitializeGameCore()
         {
-            Log("=== INITIALIZING CORE SYSTEMS ===", LogType.Important);
-            
-            // SORT SYSTEMS BY PRIORITY
-            foreach (var initializer in _systemInitializers)
+            if (IsGameInitialized)
             {
-                if (initializer.IsEnabled)
-                {
-                    _systemsByPriority[initializer.Priority].Add(initializer.SystemName);
-                }
-            }
-
-            // STEP 1: CRITICAL SYSTEMS (Synchronous - must complete before continuing)
-            yield return InitializeSystemBatch(SystemPriority.CRITICAL, waitForCompletion: true);
-
-            // STEP 2: HIGH PRIORITY (Asynchronous - can load in background)
-            yield return InitializeSystemBatch(SystemPriority.HIGH, waitForCompletion: false);
-            
-            // LOADING SCREEN UPDATE
-            yield return UpdateLoadingProgress(0.4f, " initializing core environment...");
-
-            // STEP 3: MEDIUM PRIORITY
-            yield return InitializeSystemBatch(SystemPriority.MEDIUM, waitForCompletion: false);
-            yield return UpdateLoadingProgress(0.6f, "Loading island data...");
-            
-            // Wait for island data to be ready
-            yield return new WaitUntil(() => 
-                _registeredSystems.ContainsKey("IslandManager") && 
-                (_registeredSystems["IslandManager"] as IslandManager)?.IsDataLoaded == true
-            );
-
-            // STEP 4: LOW PRIORITY (Gameplay systems)
-            yield return InitializeSystemBatch(SystemPriority.LOW, waitForCompletion: false);
-            yield return UpdateLoadingProgress(0.8f, "Spawning NPCs and vehicles...");
-
-            // STEP 5: BACKGROUND SYSTEMS
-            yield return InitializeSystemBatch(SystemPriority.BACKGROUND, waitForCompletion: false);
-            yield return UpdateLoadingProgress(1.0f, "Finishing up...");
-
-            // FINALIZE
-            yield return FinalizeInitialization();
-        }
-
-        private IEnumerator InitializeSystemBatch(SystemPriority priority, bool waitForCompletion)
-        {
-            var systemNames = _systemsByPriority[priority];
-            if (systemNames.Count == 0) yield break;
-
-            Log($"Initializing {priority} priority systems...", LogType.Info);
-            
-            int completed = 0;
-            foreach (string systemName in systemNames)
-            {
-                yield return InitializeSingleSystem(systemName);
-                completed++;
-                
-                if (waitForCompletion)
-                {
-                    // Wait for system to report ready
-                    yield return new WaitUntil(() => 
-                        _registeredSystems.ContainsKey(systemName) && 
-                        _registeredSystems[systemName].IsInitialized
-                    );
-                }
-                
-                float progress = (float)completed / systemNames.Count;
-                Log($"  ✓ {systemName} initialized ({progress:P0})", LogType.Info);
-            }
-            
-            if (!waitForCompletion)
-            {
-                // Give background systems time to breathe
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
-
-        private IEnumerator InitializeSingleSystem(string systemName)
-        {
-            // FIND OR CREATE SYSTEM COMPONENT
-            IGameSystem system = FindObjectOfType<MonoBehaviour>() as IGameSystem;
-            if (system == null)
-            {
-                GameObject systemGO = new GameObject($"[SYSTEM] {systemName}");
-                systemGO.transform.SetParent(transform);
-                
-                // CREATE COMPONENT BASED ON NAME
-                system = systemName switch
-                {
-                    "SaveSystem" => systemGO.AddComponent<SaveSystem>(),
-                    "EventManager" => systemGO.AddComponent<EventManager>(),
-                    "PoolManager" => systemGO.AddComponent<PoolManager>(),
-                    "VersionControlSystem" => systemGO.AddComponent<VersionControlSystem>(),
-                    "PrayerTimeSystem" => systemGO.AddComponent<PrayerTimeSystem>(),
-                    "AudioManager" => systemGO.AddComponent<AudioManager>(),
-                    "InputSystem" => systemGO.AddComponent<InputSystem>(),
-                    "TimeSystem" => systemGO.AddComponent<TimeSystem>(),
-                    "WeatherSystem" => systemGO.AddComponent<WeatherSystem>(),
-                    "IslandManager" => systemGO.AddComponent<IslandManager>(),
-                    "IslamicCalendar" => systemGO.AddComponent<IslamicCalendar>(),
-                    "PlayerController" => systemGO.AddComponent<PlayerController>(),
-                    "VehicleSpawnManager" => systemGO.AddComponent<VehicleSpawnManager>(),
-                    "NPCSpawner" => systemGO.AddComponent<NPCSpawner>(),
-                    "GangManager" => systemGO.AddComponent<GangManager>(),
-                    "UIManager" => systemGO.AddComponent<UIManager>(),
-                    "MissionSystem" => systemGO.AddComponent<MissionSystem>(),
-                    "AchievementSystem" => systemGO.AddComponent<AchievementSystem>(),
-                    "AnalyticsSystem" => systemGO.AddComponent<AnalyticsSystem>(),
-                    _ => throw new NotImplementedException($"System '{systemName}' not implemented")
-                };
-
-                Assert.IsNotNull(system, $"Failed to create system: {systemName}");
-            }
-
-            // REGISTER SYSTEM
-            _registeredSystems[systemName] = system;
-            system.SystemName = systemName;
-            
-            // INITIALIZE
-            system.Initialize(this);
-            
-            yield return null; // Wait one frame
-        }
-
-        private IEnumerator UpdateLoadingProgress(float progress, string message)
-        {
-            // UPDATE LOADING UI IF AVAILABLE
-            if (_registeredSystems.TryGetValue("UIManager", out var uiManager) && uiManager.IsInitialized)
-            {
-                (uiManager as UIManager)?.UpdateLoadingProgress(progress, message);
-            }
-            
-            // LOG PROGRESS
-            Log($"Loading: {progress:P0} - {message}", LogType.Info);
-            
-            yield return null;
-        }
-
-        private IEnumerator FinalizeInitialization()
-        {
-            _initializedSystemCount = _registeredSystems.Count;
-            _isInitialized = true;
-            
-            float initDuration = Time.realtimeSinceStartup - _initializationStartTime;
-            Log($"=== ALL SYSTEMS INITIALIZED ({_initializedSystemCount}) in {initDuration:F2}s ===", LogType.Important);
-            
-            // TRANSITION TO MAIN MENU
-            yield return new WaitForSeconds(0.5f);
-            
-            SetGameState(GameState.MAIN_MENU);
-            
-            // LOAD MAIN MENU SCENE
-            if (SceneManager.GetActiveScene().name != "MainMenu")
-            {
-                yield return LoadSceneAsync("MainMenu", LoadSceneMode.Single);
-            }
-            
-            // READY TO PLAY
-            Log("=== GAME READY ===", LogType.Important);
-            Log("Bismillah - RAAJJE VAGU AUTO: THE ALBAKO CHRONICLES", LogType.Important);
-        }
-        #endregion
-
-        #region SYSTEM_MANAGEMENT
-        public void RegisterSystem(string name, IGameSystem system)
-        {
-            if (string.IsNullOrEmpty(name) || system == null)
-            {
-                LogError("Invalid system registration - null name or system", "MainGameManager");
+                Debug.LogWarning("[RVA:TAC] Game core already initialized.");
                 return;
             }
 
-            if (_registeredSystems.ContainsKey(name))
+            try
             {
-                LogWarning($"System '{name}' already registered. Overwriting.", "MainGameManager");
-            }
-
-            _registeredSystems[name] = system;
-            Log($"System registered: {name}", LogType.Info);
-        }
-
-        public T GetSystem<T>() where T : class, IGameSystem
-        {
-            foreach (var system in _registeredSystems.Values)
-            {
-                if (system is T typedSystem)
+                #region Version Verification
+                if (!_versionControl.VerifyBuildCompatibility())
                 {
-                    return typedSystem;
+                    Debug.LogError("[RVA:TAC] Version compatibility check failed. Aborting initialization.");
+                    ShowVersionMismatchDialog();
+                    return;
                 }
-            }
-            return null;
-        }
+                #endregion
 
-        public IGameSystem GetSystem(string name)
-        {
-            return _registeredSystems.TryGetValue(name, out var system) ? system : null;
-        }
-
-        private void SetAllSystemsPause(bool paused)
-        {
-            foreach (var system in _registeredSystems.Values)
-            {
-                system.IsPaused = paused;
-            }
-        }
-
-        private void ShutdownAllSystems()
-        {
-            Log("Shutting down all systems...", LogType.Warning);
-            
-            // SHUTDOWN IN REVERSE PRIORITY ORDER
-            for (int priority = 4; priority >= 0; priority--)
-            {
-                var priorityEnum = (SystemPriority)priority;
-                if (!_systemsByPriority.ContainsKey(priorityEnum)) continue;
-                
-                foreach (string systemName in _systemsByPriority[priorityEnum])
+                #region Save System Load
+                _saveSystem.InitializeSaveStructure();
+                if (_saveSystem.HasExistingSave())
                 {
-                    if (_registeredSystems.TryGetValue(systemName, out var system))
+                    var loadResult = _saveSystem.LoadGame();
+                    if (loadResult.Success)
                     {
-                        try
-                        {
-                            system.Shutdown();
-                            Log($"  ✓ {systemName} shutdown", LogType.Info);
-                        }
-                        catch (Exception e)
-                        {
-                            LogError($"Failed to shutdown {systemName}: {e.Message}", systemName);
-                        }
+                        Debug.Log("[RVA:TAC] Existing save loaded successfully.");
+                        StartingIslandID = loadResult.IslandID;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[RVA:TAC] Save load failed: {loadResult.ErrorMessage}. Starting fresh.");
                     }
                 }
-            }
-        }
+                #endregion
 
-        private IEnumerator DelayedSaveOnPause()
-        {
-            yield return new WaitForSecondsRealtime(1f);
-            
-            if (_isAppPaused && Time.realtimeSinceStartup - _pauseTime > 10f)
+                #initialize Prayer & Time Systems
+                _prayerTimeSystem.InitializeForMaldives();
+                _timeSystem.InitializeMaldivianTime();
+                #endregion
+
+                #initialize Audio & Scene Management
+                _audioManager.InitializeAudioMixer();
+                _audioManager.SetMasterVolume(MasterVolume);
+                _sceneManager.InitializeSceneController();
+                #endregion
+
+                #apply Cultural Settings
+                ApplyCulturalDifficultySettings();
+                #endregion
+
+                IsGameInitialized = true;
+                CurrentGameState = GameState.MainMenu;
+
+                Debug.Log($"[RVA:TAC] Game core initialized successfully. Active island: {StartingIslandID}");
+                
+                // Trigger initialization event for other systems
+                OnMasterVolumeChanged?.Invoke(MasterVolume);
+            }
+            catch (Exception ex)
             {
-                Log("Auto-saving due to extended pause...", LogType.Info);
-                if (_registeredSystems.TryGetValue("SaveSystem", out var saveSystem))
-                {
-                    (saveSystem as SaveSystem)?.ForceSave();
-                }
+                Debug.LogError($"[RVA:TAC] CRITICAL: Game initialization failed - {ex.Message}\n{ex.StackTrace}");
+                _debugSystem.ReportCriticalError("InitializationFailure", ex);
+                ShowInitializationErrorDialog();
             }
         }
         #endregion
 
-        #region GAME_STATE_MANAGEMENT
+        #region Cultural Management
+        private void HandlePrayerTimeReached(PrayerName prayer)
+        {
+            IsPrayerTimeActive = true;
+            
+            if (RespectPrayerTimes && !DebugSkipCulturalRules)
+            {
+                SetPausedState(true);
+                ShowPrayerTimeNotification(prayer);
+                
+                // Fade audio respectfully
+                _audioManager.FadeToVolume(0.1f, 2f);
+            }
+            
+            OnPrayerTimeBegins?.Invoke(prayer);
+            
+            Debug.Log($"[RVA:TAC] Prayer time reached: {prayer}. Game paused: {IsPaused}");
+        }
+
+        private void HandlePrayerTimeEnded(PrayerName prayer)
+        {
+            IsPrayerTimeActive = false;
+            
+            // Don't auto-resume if other pause conditions exist
+            if (!CheckAnyPauseConditions())
+            {
+                SetPausedState(false);
+                _audioManager.RestoreVolume();
+            }
+            
+            OnPrayerTimeEnds?.Invoke(prayer);
+            
+            Debug.Log($"[RVA:TAC] Prayer time ended: {prayer}. Game resumed: {!IsPaused}");
+        }
+
+        private void CheckFridayJumuahPeriod()
+        {
+            if (!RespectFridayPrayer || DebugSkipCulturalRules) return;
+            
+            var now = _timeSystem.GetCurrentMaldivianTime();
+            bool wasFridayJumuah = IsFridayJumuah;
+            
+            // Jumu'ah: Friday 12:00-14:00 Maldives time
+            IsFridayJumuah = now.DayOfWeek == 5 && now.Hour >= 12 && now.Hour < 14;
+            
+            if (IsFridayJumuah != wasFridayJumuah)
+            {
+                if (IsFridayJumuah)
+                {
+                    SetPausedState(true);
+                    OnFridayJumuahBegins?.Invoke();
+                    ShowJumuahNotification();
+                }
+                else
+                {
+                    if (!CheckAnyPauseConditions())
+                    {
+                        SetPausedState(false);
+                    }
+                    OnFridayJumuahEnds?.Invoke();
+                }
+            }
+        }
+
+        private void CheckMaldivianBusinessHours()
+        {
+            if (!EnforceBusinessHours || DebugSkipCulturalRules) return;
+            
+            var now = _timeSystem.GetCurrentMaldivianTime();
+            // Maldivian standard business hours: 9AM - 5PM (some variation by island)
+            bool isBusinessHours = now.Hour >= 9 && now.Hour < 17;
+            
+            // This would affect mission availability, shop hours, etc.
+            // Implementation would query this from mission/shops systems
+        }
+
+        private void ApplyCulturalDifficultySettings()
+        {
+            switch (CulturalDifficulty)
+            {
+                case CulturalDifficultyLevel.Authentic:
+                    RespectPrayerTimes = true;
+                    RespectFridayPrayer = true;
+                    EnforceBusinessHours = true;
+                    break;
+                case CulturalDifficultyLevel.Modern:
+                    RespectPrayerTimes = true;
+                    RespectFridayPrayer = true;
+                    EnforceBusinessHours = false;
+                    break;
+                case CulturalDifficultyLevel.Relaxed:
+                    RespectPrayerTimes = false;
+                    RespectFridayPrayer = false;
+                    EnforceBusinessHours = false;
+                    break;
+            }
+            
+            Debug.Log($"[RVA:TAC] Cultural difficulty applied: {CulturalDifficulty}");
+        }
+        #endregion
+
+        #region Pause & State Management
+        public void SetPausedState(bool paused)
+        {
+            bool wasPaused = IsPaused;
+            IsPaused = paused;
+            
+            Time.timeScale = paused ? 0f : 1f;
+            
+            if (_audioManager != null)
+            {
+                _audioManager.SetMasterVolume(paused ? MasterVolume * 0.3f : MasterVolume);
+            }
+            
+            if (paused != wasPaused)
+            {
+                Debug.Log($"[RVA:TAC] Game pause state changed: {paused}");
+            }
+        }
+
+        private bool CheckAnyPauseConditions()
+        {
+            return IsPrayerTimeActive || IsFridayJumuah || CurrentGameState == GameState.PausedMenu;
+        }
+
+        private void HandleMobileBackButton()
+        {
+            switch (CurrentGameState)
+            {
+                case GameState.Playing:
+                    SetGameState(GameState.PausedMenu);
+                    break;
+                case GameState.PausedMenu:
+                    SetGameState(GameState.Playing);
+                    break;
+                case GameState.MainMenu:
+                    // Confirm quit dialog on mobile
+                    ShowQuitConfirmation();
+                    break;
+            }
+        }
+
         public void SetGameState(GameState newState)
         {
-            if (_currentState == newState) return;
-
-            _previousState = _currentState;
-            _currentState = newState;
-
-            Log($"GameState: {_previousState} → {newState}", LogType.Important);
-
-            // STATE-SPECIFIC LOGIC
+            GameState oldState = CurrentGameState;
+            CurrentGameState = newState;
+            
+            Debug.Log($"[RVA:TAC] Game state: {oldState} -> {newState}");
+            
+            // Handle state transitions
             switch (newState)
             {
-                case GameState.MAIN_MENU:
-                    Time.timeScale = 1f;
-                    AudioListener.pause = false;
-                    break;
-
-                case GameState.PLAYING:
-                    Time.timeScale = 1f;
-                    AudioListener.pause = false;
-                    // Resume if not in prayer time
-                    if (!_isPrayerTimeActive)
+                case GameState.Playing:
+                    if (CheckAnyPauseConditions())
                     {
-                        SetAllSystemsPause(false );
+                        SetPausedState(true);
+                    }
+                    else
+                    {
+                        SetPausedState(false);
                     }
                     break;
-
-                case GameState.PAUSED:
-                    Time.timeScale = 0f;
-                    // Audio continues for menu sounds
-                    SetAllSystemsPause(true);
+                    
+                case GameState.PausedMenu:
+                case GameState.MainMenu:
+                case GameState.Settings:
+                    SetPausedState(true);
                     break;
-
-                case GameState.PRAYER_PAUSE:
-                    Time.timeScale = 0f;
-                    AudioListener.pause = true; // Respectful audio pause
-                    SetAllSystemsPause(true);
-                    ShowPrayerNotification();
-                    break;
-
-                case GameState.LOADING:
-                    Time.timeScale = 0f;
-                    SetAllSystemsPause(true);
-                    break;
-
-                case GameState.SAVING:
-                    // Brief time freeze during save
-                    Time.timeScale = 0f;
-                    break;
-
-                case GameState.QUITTING:
-                    StartCoroutine(QuitApplicationAsync());
+                    
+                case GameState.Loading:
+                    SetPausedState(true);
                     break;
             }
-
-            // BROADCAST STATE CHANGE
-            EventManager.TriggerEvent("OnGameStateChanged", new GameStateChangedData
-            {
-                PreviousState = _previousState,
-                NewState = newState
-            });
-        }
-
-        public void ReturnToPreviousState()
-        {
-            SetGameState(_previousState);
-        }
-
-        public bool IsInGameplayState()
-        {
-            return _currentState == GameState.PLAYING || _currentState == GameState.PAUSED;
         }
         #endregion
 
-        #region SCENE_MANAGEMENT
-        public IEnumerator LoadSceneAsync(string sceneName, LoadSceneMode mode = LoadSceneMode.Single)
+        #region Audio Control
+        public void SetMasterVolume(float volume)
         {
-            Log($"Loading scene: {sceneName} ({mode})", LogType.Info);
+            MasterVolume = Mathf.Clamp01(volume);
+            _audioManager?.SetMasterVolume(MasterVolume);
+            OnMasterVolumeChanged?.Invoke(MasterVolume);
             
-            // VALIDATE SCENE EXISTS
-            if (!Application.CanStreamedLevelBeLoaded(sceneName))
-            {
-                LogError($"Scene '{sceneName}' cannot be loaded. Check Build Settings.", "SceneManager");
-                yield break;
-            }
-
-            // PRE-LOAD SAVE
-            if (mode == LoadSceneMode.Single && _registeredSystems.ContainsKey("SaveSystem"))
-            {
-                (GetSystem<SaveSystem>())?.LoadGameState();
-            }
-
-            // START LOADING
-            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, mode);
-            operation.allowSceneActivation = false;
-
-            // SHOW LOADING UI
-            SetGameState(GameState.LOADING);
-            
-            float progress = 0f;
-            while (!operation.isDone)
-            {
-                progress = Mathf.Clamp01(operation.progress / 0.9f);
-                yield return UpdateLoadingProgress(progress, $"Loading {sceneName}...");
-                
-                if (progress >= 0.9f)
-                {
-                    operation.allowSceneActivation = true;
-                }
-                
-                yield return null;
-            }
-
-            // POST-LOAD INITIALIZATION
-            yield return new WaitForSeconds(0.1f);
-            
-            if (mode == LoadSceneMode.Single)
-            {
-                SetGameState(GameState.PLAYING);
-            }
-            
-            Log($"Scene loaded: {sceneName}", LogType.Info);
+            // Auto-save volume preference
+            PlayerPrefs.SetFloat("RVA_MasterVolume", MasterVolume);
+            PlayerPrefs.Save();
         }
 
-        public void LoadIsland(string islandName)
+        public float GetMasterVolume()
         {
-            StartCoroutine(LoadSceneAsync($"Islands/{islandName}", LoadSceneMode.Single));
-        }
-
-        public void ReturnToMainMenu()
-        {
-            StartCoroutine(LoadSceneAsync("MainMenu", LoadSceneMode.Single));
-        }
-
-        private IEnumerator QuitApplicationAsync()
-        {
-            Log("Quitting application...", LogType.Important);
-            
-            // FINAL SAVE
-            if (_registeredSystems.TryGetValue("SaveSystem", out var saveSystem))
-            {
-                yield return (saveSystem as SaveSystem)?.ForceSaveAsync();
-            }
-            
-            // WAIT FOR OPERATIONS
-            yield return new WaitForSeconds(0.5f);
-            
-            Application.Quit();
-            
-            #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-            #endif
+            return MasterVolume;
         }
         #endregion
 
-        #region CULTURAL_INTEGRATION
-        private void CheckPrayerTimes()
+        #region Scene & Level Management
+        public void LoadIsland(int islandID, bool showLoadingScreen = true)
         {
-            if (!_registeredSystems.TryGetValue("PrayerTimeSystem", out var prayerSystem)) return;
-
-            var prayer = prayerSystem as PrayerTimeSystem;
-            if (prayer != null && prayer.IsPrayerTimeNow() && !_isPrayerTimeActive)
+            if (islandID < 1 || islandID > TotalIslands)
             {
-                _isPrayerTimeActive = true;
-                _nextPrayerName = prayer.GetCurrentPrayerName();
-                
-                Log($"Prayer time detected: {_nextPrayerName}. Auto-pausing game.", LogType.Important);
-                SetGameState(GameState.PRAYER_PAUSE);
+                Debug.LogError($"[RVA:TAC] Invalid island ID: {islandID}. Valid range: 1-{TotalIslands}");
+                return;
             }
-            else if (prayer != null && !prayer.IsPrayerTimeNow() && _isPrayerTimeActive)
-            {
-                _isPrayerTimeActive = false;
-                Log($"Prayer time ended. Resuming gameplay.", LogType.Important);
-                
-                if (_previousState == GameState.PLAYING)
-                {
-                    ReturnToPreviousState();
-                }
-            }
-
-            // UPDATE NEXT PRAYER INFO
-            var nextPrayer = prayer?.GetNextPrayerTime();
-            if (nextPrayer.HasValue)
-            {
-                _nextPrayerTime = nextPrayer.Value.Time;
-                _nextPrayerName = nextPrayer.Value.Name;
-            }
-        }
-
-        private void ShowPrayerNotification()
-        {
-            if (!_prayerNotifications) return;
             
-            // TRIGGER UI NOTIFICATION
-            EventManager.TriggerEvent("OnPrayerTimeNotification", new PrayerNotificationData
+            Debug.Log($"[RVA:TAC] Loading island {islandID}...");
+            
+            if (showLoadingScreen)
             {
-                PrayerName = _nextPrayerName,
-                PrayerTime = _nextPrayerTime,
-                IsAutoPause = true
-            });
+                SetGameState(GameState.Loading);
+            }
+            
+            _sceneManager.LoadIslandScene(islandID, OnIslandLoadComplete);
+        }
 
-            // PLAY ADHAN AUDIO (RESPECTFUL VOLUME)
-            if (_registeredSystems.TryGetValue("AudioManager", out var audioSystem))
+        private void OnIslandLoadComplete(bool success, int islandID)
+        {
+            if (success)
             {
-                (audioSystem as AudioManager)?.PlayPrayerCall(_nextPrayerName, volume: 0.3f);
+                Debug.Log($"[RVA:TAC] Island {islandID} loaded successfully.");
+                SetGameState(GameState.Playing);
+                _saveSystem?.SaveCurrentIsland(islandID);
+            }
+            else
+            {
+                Debug.LogError($"[RVA:TAC] Failed to load island {islandID}.");
+                ShowLoadingErrorDialog();
+                SetGameState(GameState.MainMenu);
+            }
+        }
+        #endregion
+
+        #region Mobile-Specific
+        private void HandleLowMemoryDuringPrayer()
+        {
+            if (IsPrayerTimeActive)
+            {
+                Debug.LogWarning("[RVA:TAC] Low memory during prayer time. Aggressive cleanup initiated.");
+                
+                // Force garbage collection during prayer pause
+                Resources.UnloadUnusedAssets();
+                GC.Collect();
             }
         }
 
-        public PrayerNotificationData GetNextPrayerInfo()
+        public void HandleCallInterruption()
         {
-            return new PrayerNotificationData
+            // Mobile call interruption handler
+            if (CurrentGameState == GameState.Playing)
             {
-                PrayerName = _nextPrayerName,
-                PrayerTime = _nextPrayerTime,
-                IsAutoPause = _respectPrayerTimes
+                SetPausedState(true);
+                _saveSystem.AutoSave();
+                Debug.Log("[RVA:TAC] Call interruption handled - game paused and auto-saved.");
+            }
+        }
+        #endregion
+
+        #region UI Dialog Methods
+        private void ShowPrayerTimeNotification(PrayerName prayer)
+        {
+            string prayerNameDhivehi = GetDhivehiPrayerName(prayer);
+            string message = $"🕌 Time for {prayer} ({prayerNameDhivehi})\nThe game will resume after prayer time.";
+            
+            // UI Manager would show this as overlay
+            Debug.Log($"[RVA:TAC] CULTURAL NOTICE: {message}");
+        }
+
+        private void ShowJumuahNotification()
+        {
+            string message = "🕌 Jumu'ah Prayer (Friday Congregational)\n12:00 PM - 2:00 PM\nThe game will resume after prayer time.";
+            
+            Debug.Log($"[RVA:TAC] CULTURAL NOTICE: {message}");
+        }
+
+        private void ShowInitializationErrorDialog()
+        {
+            string title = "Game Initialization Failed";
+            string message = "Unable to start RAAJJE VAGU AUTO. Please restart the application or reinstall if problem persists.";
+            
+            Debug.LogError($"[RVA:TAC] UI Dialog: {title} - {message}");
+        }
+
+        private void ShowVersionMismatchDialog()
+        {
+            string title = "Version Mismatch";
+            string message = $"Your save data is incompatible with this version ({VersionControlSystem.VERSION}). Please update or start a new game.";
+            
+            Debug.LogError($"[RVA:TAC] UI Dialog: {title} - {message}");
+        }
+
+        private void ShowLoadingErrorDialog()
+        {
+            string title = "Island Loading Error";
+            string message = "Failed to load island data. Please check your connection or try again.";
+            
+            Debug.LogError($"[RVA:TAC] UI Dialog: {title} - {message}");
+        }
+
+        private void ShowQuitConfirmation()
+        {
+            string title = "Exit Game?";
+            string message = "Are you sure you want to exit RAAJJE VAGU AUTO?";
+            
+            Debug.Log($"[RVA:TAC] UI Dialog: {title} - {message}");
+        }
+        #endregion
+
+        #region Cultural Helper Methods
+        private string GetDhivehiPrayerName(PrayerName prayer)
+        {
+            return prayer switch
+            {
+                PrayerName.Fajr => "ފަޖްރު",
+                PrayerName.Dhuhr => "ދުހުރު",
+                PrayerName.Asr => "އަސުރު",
+                PrayerName.Maghrib => "މަޣުރިބު",
+                PrayerName.Isha => "ޢިޝާ",
+                _ => prayer.ToString()
             };
         }
         #endregion
 
-        #region PERFORMANCE_MONITORING
-        [BurstCompile]
-        private void UpdatePerformanceMetrics()
+        #region Public API
+        public bool IsReady()
         {
-            // FRAME TIME
-            float frameTime = Time.unscaledDeltaTime;
-            _frameTimeHistory.Enqueue(frameTime);
-            if (_frameTimeHistory.Count > 60) _frameTimeHistory.Dequeue();
-
-            float avgFrameTime = 0f;
-            foreach (var ft in _frameTimeHistory)
-            {
-                avgFrameTime += ft;
-            }
-            avgFrameTime /= _frameTimeHistory.Count;
-
-            // MEMORY
-            long memoryBytes = GC.GetTotalMemory(false);
-            float memoryMB = memoryBytes / (1024f * 1024f);
-
-            // OBJECT COUNT
-            int objectCount = FindObjectsOfType<Object>().Length;
-
-            // SYSTEM LOAD
-            int totalSystems = _registeredSystems.Count;
-            int activeSystems = 0;
-            foreach (var system in _registeredSystems.Values)
-            {
-                if (system.IsEnabled && !system.IsPaused) activeSystems++;
-            }
-            int systemLoadPercent = totalSystems > 0 ? (activeSystems * 100) / totalSystems : 0;
-
-            // CRITICAL PERFORMANCE DETECTION
-            bool wasCritical = _isPerformanceCritical;
-            _isPerformanceCritical = avgFrameTime > (1f / (_targetFrameRate * 0.8f)); // 20% below target
-
-            if (_isPerformanceCritical && !wasCritical)
-            {
-                Log($"PERFORMANCE CRITICAL: {avgFrameTime * 1000:F1}ms frame time", LogType.Critical);
-                OnPerformanceCritical();
-            }
-
-            // UPDATE STRUCT
-            _currentMetrics = new PerformanceMetrics
-            {
-                DeltaTimeAvg = avgFrameTime,
-                FrameTimeMS = avgFrameTime * 1000f,
-                MemoryUsageMB = memoryMB,
-                ActiveObjectCount = objectCount,
-                DrawCalls = UnityStats.drawCalls,
-                SystemLoadPercent = systemLoadPercent
-            };
+            return IsGameInitialized && _saveSystem != null && _prayerTimeSystem != null;
         }
 
-        private void OnPerformanceCritical()
+        public string GetBuildInfo()
         {
-            if (!_adaptiveQuality) return;
+            return $"RAAJJE VAGU AUTO v{VersionControlSystem.VERSION} | Unity {Application.unityVersion} | Platform: {Application.platform}";
+        }
 
-            // EMERGENCY QUALITY REDUCTION
-            Log("Applying emergency performance optimizations...", LogType.Warning);
+        public void EmergencyShutdown()
+        {
+            Debug.LogError("[RVA:TAC] EMERGENCY SHUTDOWN initiated.");
             
-            // REDUCE RENDER SCALE
-            if (ScalableBufferManager.widthScaleFactor > 0.7f)
-            {
-                ScalableBufferManager.ResizeBuffers(0.7f, 0.7f);
-            }
-
-            // DISABLE NON-CRITICAL SYSTEMS
-            foreach (var kvp in _registeredSystems)
-            {
-                if (kvp.Value.SystemPriority == SystemPriority.BACKGROUND)
-                {
-                    kvp.Value.IsEnabled = false;
-                }
-            }
-
-            // CLEAR POOLS
-            if (_registeredSystems.TryGetValue("PoolManager", out var poolManager))
-            {
-                (poolManager as PoolManager)?.ClearAllPools();
-            }
-        }
-
-        private void CheckMemoryPressure()
-        {
-            long availableMemory = SystemInfo.systemMemorySize - (long)(_currentMetrics.MemoryUsageMB);
-            float availableMB = availableMemory;
+            _saveSystem?.AutoSave();
+            SetPausedState(true);
+            CurrentGameState = GameState.MainMenu;
             
-            if (availableMB < _lowMemoryThresholdMB)
-            {
-                Log($"Low memory pressure detected: {availableMB:F0}MB available", LogType.Warning);
-                OnLowMemory();
-            }
-        }
-        #endregion
-
-        #region LOGGING
-        public void Log(string message, LogType type = LogType.Info, [CallerMemberName] string caller = "")
-        {
-            if (_isProductionBuild && type == LogType.Debug) return;
-
-            string timestamp = DateTime.Now.ToString("HH:mm:ss.fff");
-            string logLevel = type switch
-            {
-                LogType.Debug => "[DEBUG]",
-                LogType.Info => "[INFO]",
-                LogType.Warning => "[WARN]",
-                LogType.Error => "[ERROR]",
-                LogType.Critical => "[CRITICAL]",
-                LogType.Important => "[===]",
-                _ => "[INFO]"
-            };
-
-            string logMessage = $"{timestamp} {logLevel} [MainGameManager.{caller}] {message}";
-            
-            // UNITY DEBUG LOG
-            switch (type)
-            {
-                case LogType.Debug:
-                case LogType.Info:
-                    Debug.Log(logMessage);
-                    break;
-                case LogType.Warning:
-                    Debug.LogWarning(logMessage);
-                    break;
-                case LogType.Error:
-                case LogType.Critical:
-                    Debug.LogError(logMessage);
-                    break;
-                case LogType.Important:
-                    Debug.Log($"<color=cyan><b>{logMessage}</b></color>");
-                    break;
-            }
-
-            // PERSIST TO FILE IN DEVELOPMENT
-            if (!_isProductionBuild && _registeredSystems.TryGetValue("SaveSystem", out var saveSystem))
-            {
-                (saveSystem as SaveSystem)?.LogToFile(logMessage);
-            }
-        }
-
-        public void LogError(string message, string systemName = null)
-        {
-            Log(message, LogType.Error);
-            
-            // ANALYTICS TRACKING
-            if (_registeredSystems.ContainsKey("AnalyticsSystem"))
-            {
-                EventManager.TriggerEvent("OnErrorLogged", new ErrorData
-                {
-                    SystemName = systemName ?? "MainGameManager",
-                    ErrorMessage = message,
-                    Timestamp = DateTime.Now,
-                    StackTrace = Environment.StackTrace
-                });
-            }
-        }
-
-        public void LogWarning(string message, string systemName = null)
-        {
-            Log(message, LogType.Warning);
-        }
-        #endregion
-
-        #region UTILITY_METHODS
-        public bool IsSystemReady(string systemName)
-        {
-            return _registeredSystems.TryGetValue(systemName, out var system) && system.IsInitialized;
-        }
-
-        public T GetSafeComponent<T>(GameObject obj, bool addIfMissing = true) where T : Component
-        {
-            if (obj == null) return null;
-            
-            T component = obj.GetComponent<T>();
-            if (component == null && addIfMissing)
-            {
-                component = obj.AddComponent<T>();
-            }
-            
-            return component;
-        }
-
-        public Coroutine StartCoroutineSafe(IEnumerator routine, string coroutineName = "")
-        {
-            if (_isShuttingDown)
-            {
-                LogWarning($"Cannot start coroutine '{coroutineName}' - application shutting down", "MainGameManager");
-                return null;
-            }
-            return StartCoroutine(routine);
-        }
-
-        public void StopAllSystemCoroutines()
-        {
-            StopAllCoroutines();
+            // Force cleanup
+            Resources.UnloadUnusedAssets();
+            GC.Collect();
         }
         #endregion
     }
 
-    #region SUPPORTING_STRUCTS
-    [Serializable]
-    public class SystemInitializer
+    #region Enums
+    public enum GameState
     {
-        public string SystemName;
-        public SystemPriority Priority;
-        public bool IsEnabled;
-
-        public SystemInitializer(string name, SystemPriority priority, bool enabled)
-        {
-            SystemName = name;
-            Priority = priority;
-            IsEnabled = enabled;
-        }
+        MainMenu,
+        Playing,
+        PausedMenu,
+        Settings,
+        Loading,
+        Cutscene,
+        GameOver
     }
 
-    public enum LogType
+    public enum CulturalDifficultyLevel
     {
-        Debug,
-        Info,
-        Warning,
-        Error,
-        Critical,
-        Important
-    }
-
-    public interface IGameSystem
-    {
-        string SystemName { get; set; }
-        bool IsInitialized { get; }
-        bool IsEnabled { get; set; }
-        bool IsPaused { get; set; }
-        SystemPriority SystemPriority { get; }
-        
-        void Initialize(MainGameManager gameManager);
-        void Shutdown();
-        void OnUpdate(float deltaTime);
-        void OnFixedUpdate(float fixedDeltaTime);
-        void OnLateUpdate(float deltaTime);
-        void OnLowMemory();
-    }
-
-    [Serializable]
-    public struct GameStateChangedData
-    {
-        public GameState PreviousState;
-        public GameState NewState;
-    }
-
-    [Serializable]
-    public struct PrayerNotificationData
-    {
-        public string PrayerName;
-        public DateTime PrayerTime;
-        public bool IsAutoPause;
-    }
-
-    [Serializable]
-    public struct ErrorData
-    {
-        public string SystemName;
-        public string ErrorMessage;
-        public DateTime Timestamp;
-        public string StackTrace;
+        Authentic,  // Full cultural compliance
+        Modern,     // Prayer times respected, business hours flexible
+        Relaxed     // Cultural rules disabled
     }
     #endregion
 }
