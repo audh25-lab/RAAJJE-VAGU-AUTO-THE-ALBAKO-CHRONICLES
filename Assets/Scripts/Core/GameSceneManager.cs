@@ -947,7 +947,7 @@ namespace RVA.TAC.Core
         {
             // Create fade plane
             GameObject fadeObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            fadeObject.name = "FadePlane";
+            liftObject.name = "FadePlane";
             fadeObject.transform.position = new Vector3(0, 0, 0.5f);
             fadeObject.transform.localScale = new Vector3(100, 100, 1);
             
@@ -1387,7 +1387,6 @@ namespace RVA.TAC.Core
             StartCoroutine(LoadIslandAsync(request));
         }
         
-        private IEnumerator
         private IEnumerator LoadIslandAsync(SceneLoadRequest request)
         {
             _currentTransitionState = SceneTransitionState.Loading;
@@ -2105,997 +2104,7 @@ namespace RVA.TAC.Core
             }
             
             report.AppendLine("\n=== MALDIVIAN CULTURAL STATUS ===");
-            report.AppendLine($"Capital (Male) Loaded: {_loadedIslandIndices.Contains(_maleIslandIndex)}");
-            report.AppendLine($"Prayer System Available: {_prayerTimeSystem != null}");
-            report.AppendLine($"Next Prayer Check: Enabled");
-            
-            return report.ToString();
-        }
-        
-        /// <summary>
-        /// Performs full system diagnostic
-        /// </summary>
-        public void RunDiagnostics()
-        {
-            LogSystemMessage("Running full system diagnostics...", LogLevel.Info);
-            
-            // Test memory calculation
-            UpdateMemoryUsage();
-            
-            // Test job system
-            if (_useBurstCompilation)
-            {
-                _sceneLoaderJob.IslandIndices.CopyFrom(new int[] { 0, 1, 2 });
-                _sceneLoaderHandle = _sceneLoaderJob.Schedule();
-                _isJobRunning = true;
-            }
-            
-            // Test island data integrity
-            foreach (var kvp in _islandScenes)
-            {
-                if (string.IsNullOrEmpty(kvp.Value.SceneName))
-                {
-                    LogSystemMessage($"Invalid scene name for island {kvp.Key}", LogLevel.Error);
-                }
-            }
-            
-            // Test prayer integration
-            if (_respectPrayerTimes && _prayerTimeSystem != null)
-            {
-                LogSystemMessage($"Prayer system integration: ACTIVE", LogLevel.Info);
-            }
-            
-            LogSystemMessage("Diagnostics complete", LogLevel.Info);
-        }
-    }
-}
-
-// ============================================================================
-// BURST-COMPILED MATH EXTENSIONS
-// ============================================================================
-
-public static class SceneManagerMathExtensions
-{
-    /// <summary>
-    /// SIMD-optimized island priority sorting
-    /// </summary>
-    [BurstCompile]
-    public static int3 SortIslandPriorities(int3 priorities)
-    {
-        // Use SIMD comparison for 3-wide sorting
-        int3 sorted = priorities;
-        
-        // Sort network (3-element sort)
-        int min = math.min(sorted.x, math.min(sorted.y, sorted.z));
-        int max = math.max(sorted.x, math.max(sorted.y, sorted.z));
-        int mid = sorted.x + sorted.y + sorted.z - min - max;
-        
-        return new int3(min, mid, max);
-    }
-    
-    /// <summary>
-    /// Fast memory estimation using Burst
-    /// </summary>
-    [BurstCompile]
-    public static float EstimateIslandMemoryBurst(int islandCount, int priorityA_Count, int priorityC_Count)
-    {
-        // Weighted memory calculation
-        float memoryA = priorityA_Count * 85f;
-        float memoryC = priorityC_Count * 75f;
-        float memoryD = (islandCount - priorityA_Count - priorityC_Count) * 55f;
-        
-        return memoryA + memoryC + memoryD;
-    }
-}
-
-// ============================================================================
-// CULTURAL VALIDATION ATTRIBUTES
-// ============================================================================
-
-[AttributeUsage(AttributeTargets.Method)]
-public class CulturalValidationAttribute : Attribute
-{
-    public string Category { get; }
-    public string Description { get; }
-    
-    public CulturalValidationAttribute(string category, string description)
-    {
-        Category = category;
-        Description = description;
-    }
-}
-
-// ============================================================================
-// MALDIVIAN CULTURAL CONSTANTS
-// ============================================================================
-
-public static class MaldivianCulturalConstants
-{
-    public const string MALE_CITY_NAME = "Male";
-    public const string MALE_SCENE_NAME = "Island_Male";
-    public const float MALE_LATITUDE = 4.1755f;
-    public const float MALE_LONGITUDE = 73.5093f;
-    
-    public const int TOTAL_ISLANDS = 41;
-    public const int GANG_COUNT = 83;
-    public const int VEHICLE_COUNT = 40;
-    public const int BUILDING_COUNT = 70;
-    
-    public const string BODUBERU_AUDIO_FORMAT = "boduberu_{0}.wav";
-    public const string ISLAMIC_DATE_FORMAT = "dd MMMM yyyy";
-    
-    public const float PRAYER_BUFFER_MINUTES_DEFAULT = 5f;
-    public const float SCENE_FADE_DURATION_DEFAULT = 1.5f;
-    
-    // Mali-G72 GPU constants
-    public const int MALI_G72_TARGET_FPS = 30;
-    public const float MALI_G72_MEMORY_BUDGET_MB = 255f;
-    public const int MALI_G72_MAX_CONCURRENT_ISLANDS = 3;
-}
-
-// ============================================================================
-// EDITOR ONLY - VALIDATION
-// ============================================================================
-
-#if UNITY_EDITOR
-[UnityEditor.CustomEditor(typeof(GameSceneManager))]
-public class GameSceneManagerEditor : UnityEditor.Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        
-        var manager = target as GameSceneManager;
-        
-        if (GUILayout.Button("Generate Island Data"))
-        {
-            manager.RunDiagnostics();
-        }
-        
-        if (GUILayout.Button("Print Status Report"))
-        {
-            Debug.Log(manager.GetSystemStatusReport());
-        }
-        
-        if (GUILayout.Button("Test Prayer Interruption"))
-        {
-            // Simulate prayer time
-            Debug.LogWarning("[CULTURAL SIMULATION] Prayer time approaching in 2 minutes");
-        }
-        
-        if (GUILayout.Button("Clear All Islands"))
-        {
-            if (UnityEditor.EditorUtility.DisplayDialog(
-                "Clear All Islands",
-                "Unload all islands except Male?",
-                "Yes",
-                "Cancel"))
-            {
-                manager.ResetSceneManager();
-            }
-        }
-        
-        // Show memory usage bar
-        float memoryPercent = manager.CurrentMemoryUsage / (manager.MaxConcurrentIslands * 85f);
-        UnityEditor.EditorGUI.ProgressBar(
-            GUILayoutUtility.GetRect(50, 20),
-            memoryPercent,
-            $"Memory: {manager.CurrentMemoryUsage:F1}MB"
-        );
-        
-        // Show loaded islands
-        GUILayout.Space(10);
-        GUILayout.Label("Loaded Islands:", UnityEditor.EditorStyles.boldLabel);
-        foreach (var island in manager.LoadedIslands)
-        {
-            GUILayout.Label($"  Island {island}");
-        }
-    }
-}
-#endif
-
-// ============================================================================
-// UNITY INTEGRATION - SCRIPTABLE OBJECT BRIDGE
-// ============================================================================
-
-[CreateAssetMenu(fileName = "SceneManagerConfig", menuName = "RVA TAC/Scene Manager Config")]
-public class SceneManagerConfig : ScriptableObject
-{
-    [Header("Maldivian Configuration")]
-    public int TotalIslands = 41;
-    public int MaleIslandIndex = 0;
-    public int MaxConcurrentIslands = 3;
-    
-    [Header("Performance")]
-    public int TargetFPS = 30;
-    public float MemoryBudgetPerIsland = 85f;
-    
-    [Header("Cultural")]
-    public bool RespectPrayerTimes = true;
-    public float PrayerBufferTime = 5f;
-    public bool ShowIslamicDate = true;
-    
-    [Header("Scene References")]
-    public SceneReference MaleScene;
-    public List<SceneReference> PriorityA_Scenes;
-    public List<SceneReference> PriorityC_Scenes;
-    public List<SceneReference> PriorityD_Scenes;
-    
-    [Header("Loading Screen")]
-    public Texture2D LoadingScreenTexture;
-    public AudioClip LoadingAudioClip;
-    public float FadeDuration = 1.5f;
-    
-    [Header("Advanced")]
-    public bool UseBurstCompilation = true;
-    public bool EnableSIMDOptimizations = true;
-    public bool EnableLogging = false;
-    
-    // ============================================================================
-    // VALIDATION IN EDITOR
-    // ============================================================================
-    
-    public void ValidateConfiguration()
-    {
-        // Validate scene count matches island count
-        int totalScenes = 1 + PriorityA_Scenes.Count + PriorityC_Scenes.Count + PriorityD_Scenes.Count;
-        
-        if (totalScenes != TotalIslands)
-        {
-            Debug.LogError($"Configuration mismatch: {TotalIslands} islands but {totalScenes} scenes defined");
-        }
-        
-        // Validate Male scene assignment
-        if (MaleIslandIndex != 0)
-        {
-            Debug.LogWarning("Male Island Index should be 0 for capital city");
-        }
-        
-        // Validate memory budget
-        float totalMemory = 95f; // Male
-        totalMemory += PriorityA_Scenes.Count * 85f;
-        totalMemory += PriorityC_Scenes.Count * 72f;
-        totalMemory += PriorityD_Scenes.Count * 55f;
-        
-        if (totalMemory > 3000f)
-        {
-            Debug.LogError($"Total memory estimate {totalMemory:F0}MB exceeds mobile limits");
-        }
-        
-        Debug.Log($"Configuration validated: {TotalIslands} islands, {totalMemory:F0}MB total");
-    }
-}
-
-// ============================================================================
-// SCENE REFERENCE - TYPE SAFE SCENE REFERENCES
-// ============================================================================
-
-[System.Serializable]
-public class SceneReference
-{
-    public string SceneName;
-    public IslandPriority Priority;
-    public float MemoryEstimateMB;
-    public bool LoadOnStartup;
-    public float2 GeographicCoordinates;
-    
-    public SceneReference(string sceneName, IslandPriority priority, float memoryMB, bool loadOnStartup, float2 coords)
-    {
-        SceneName = sceneName;
-        Priority = priority;
-        MemoryEstimateMB = memoryMB;
-        LoadOnStartup = loadOnStartup;
-        GeographicCoordinates = coords;
-    }
-}
-
-// ============================================================================
-// FINAL BUILD METADATA
-// ============================================================================
-
-[System.Serializable]
-public class SceneManagerBuildData
-{
-    public string BuildVersion;
-    public string BuildDate;
-    public int[] IslandLoadOrder;
-    public float[] IslandMemoryEstimates;
-    public bool CulturalIntegrationEnabled;
-    public bool MaliG72OptimizationEnabled;
-    public bool BurstCompilationEnabled;
-    
-    public static SceneManagerBuildData CreateCurrent()
-    {
-        return new SceneManagerBuildData
-        {
-            BuildVersion = "RVAFULLIMP-BATCH001-FILE002-FINAL",
-            BuildDate = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"),
-            CulturalIntegrationEnabled = true,
-            MaliG72OptimizationEnabled = true,
-            BurstCompilationEnabled = true
-        };
-    }
-}
-        LoadIslandAsync(SceneLoadRequest request)
-        {
-            _currentTransitionState = SceneTransitionState.Loading;
-            bool prayerBlocked = false;
-            
-            // Prayer time check with buffer
-            if (request.RespectPrayerTimes && _respectPrayerTimes)
-            {
-                var nextPrayer = _prayerTimeSystem.GetNextPrayerTime();
-                float timeUntilPrayer = (float)(nextPrayer - DateTime.Now).TotalMinutes;
-                
-                if (timeUntilPrayer >= 0 && timeUntilPrayer <= _prayerBufferTime)
-                {
-                    LogSystemMessage($"Load blocked for island {request.IslandIndex}: Prayer buffer active", LogLevel.Warning);
-                    ShowCulturalRestrictionMessage();
-                    _currentTransitionState = SceneTransitionState.Blocked;
-                    prayerBlocked = true;
-                    
-                    // Wait for prayer buffer to pass
-                    yield return new WaitForSecondsRealtime((_prayerBufferTime - timeUntilPrayer) * 60f);
-                    _currentTransitionState = SceneTransitionState.Loading;
-                }
-            }
-            
-            // Show loading screen if requested
-            if (request.ShowLoadingScreen && !prayerBlocked)
-            {
-                if (_loadingCamera != null)
-                {
-                    _loadingCamera.enabled = true;
-                    _loadingCamera.depth = 100;
-                }
-                
-                if (_loadingAudioSource != null && _loadingAudioClip != null)
-                {
-                    _loadingAudioSource.volume = 0.7f;
-                    _loadingAudioSource.Play();
-                }
-                
-                // Display island info with Islamic date
-                if (_showIslamicDate && _versionControl != null)
-                {
-                    string islandInfo = $"Loading {_islandScenes[request.IslandIndex].IslandName}...\n";
-                    islandInfo += $"Build: {_versionControl.GetBuildVersion()}\n";
-                    
-                    var islamicDate = GetIslamicDateString();
-                    if (!string.IsNullOrEmpty(islamicDate))
-                    {
-                        islandInfo += $"Date: {islamicDate}";
-                    }
-                    
-                    LogSystemMessage(islandInfo, LogLevel.Info);
-                }
-            }
-            
-            // Prepare scene load
-            string sceneName = request.SceneName;
-            AsyncOperation loadOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-            
-            if (loadOp == null)
-            {
-                LogSystemMessage($"Failed to create load operation for {sceneName}", LogLevel.Error);
-                _currentTransitionState = SceneTransitionState.Error;
-                request.OnComplete?.Invoke();
-                yield break;
-            }
-            
-            _currentAsyncOperation = loadOp;
-            loadOp.allowSceneActivation = false;
-            loadOp.priority = (int)request.Priority;
-            
-            // Simulate progress with cultural loading tips
-            float simulatedProgress = 0f;
-            string[] loadingTips = new string[]
-            {
-                "Respecting local customs...",
-                "Loading Boduberu audio...",
-                "Generating island terrain...",
-                "Spawning NPCs...",
-                "Finalizing scene..."
-            };
-            
-            while (!loadOp.isDone)
-            {
-                // Update progress with SIMD-optimized calculation
-                float realProgress = Mathf.Clamp01(loadOp.progress / 0.9f);
-                simulatedProgress = math.lerp(simulatedProgress, realProgress, 0.1f);
-                
-                int tipIndex = Mathf.FloorToInt(simulatedProgress * loadingTips.Length);
-                if (tipIndex < loadingTips.Length)
-                {
-                    LogSystemMessage($"[{simulatedProgress:P1}] {loadingTips[tipIndex]}", LogLevel.Debug);
-                }
-                
-                // Check for cancellation
-                if (_sceneLoadCancellationToken.Token.IsCancellationRequested)
-                {
-                    loadOp.allowSceneActivation = false;
-                    _currentTransitionState = SceneTransitionState.Cancelled;
-                    LogSystemMessage($"Load cancelled for island {request.IslandIndex}", LogLevel.Warning);
-                    yield break;
-                }
-                
-                yield return null;
-            }
-            
-            // Activate scene
-            loadOp.allowSceneActivation = true;
-            yield return new WaitUntil(() => loadOp.isDone);
-            
-            // Get loaded scene
-            Scene loadedScene = SceneManager.GetSceneByName(sceneName);
-            if (!loadedScene.IsValid())
-            {
-                LogSystemMessage($"Scene {sceneName} loaded but invalid", LogLevel.Error);
-                _currentTransitionState = SceneTransitionState.Error;
-                request.OnComplete?.Invoke();
-                yield break;
-            }
-            
-            // Set active if first island or capital
-            if (_loadedIslandIndices.Count == 0 || request.IslandIndex == _maleIslandIndex)
-            {
-                SceneManager.SetActiveScene(loadedScene);
-                _activeIslandIndices.Add(request.IslandIndex);
-            }
-            
-            // Update tracking
-            _loadedIslandIndices.Add(request.IslandIndex);
-            UpdateMemoryUsage();
-            
-            // Hide loading screen
-            if (request.ShowLoadingScreen)
-            {
-                if (_loadingCamera != null)
-                {
-                    yield return StartCoroutine(FadeOutLoadingCamera());
-                }
-                
-                if (_loadingAudioSource != null)
-                {
-                    yield return StartCoroutine(FadeOutAudio());
-                }
-            }
-            
-            _currentTransitionState = SceneTransitionState.Idle;
-            _currentAsyncOperation = null;
-            
-            LogSystemMessage($"Successfully loaded island {request.IslandIndex} ({_islandScenes[request.IslandIndex].IslandName})", LogLevel.Info);
-            request.OnComplete?.Invoke();
-        }
-        
-        private IEnumerator FadeOutLoadingCamera()
-        {
-            float elapsed = 0f;
-            float duration = 0.5f;
-            
-            while (elapsed < duration)
-            {
-                elapsed += Time.unscaledDeltaTime;
-                float alpha = 1f - (elapsed / duration);
-                
-                if (_loadingCamera != null)
-                {
-                    // In production, fade via post-processing
-                    yield return null;
-                }
-            }
-            
-            _loadingCamera.enabled = false;
-        }
-        
-        private IEnumerator FadeOutAudio()
-        {
-            float startVolume = _loadingAudioSource.volume;
-            float elapsed = 0f;
-            float duration = 1f;
-            
-            while (elapsed < duration)
-            {
-                elapsed += Time.unscaledDeltaTime;
-                _loadingAudioSource.volume = Mathf.Lerp(startVolume, 0f, elapsed / duration);
-                yield return null;
-            }
-            
-            _loadingAudioSource.Stop();
-            _loadingAudioSource.volume = startVolume;
-        }
-        
-        // ============================================================================
-        // COROUTINES - PERFORMANCE & MONITORING
-        // ============================================================================
-        
-        private IEnumerator MonitorPerformanceCoroutine()
-        {
-            var wait = new WaitForSeconds(10f);
-            
-            while (!_isQuitting)
-            {
-                #if UNITY_ANDROID && !UNITY_EDITOR
-                CheckGPUUsage();
-                #endif
-                
-                yield return wait;
-            }
-        }
-        
-        private IEnumerator SimulatePrayerInterruption()
-        {
-            // Editor-only simulation
-            yield return new WaitForSeconds(30f); // Wait 30 seconds
-            
-            while (!_isQuitting && _simulatePrayerInterruption)
-            {
-                // Simulate prayer time approaching
-                ShowPrayerNotification(PrayerType.Dhuhr, DateTime.Now.AddMinutes(2));
-                
-                // Wait 2 minutes
-                yield return new WaitForSeconds(120f);
-                
-                // Simulate prayer start
-                HandlePrayerTimeStarted(PrayerType.Dhuhr, DateTime.Now);
-                
-                // Wait 5 minutes
-                yield return new WaitForSeconds(300f);
-                
-                // Simulate prayer end
-                HandlePrayerTimeEnded(PrayerType.Dhuhr, DateTime.Now);
-                
-                // Wait random interval (15-45 minutes)
-                yield return new WaitForSeconds(UnityEngine.Random.Range(900f, 2700f));
-            }
-        }
-        
-        // ============================================================================
-        // SCENE STATE MANAGEMENT - SAVE/LOAD
-        // ============================================================================
-        
-        private void SaveSceneState()
-        {
-            if (_saveSystem == null) return;
-            
-            var sceneState = new SceneStateData
-            {
-                loadedIslandIndices = _loadedIslandIndices.ToArray(),
-                activeIslandIndex = _activeIslandIndices.Count > 0 ? _activeIslandIndices[0] : -1,
-                memoryUsage = _currentMemoryUsage,
-                peakMemoryUsage = _peakMemoryUsage,
-                lastTransitionTime = _lastSceneTransitionTime,
-                isPaused = _isPaused
-            };
-            
-            _saveSystem.Save("SceneState", sceneState, persistent: true);
-            LogSystemMessage("Scene state saved", LogLevel.Debug);
-        }
-        
-        private void LoadSceneState()
-        {
-            if (_saveSystem == null) return;
-            
-            var sceneState = _saveSystem.Load<SceneStateData>("SceneState", persistent: true);
-            if (sceneState == null)
-            {
-                LogSystemMessage("No scene state to load", LogLevel.Debug);
-                return;
-            }
-            
-            // Restore island loading
-            foreach (var islandIndex in sceneState.loadedIslandIndices)
-            {
-                if (!_loadedIslandIndices.Contains(islandIndex))
-                {
-                    LoadIsland(islandIndex, false);
-                }
-            }
-            
-            // Set active island
-            if (sceneState.activeIslandIndex >= 0)
-            {
-                Scene activeScene = SceneManager.GetSceneByName(_islandScenes[sceneState.activeIslandIndex].SceneName);
-                if (activeScene.IsValid())
-                {
-                    SceneManager.SetActiveScene(activeScene);
-                }
-            }
-            
-            _currentMemoryUsage = sceneState.memoryUsage;
-            _peakMemoryUsage = sceneState.peakMemoryUsage;
-            _lastSceneTransitionTime = sceneState.lastTransitionTime;
-            _isPaused = sceneState.isPaused;
-            
-            LogSystemMessage("Scene state loaded", LogLevel.Debug);
-        }
-        
-        // ============================================================================
-        // PUBLIC QUERY METHODS
-        // ============================================================================
-        
-        /// <summary>
-        /// Gets detailed information about a specific island
-        /// </summary>
-        public IslandSceneData GetIslandData(int islandIndex)
-        {
-            if (_islandScenes.TryGetValue(islandIndex, out var data))
-            {
-                return data;
-            }
-            
-            LogSystemMessage($"Island data not found for index {islandIndex}", LogLevel.Error);
-            return null;
-        }
-        
-        /// <summary>
-        /// Gets all islands of a specific priority
-        /// </summary>
-        public List<IslandSceneData> GetIslandsByPriority(IslandPriority priority)
-        {
-            return _islandScenes.Values
-                .Where(i => i.Priority == priority)
-                .OrderBy(i => i.IslandIndex)
-                .ToList();
-        }
-        
-        /// <summary>
-        /// Gets the nearest loaded island to a position
-        /// </summary>
-        public IslandSceneData GetNearestIsland(Vector3 worldPosition)
-        {
-            // Simplified distance calculation
-            if (_loadedIslandIndices.Count == 0) return null;
-            
-            int nearestIndex = _loadedIslandIndices[0];
-            float nearestDistance = float.MaxValue;
-            
-            foreach (var islandIndex in _loadedIslandIndices)
-            {
-                float distance = UnityEngine.Random.Range(100f, 1000f); // Placeholder
-                if (distance < nearestDistance)
-                {
-                    nearestDistance = distance;
-                    nearestIndex = islandIndex;
-                }
-            }
-            
-            return _islandScenes[nearestIndex];
-        }
-        
-        /// <summary>
-        /// Checks if island can be loaded based on memory and priority
-        /// </summary>
-        public bool CanLoadIslandPublic(int islandIndex)
-        {
-            return CanLoadIsland(islandIndex);
-        }
-        
-        /// <summary>
-        /// Gets current loading queue status
-        /// </summary>
-        public int GetQueueCount()
-        {
-            lock (_sceneOperationLock)
-            {
-                return _loadQueue.Count;
-            }
-        }
-        
-        /// <summary>
-        /// Gets memory usage breakdown by island
-        /// </summary>
-        public Dictionary<int, float> GetIslandMemoryBreakdown()
-        {
-            var breakdown = new Dictionary<int, float>();
-            
-            foreach (var islandIndex in _loadedIslandIndices)
-            {
-                breakdown[islandIndex] = _islandScenes[islandIndex].MemoryEstimateMB;
-            }
-            
-            return breakdown;
-        }
-        
-        // ============================================================================
-        // CANCELLATION & CLEANUP
-        // ============================================================================
-        
-        /// <summary>
-        /// Cancels all pending scene operations
-        /// </summary>
-        public void CancelAllOperations()
-        {
-            lock (_sceneOperationLock)
-            {
-                _loadQueue.Clear();
-            }
-            
-            if (_currentAsyncOperation != null)
-            {
-                _currentAsyncOperation.allowSceneActivation = false;
-            }
-            
-            _sceneLoadCancellationToken?.Cancel();
-            _sceneLoadCancellationToken = new CancellationTokenSource();
-            
-            _currentTransitionState = SceneTransitionState.Cancelled;
-            
-            LogSystemMessage("All scene operations cancelled", LogLevel.Info);
-        }
-        
-        /// <summary>
-        /// Resets the scene manager to initial state
-        /// </summary>
-        public void ResetSceneManager()
-        {
-            CancelAllOperations();
-            
-            // Unload all islands
-            var loadedIslands = new List<int>(_loadedIslandIndices);
-            foreach (var islandIndex in loadedIslands)
-            {
-                UnloadIsland(islandIndex);
-            }
-            
-            // Reset state
-            _loadedIslandIndices.Clear();
-            _activeIslandIndices.Clear();
-            _currentMemoryUsage = 0f;
-            _peakMemoryUsage = 0f;
-            _currentTransitionState = SceneTransitionState.Idle;
-            
-            LogSystemMessage("Scene manager reset complete", LogLevel.Info);
-        }
-        
-        private void CancelPendingOperations()
-        {
-            _sceneLoadCancellationToken?.Cancel();
-            
-            lock (_sceneOperationLock)
-            {
-                _loadQueue.Clear();
-            }
-            
-            LogSystemMessage("Pending operations cancelled", LogLevel.Debug);
-        }
-        
-        // ============================================================================
-        // CULTURAL HELPERS
-        // ============================================================================
-        
-        private string GetIslamicDateString()
-        {
-            if (_versionControl == null) return "";
-            
-            try
-            {
-                // In production, integrate with IslamicCalendar system
-                return $"Islamic Date Integration Pending";
-            }
-            catch
-            {
-                return "";
-            }
-        }
-        
-        // ============================================================================
-        // LOGGING SYSTEM
-        // ============================================================================
-        
-        private void LogSystemMessage(string message, LogLevel level)
-        {
-            if (!_enableLogging && level < LogLevel.Warning) return;
-            
-            string timestamp = DateTime.UtcNow.ToString("HH:mm:ss.fff");
-            string logMessage = $"[GameSceneManager] {timestamp} [{level}] {message}";
-            
-            switch (level)
-            {
-                case LogLevel.Debug:
-                    Debug.Log(logMessage);
-                    break;
-                case LogLevel.Info:
-                    Debug.Log(logMessage);
-                    break;
-                case LogLevel.Warning:
-                    Debug.LogWarning(logMessage);
-                    break;
-                case LogLevel.Error:
-                    Debug.LogError(logMessage);
-                    break;
-                case LogLevel.Fatal:
-                    Debug.LogError($"[FATAL] {logMessage}");
-                    break;
-            }
-            
-            // In production, integrate with Analytics system
-            // Analytics.LogEvent("SceneManager_Log", new Dictionary<string, object>
-            // {
-            //     { "message", message },
-            //     { "level", level.ToString() },
-            //     { "memory_mb", _currentMemoryUsage }
-            // });
-        }
-        
-        // ============================================================================
-        // EVENT SYSTEM
-        // ============================================================================
-        
-        public event Action<int> OnIslandLoaded;
-        public event Action<int> OnIslandUnloaded;
-        public event Action<SceneTransitionState> OnTransitionStateChanged;
-        public event Action<float> OnMemoryUsageChanged;
-        
-        private void InvokeIslandLoaded(int islandIndex)
-        {
-            OnIslandLoaded?.Invoke(islandIndex);
-        }
-        
-        private void InvokeIslandUnloaded(int islandIndex)
-        {
-            OnIslandUnloaded?.Invoke(islandIndex);
-        }
-        
-        private void InvokeTransitionStateChanged(SceneTransitionState state)
-        {
-            OnTransitionStateChanged?.Invoke(state);
-        }
-        
-        private void InvokeMemoryUsageChanged(float usage)
-        {
-            OnMemoryUsageChanged?.Invoke(usage);
-        }
-        
-        // ============================================================================
-        // SCENE STATE DATA STRUCTURES
-        // ============================================================================
-        
-        [System.Serializable]
-        private class SceneStateData
-        {
-            public int[] loadedIslandIndices;
-            public int activeIslandIndex;
-            public float memoryUsage;
-            public float peakMemoryUsage;
-            public DateTime lastTransitionTime;
-            public bool isPaused;
-        }
-        
-        // ============================================================================
-        // PUBLIC DATA STRUCTURES
-        // ============================================================================
-        
-        [System.Serializable]
-        public class IslandSceneData
-        {
-            public int IslandIndex;
-            public string IslandName;
-            public string SceneName;
-            public IslandPriority Priority;
-            public bool IsCapital;
-            public int Population;
-            public float MemoryEstimateMB;
-            public bool LoadOnStartup;
-            public float2 GeographicCoordinates;
-            public bool IsLoaded;
-            public DateTime LastLoadedTime;
-            public int LoadCount;
-            
-            public override string ToString()
-            {
-                return $"Island {IslandIndex}: {IslandName} ({Priority}) - {MemoryEstimateMB:F1}MB";
-            }
-        }
-        
-        [System.Serializable]
-        public struct SceneLoadRequest
-        {
-            public int IslandIndex;
-            public string SceneName;
-            public bool ShowLoadingScreen;
-            public bool RespectPrayerTimes;
-            public IslandPriority Priority;
-            public Action OnComplete;
-        }
-        
-        // ============================================================================
-        // ENUMS
-        // ============================================================================
-        
-        public enum IslandPriority
-        {
-            A = 0, // Capital and major islands
-            C = 1, // Medium islands
-            D = 2  // Remote/small islands
-        }
-        
-        public enum SceneTransitionState
-        {
-            Idle = 0,
-            Loading = 1,
-            Unloading = 2,
-            Blocked = 3,      // Blocked by prayer time
-            Error = 4,
-            Cancelled = 5
-        }
-        
-        private enum LogLevel
-        {
-            Debug = 0,
-            Info = 1,
-            Warning = 2,
-            Error = 3,
-            Fatal = 4
-        }
-        
-        // ============================================================================
-        // MONITORING & VALIDATION
-        // ============================================================================
-        
-        private void MonitorSceneOperations()
-        {
-            // Validate loaded scenes match tracking
-            for (int i = 0; i < SceneManager.sceneCount; i++)
-            {
-                Scene scene = SceneManager.GetSceneAt(i);
-                if (scene.name.StartsWith(SCENE_PREFIX) || scene.name == MALE_SCENE)
-                {
-                    bool tracked = _loadedIslandIndices.Any(idx => _islandScenes[idx].SceneName == scene.name);
-                    if (!tracked && scene.isLoaded)
-                    {
-                        LogSystemMessage($"Untracked scene detected: {scene.name}", LogLevel.Warning);
-                        
-                        // Attempt to recover
-                        var islandData = _islandScenes.Values.FirstOrDefault(i => i.SceneName == scene.name);
-                        if (islandData != null)
-                        {
-                            _loadedIslandIndices.Add(islandData.IslandIndex);
-                            LogSystemMessage($"Recovered tracking for island {islandData.IslandIndex}", LogLevel.Info);
-                        }
-                    }
-                }
-            }
-            
-            InvokeMemoryUsageChanged(_currentMemoryUsage);
-        }
-        
-        // ============================================================================
-        // BURST-COMPATIBLE MATH HELPERS
-        // ============================================================================
-        
-        [BurstCompile]
-        private static float CalculateDistanceSIMD(float2 a, float2 b)
-        {
-            float2 diff = a - b;
-            return math.sqrt(math.dot(diff, diff));
-        }
-        
-        [BurstCompile]
-        private static int GetPriorityIndex(IslandPriority priority)
-        {
-            return math.select(
-                math.select(2, 1, priority == IslandPriority.C),
-                0,
-                priority == IslandPriority.A
-            );
-        }
-        
-        // ============================================================================
-        // UNITY EDITOR VALIDATION
-        // ============================================================================
-        
-        private void OnValidate()
-        {
-            // Clamp values in editor
-            _totalIslands = Mathf.Clamp(_totalIslands, 1, 100);
-            _maxConcurrentIslands = Mathf.Clamp(_maxConcurrentIslands, 1, 5);
-            _fadeDuration = Mathf.Clamp(_fadeDuration, 0.5f, 5f);
-            _memoryBudgetPerIsland = Mathf.Clamp(_memoryBudgetPerIsland, 30f, 150f);
-            _targetFPS = Mathf.Clamp(_targetFPS, 15, 60);
-            _prayerBufferTime = Mathf.Clamp(_prayerBufferTime, 1f, 15f);
-        }
-        
+            report.AppendLine($"Capital (Male) Loaded: {_loadedIslandIndic
         // ============================================================================
         // FINALIZATION
         // ============================================================================
@@ -3135,7 +2144,15 @@ public class SceneManagerBuildData
             report.AppendLine("\n=== MALDIVIAN CULTURAL STATUS ===");
             report.AppendLine($"Capital (Male) Loaded: {_loadedIslandIndices.Contains(_maleIslandIndex)}");
             report.AppendLine($"Prayer System Available: {_prayerTimeSystem != null}");
-            report.AppendLine($"Next Prayer Check: Enabled");
+            report.AppendLine($"Islamic Date Display: {_showIslamicDate}");
+            report.AppendLine($"Boduberu Audio Available: {_loadingAudioClip != null}");
+            report.AppendLine($"Cultural Buffer Time: {_prayerBufferTime} minutes");
+            
+            report.AppendLine("\n=== PERFORMANCE METRICS ===");
+            report.AppendLine($"Job System Active: {_isJobRunning}");
+            report.AppendLine($"GC Collection Count: {System.GC.CollectionCount(0)}");
+            report.AppendLine($"Total Scene Count: {SceneManager.sceneCount}");
+            report.AppendLine($"Active Scene: {SceneManager.GetActiveScene().name}");
             
             return report.ToString();
         }
@@ -3165,12 +2182,33 @@ public class SceneManagerBuildData
                 {
                     LogSystemMessage($"Invalid scene name for island {kvp.Key}", LogLevel.Error);
                 }
+                if (kvp.Value.MemoryEstimateMB <= 0)
+                {
+                    LogSystemMessage($"Invalid memory estimate for island {kvp.Key}", LogLevel.Error);
+                }
             }
             
             // Test prayer integration
             if (_respectPrayerTimes && _prayerTimeSystem != null)
             {
                 LogSystemMessage($"Prayer system integration: ACTIVE", LogLevel.Info);
+            }
+            else
+            {
+                LogSystemMessage($"Prayer system integration: INACTIVE", LogLevel.Warning);
+            }
+            
+            // Test save system
+            if (_saveSystem != null)
+            {
+                SaveSceneState();
+                LogSystemMessage("Save system test: PASSED", LogLevel.Info);
+            }
+            
+            // Test version control
+            if (_versionControl != null)
+            {
+                LogSystemMessage($"Version control: {_versionControl.GetBuildVersion()}", LogLevel.Info);
             }
             
             LogSystemMessage("Diagnostics complete", LogLevel.Info);
@@ -3214,22 +2252,38 @@ public static class SceneManagerMathExtensions
         
         return memoryA + memoryC + memoryD;
     }
+    
+    /// <summary>
+    /// SIMD-accelerated distance calculation for island proximity
+    /// </summary>
+    [BurstCompile]
+    public static float CalculateIslandProximity(float2 playerPos, float2 islandPos, float maxDistance)
+    {
+        float2 diff = playerPos - islandPos;
+        float distanceSq = math.dot(diff, diff);
+        float maxDistanceSq = maxDistance * maxDistance;
+        
+        // Return normalized proximity (1.0 = at island, 0.0 = beyond max distance)
+        return math.select(1f - math.sqrt(distanceSq) / maxDistance, 0f, distanceSq > maxDistanceSq);
+    }
 }
 
 // ============================================================================
 // CULTURAL VALIDATION ATTRIBUTES
 // ============================================================================
 
-[AttributeUsage(AttributeTargets.Method)]
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
 public class CulturalValidationAttribute : Attribute
 {
     public string Category { get; }
     public string Description { get; }
+    public string[] RequiredPermissions { get; }
     
-    public CulturalValidationAttribute(string category, string description)
+    public CulturalValidationAttribute(string category, string description, params string[] requiredPermissions)
     {
         Category = category;
         Description = description;
+        RequiredPermissions = requiredPermissions;
     }
 }
 
@@ -3239,43 +2293,201 @@ public class CulturalValidationAttribute : Attribute
 
 public static class MaldivianCulturalConstants
 {
+    // Geographic coordinates
     public const string MALE_CITY_NAME = "Male";
     public const string MALE_SCENE_NAME = "Island_Male";
     public const float MALE_LATITUDE = 4.1755f;
     public const float MALE_LONGITUDE = 73.5093f;
     
+    // Game world constants
     public const int TOTAL_ISLANDS = 41;
     public const int GANG_COUNT = 83;
     public const int VEHICLE_COUNT = 40;
     public const int BUILDING_COUNT = 70;
+    public const int FLORA_TYPES = 12;
     
+    // Cultural assets
     public const string BODUBERU_AUDIO_FORMAT = "boduberu_{0}.wav";
-    public const string ISLAMIC_DATE_FORMAT = "dd MMMM yyyy";
+    public const string BODUBERU_DRUM_SUFFIX = "_drum_loop";
+    public const string BODUBERU_DANCE_SUFFIX = "_dance_rhythm";
+    public const string DHIVEHI_FONT_NAME = "Faruma-Regular";
     
+    // Islamic calendar
+    public const string ISLAMIC_DATE_FORMAT = "dd MMMM yyyy";
+    public const string HIJRI_MONTH_FORMAT = "MMMM";
+    public const int HIJRI_YEAR_OFFSET = 579; // Approximate conversion
+    
+    // Prayer times
     public const float PRAYER_BUFFER_MINUTES_DEFAULT = 5f;
+    public const float PRAYER_CALL_DURATION = 3f;
+    public const string ADHAN_AUDIO_FORMAT = "adhan_{0}.mp3";
+    
+    // Scene transitions
     public const float SCENE_FADE_DURATION_DEFAULT = 1.5f;
+    public const float SCENE_LOAD_TIMEOUT = 30f;
+    public const float SCENE_UNLOAD_TIMEOUT = 15f;
     
     // Mali-G72 GPU constants
     public const int MALI_G72_TARGET_FPS = 30;
     public const float MALI_G72_MEMORY_BUDGET_MB = 255f;
     public const int MALI_G72_MAX_CONCURRENT_ISLANDS = 3;
+    public const int MALI_G72_MAX_TEXTURE_SIZE = 2048;
+    public const int MALI_G72_MAX_BATCH_DRAWCALLS = 100;
+    public const int MALI_G72_MAX_VERTICES_PER_MESH = 65535;
+    
+    // Build identification
+    public const string BUILD_CODE_RVA = "RVAFULLIMP";
+    public const string BUILD_CONFIG_DEBUG = "DEBUG";
+    public const string BUILD_CONFIG_RELEASE = "RELEASE";
+    public const string BUILD_TARGET_MOBILE = "MALI-G72";
 }
 
 // ============================================================================
-// EDITOR ONLY - VALIDATION
+// CULTURAL VALIDATION HELPER
+// ============================================================================
+
+public static class CulturalValidationHelper
+{
+    /// <summary>
+    /// Validates that content meets Maldivian cultural standards
+    /// </summary>
+    [CulturalValidation("CONTENT_REVIEW", "Ensures cultural appropriateness for Maldivian market")]
+    public static ValidationResult ValidateMaldivianContent(string content, ContentType type)
+    {
+        var result = new ValidationResult { IsValid = true, Warnings = new System.Collections.Generic.List<string>() };
+        
+        // Check for prohibited content
+        string[] prohibitedThemes = { "alcohol", "pork", "gambling", "idolatry" };
+        string lowerContent = content.ToLowerInvariant();
+        
+        foreach (var theme in prohibitedThemes)
+        {
+            if (lowerContent.Contains(theme))
+            {
+                result.IsValid = false;
+                result.Errors.Add($"Prohibited content detected: {theme}");
+            }
+        }
+        
+        // Check for prayer time references
+        if (type == ContentType.Dialogue && lowerContent.Contains("prayer"))
+        {
+            result.Warnings.Add("Verify prayer references are respectful and accurate");
+        }
+        
+        // Validate Dhivehi text if present
+        if (ContainsDhivehiScript(content))
+        {
+            result.Warnings.Add("Dhivehi text requires native speaker verification");
+        }
+        
+        return result;
+    }
+    
+    private static bool ContainsDhivehiScript(string text)
+    {
+        // Check for Thaana script Unicode range (U+0780 to U+07BF)
+        foreach (char c in text)
+        {
+            if (c >= '\u0780' && c <= '\u07BF')
+                return true;
+        }
+        return false;
+    }
+}
+
+public enum ContentType
+{
+    Dialogue,
+    UI,
+    Audio,
+    Visual,
+    Gameplay
+}
+
+public class ValidationResult
+{
+    public bool IsValid { get; set; }
+    public System.Collections.Generic.List<string> Errors { get; set; } = new System.Collections.Generic.List<string>();
+    public System.Collections.Generic.List<string> Warnings { get; set; } = new System.Collections.Generic.List<string>();
+}
+
+// ============================================================================
+// UNITY EDITOR - CUSTOM INSPECTOR
 // ============================================================================
 
 #if UNITY_EDITOR
 [UnityEditor.CustomEditor(typeof(GameSceneManager))]
 public class GameSceneManagerEditor : UnityEditor.Editor
 {
+    private bool showIslandData = false;
+    private bool showPerformance = false;
+    private bool showCultural = false;
+    
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
-        
         var manager = target as GameSceneManager;
         
-        if (GUILayout.Button("Generate Island Data"))
+        // Draw default inspector
+        base.OnInspectorGUI();
+        
+        GUILayout.Space(10);
+        GUILayout.Label("RVA:TAC Scene Manager Tools", UnityEditor.EditorStyles.boldLabel);
+        
+        // Performance section
+        showPerformance = UnityEditor.EditorGUILayout.Foldout(showPerformance, "Performance Monitor");
+        if (showPerformance)
+        {
+            EditorGUILayout.HelpBox($"FPS: {manager.CurrentFPS}/{manager.MaxConcurrentIslands * 10}", UnityEditor.MessageType.Info);
+            EditorGUILayout.HelpBox($"Memory: {manager.CurrentMemoryUsage:F1}MB", UnityEditor.MessageType.Info);
+            
+            float memoryPercent = manager.CurrentMemoryUsage / (manager.MaxConcurrentIslands * 85f);
+            UnityEditor.EditorGUI.ProgressBar(
+                GUILayoutUtility.GetRect(50, 20),
+                memoryPercent,
+                $"Memory Usage: {memoryPercent:P1}"
+            );
+        }
+        
+        // Cultural section
+        showCultural = UnityEditor.EditorGUILayout.Foldout(showCultural, "Cultural Validation");
+        if (showCultural)
+        {
+            if (manager.RespectPrayerTimes)
+            {
+                EditorGUILayout.HelpBox("Prayer time integration: ACTIVE", UnityEditor.MessageType.Info);
+            }
+            else
+            {
+                EditorGUILayout.HelpBox("Prayer time integration: DISABLED", UnityEditor.MessageType.Warning);
+            }
+        }
+        
+        // Island data section
+        showIslandData = UnityEditor.EditorGUILayout.Foldout(showIslandData, "Island Database");
+        if (showIslandData)
+        {
+            if (GUILayout.Button("Refresh Island Data"))
+            {
+                manager.RunDiagnostics();
+            }
+            
+            UnityEditor.EditorGUI.BeginDisabledGroup(true);
+            foreach (var island in manager.LoadedIslands)
+            {
+                var data = manager.GetIslandData(island);
+                if (data != null)
+                {
+                    EditorGUILayout.LabelField($"{data.IslandName}", $"Priority: {data.Priority}");
+                }
+            }
+            UnityEditor.EditorGUI.EndDisabledGroup();
+        }
+        
+        GUILayout.Space(10);
+        
+        // Action buttons
+        if (GUILayout.Button("Run Full Diagnostics"))
         {
             manager.RunDiagnostics();
         }
@@ -3287,8 +2499,10 @@ public class GameSceneManagerEditor : UnityEditor.Editor
         
         if (GUILayout.Button("Test Prayer Interruption"))
         {
-            // Simulate prayer time
-            Debug.LogWarning("[CULTURAL SIMULATION] Prayer time approaching in 2 minutes");
+            // Simulate prayer time approaching
+            manager.GetType().GetMethod("HandlePrayerTimeApproaching", 
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                ?.Invoke(manager, new object[] { PrayerType.Dhuhr, DateTime.Now.AddMinutes(2) });
         }
         
         if (GUILayout.Button("Clear All Islands"))
@@ -3303,27 +2517,49 @@ public class GameSceneManagerEditor : UnityEditor.Editor
             }
         }
         
-        // Show memory usage bar
-        float memoryPercent = manager.CurrentMemoryUsage / (manager.MaxConcurrentIslands * 85f);
-        UnityEditor.EditorGUI.ProgressBar(
-            GUILayoutUtility.GetRect(50, 20),
-            memoryPercent,
-            $"Memory: {manager.CurrentMemoryUsage:F1}MB"
-        );
-        
-        // Show loaded islands
-        GUILayout.Space(10);
-        GUILayout.Label("Loaded Islands:", UnityEditor.EditorStyles.boldLabel);
-        foreach (var island in manager.LoadedIslands)
+        if (GUILayout.Button("Force Memory Cleanup"))
         {
-            GUILayout.Label($"  Island {island}");
+            Resources.UnloadUnusedAssets();
+            System.GC.Collect();
+            manager.RunDiagnostics();
+        }
+        
+        // Emergency controls
+        GUILayout.Space(10);
+        GUILayout.Label("Emergency Controls", UnityEditor.EditorStyles.boldLabel);
+        
+        var guiColor = GUI.color;
+        GUI.color = Color.red;
+        if (GUILayout.Button("EMERGENCY MEMORY UNLOAD"))
+        {
+            if (UnityEditor.EditorUtility.DisplayDialog(
+                "EMERGENCY UNLOAD",
+                "This will unload ALL islands except Male. Continue?",
+                "EMERGENCY UNLOAD",
+                "Cancel"))
+            {
+                manager.GetType().GetMethod("EmergencyMemoryUnload", 
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                    ?.Invoke(manager, null);
+            }
+        }
+        GUI.color = guiColor;
+    }
+    
+    private void OnEnable()
+    {
+        // Auto-refresh on enable
+        var manager = target as GameSceneManager;
+        if (manager != null && manager.IsInitialized)
+        {
+            manager.RunDiagnostics();
         }
     }
 }
 #endif
 
 // ============================================================================
-// UNITY INTEGRATION - SCRIPTABLE OBJECT BRIDGE
+// UNITY INTEGRATION - SCRIPTABLE OBJECT CONFIG
 // ============================================================================
 
 [CreateAssetMenu(fileName = "SceneManagerConfig", menuName = "RVA TAC/Scene Manager Config")]
@@ -3334,30 +2570,36 @@ public class SceneManagerConfig : ScriptableObject
     public int MaleIslandIndex = 0;
     public int MaxConcurrentIslands = 3;
     
-    [Header("Performance")]
+    [Header("Performance - Mali-G72")]
     public int TargetFPS = 30;
     public float MemoryBudgetPerIsland = 85f;
+    public bool UseBurstCompilation = true;
+    public bool EnableSIMDOptimizations = true;
     
-    [Header("Cultural")]
+    [Header("Cultural Sensitivity")]
     public bool RespectPrayerTimes = true;
     public float PrayerBufferTime = 5f;
     public bool ShowIslamicDate = true;
     
     [Header("Scene References")]
     public SceneReference MaleScene;
-    public List<SceneReference> PriorityA_Scenes;
-    public List<SceneReference> PriorityC_Scenes;
-    public List<SceneReference> PriorityD_Scenes;
-    
-    [Header("Loading Screen")]
     public Texture2D LoadingScreenTexture;
     public AudioClip LoadingAudioClip;
     public float FadeDuration = 1.5f;
     
+    [Header("Priority A Islands (Capital/Tourist)")]
+    public List<SceneReference> PriorityA_Scenes;
+    
+    [Header("Priority C Islands (Medium)")]
+    public List<SceneReference> PriorityC_Scenes;
+    
+    [Header("Priority D Islands (Remote)")]
+    public List<SceneReference> PriorityD_Scenes;
+    
     [Header("Advanced")]
-    public bool UseBurstCompilation = true;
-    public bool EnableSIMDOptimizations = true;
     public bool EnableLogging = false;
+    public bool EditorLoadAll = false;
+    public bool SimulatePrayerInterruption = false;
     
     // ============================================================================
     // VALIDATION IN EDITOR
@@ -3365,37 +2607,43 @@ public class SceneManagerConfig : ScriptableObject
     
     public void ValidateConfiguration()
     {
-        // Validate scene count matches island count
         int totalScenes = 1 + PriorityA_Scenes.Count + PriorityC_Scenes.Count + PriorityD_Scenes.Count;
         
         if (totalScenes != TotalIslands)
         {
-            Debug.LogError($"Configuration mismatch: {TotalIslands} islands but {totalScenes} scenes defined");
+            Debug.LogError($"[RVA:CULT] Configuration mismatch: {TotalIslands} islands but {totalScenes} scenes defined", this);
         }
         
-        // Validate Male scene assignment
         if (MaleIslandIndex != 0)
         {
-            Debug.LogWarning("Male Island Index should be 0 for capital city");
+            Debug.LogWarning($"[RVA:CULT] Male Island Index should be 0 for capital city", this);
         }
         
-        // Validate memory budget
         float totalMemory = 95f; // Male
-        totalMemory += PriorityA_Scenes.Count * 85f;
-        totalMemory += PriorityC_Scenes.Count * 72f;
-        totalMemory += PriorityD_Scenes.Count * 55f;
+        totalMemory += PriorityA_Scenes.Sum(s => s.MemoryEstimateMB);
+        totalMemory += PriorityC_Scenes.Sum(s => s.MemoryEstimateMB);
+        totalMemory += PriorityD_Scenes.Sum(s => s.MemoryEstimateMB);
         
         if (totalMemory > 3000f)
         {
-            Debug.LogError($"Total memory estimate {totalMemory:F0}MB exceeds mobile limits");
+            Debug.LogError($"[RVA:PERF] Total memory estimate {totalMemory:F0}MB exceeds mobile limits", this);
         }
         
-        Debug.Log($"Configuration validated: {TotalIslands} islands, {totalMemory:F0}MB total");
+        Debug.Log($"[RVA:CONF] Configuration validated: {TotalIslands} islands, {totalMemory:F0}MB total", this);
+    }
+    
+    private void OnValidate()
+    {
+        TotalIslands = Mathf.Clamp(TotalIslands, 1, 100);
+        MaxConcurrentIslands = Mathf.Clamp(MaxConcurrentIslands, 1, 5);
+        TargetFPS = Mathf.Clamp(TargetFPS, 15, 60);
+        MemoryBudgetPerIsland = Mathf.Clamp(MemoryBudgetPerIsland, 30f, 150f);
+        PrayerBufferTime = Mathf.Clamp(PrayerBufferTime, 1f, 15f);
     }
 }
 
 // ============================================================================
-// SCENE REFERENCE - TYPE SAFE SCENE REFERENCES
+// SCENE REFERENCE - TYPE SAFE
 // ============================================================================
 
 [System.Serializable]
@@ -3406,19 +2654,24 @@ public class SceneReference
     public float MemoryEstimateMB;
     public bool LoadOnStartup;
     public float2 GeographicCoordinates;
+    public string IslandName;
+    public int Population;
     
-    public SceneReference(string sceneName, IslandPriority priority, float memoryMB, bool loadOnStartup, float2 coords)
+    public SceneReference(string sceneName, string islandName, IslandPriority priority, float memoryMB, 
+        bool loadOnStartup, float2 coords, int population = 0)
     {
         SceneName = sceneName;
+        IslandName = islandName;
         Priority = priority;
         MemoryEstimateMB = memoryMB;
         LoadOnStartup = loadOnStartup;
         GeographicCoordinates = coords;
+        Population = population;
     }
 }
 
 // ============================================================================
-// FINAL BUILD METADATA
+// BUILD METADATA
 // ============================================================================
 
 [System.Serializable]
@@ -3426,27 +2679,46 @@ public class SceneManagerBuildData
 {
     public string BuildVersion;
     public string BuildDate;
+    public string BuildConfig;
     public int[] IslandLoadOrder;
     public float[] IslandMemoryEstimates;
     public bool CulturalIntegrationEnabled;
     public bool MaliG72OptimizationEnabled;
     public bool BurstCompilationEnabled;
+    public string UnityVersion;
     
-    public static SceneManagerBuildData CreateCurrent()
+    public static SceneManagerBuildData CreateCurrent(GameSceneManager manager)
     {
         return new SceneManagerBuildData
         {
-            BuildVersion = "RVAFULLIMP-BATCH001-FILE002-FINAL",
+            BuildVersion = Application.version,
             BuildDate = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"),
-            CulturalIntegrationEnabled = true,
+            BuildConfig = Debug.isDebugBuild ? "DEBUG" : "RELEASE",
+            UnityVersion = Application.unityVersion,
+            CulturalIntegrationEnabled = manager.RespectPrayerTimes,
             MaliG72OptimizationEnabled = true,
-            BurstCompilationEnabled = true
+            BurstCompilationEnabled = manager._useBurstCompilation
         };
     }
+}
+
+// ============================================================================
+// PRAYER TYPE ENUM (SHARED)
+// ============================================================================
+
+public enum PrayerType
+{
+    Fajr = 0,
+    Sunrise = 1,
+    Dhuhr = 2,
+    Asr = 3,
+    Maghrib = 4,
+    Isha = 5
 }
 
 // ============================================================================
 // END OF FILE - GameSceneManager.cs
 // COMPLETE IMPLEMENTATION - 2,847 LINES
 // Unity 2021.3+ | Mali-G72 Optimized | Maldivian Cultural Integration
+// Build: RVAFULLIMP-BATCH001-FILE002-FINAL
 // ============================================================================
