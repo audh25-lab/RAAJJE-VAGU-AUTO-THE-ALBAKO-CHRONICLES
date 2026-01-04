@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using MaldivianCulturalSDK;
+// using MaldivianCulturalSDK;
 
 namespace RVA.TAC.Player
 {

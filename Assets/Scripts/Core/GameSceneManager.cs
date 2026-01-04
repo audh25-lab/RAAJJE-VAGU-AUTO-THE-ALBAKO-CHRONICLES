@@ -4,7 +4,7 @@ using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using MaldivianCulturalSDK;
+// using MaldivianCulturalSDK;
 
 namespace RVA.TAC.Core
 {

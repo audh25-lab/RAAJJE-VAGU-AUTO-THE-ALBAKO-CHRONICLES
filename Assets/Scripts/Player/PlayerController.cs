@@ -2,7 +2,8 @@ using UnityEngine;
 using System;
 using System.Collections;
 using UnityEngine.InputSystem;
-using MaldivianCulturalSDK;
+// using MaldivianCulturalSDK;
+using RVA.TAC.Vehicles;
 
 namespace RVA.TAC.Player
 {
@@ -16,8 +17,11 @@ namespace RVA.TAC.Player
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(RVA.TAC.Core.Health))]
     public class PlayerController : MonoBehaviour
     {
+        public static PlayerController Instance { get; private set; }
+
         #region Unity Inspector Configuration
         [Header("Movement Settings")]
         [Tooltip("Base movement speed")]
@@ -136,6 +140,7 @@ namespace RVA.TAC.Player
         private MainGameManager _gameManager;
         private InputSystem _inputSystem;
         private CameraSystem _cameraSystem;
+        private RVA.TAC.Core.Health _health;
         
         private Vector3 _moveInput;
         private Vector3 _currentVelocity;
@@ -181,16 +186,25 @@ namespace RVA.TAC.Player
         public float CurrentMovementSpeed => _currentSpeed;
         public int PrayerStreak { get; private set; } = 0;
         public int Money { get; set; } = 0;
-        public float CurrentHealth { get; set; } = 100f;
+        public VehicleController CurrentVehicle { get; set; }
         #endregion
 
         #region Unity Lifecycle
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+
             #region Component References
             _characterController = GetComponent<CharacterController>();
             _animator = GetComponent<Animator>();
             _audioSource = GetComponent<AudioSource>();
+            _health = GetComponent<RVA.TAC.Core.Health>();
+            _health.OnDeath += Die;
             
             _gameManager = MainGameManager.Instance;
             _inputSystem = GetComponent<InputSystem>();
@@ -272,6 +286,7 @@ namespace RVA.TAC.Player
                 _gameManager.OnPrayerTimeBegins -= HandlePrayerTimeBegins;
                 _gameManager.OnPrayerTimeEnds -= HandlePrayerTimeEnds;
             }
+            _health.OnDeath -= Die;
         }
         #endregion
 
@@ -858,6 +873,18 @@ namespace RVA.TAC.Player
         private void LogError(string context, string message, object data = null)
         {
             FindObjectOfType<DebugSystem>()?.LogError(context, message, null, data);
+        }
+
+        public void TakeDamage(float amount)
+        {
+            _health.TakeDamage(amount);
+        }
+
+        private void Die()
+        {
+            // Handle player death
+            Debug.Log("Player has died. Reloading scene.");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
         #endregion
     }
