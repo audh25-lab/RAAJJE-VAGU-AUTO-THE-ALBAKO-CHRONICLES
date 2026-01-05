@@ -1,0 +1,2567 @@
+# RAAJJE THEFT AUTO 1
+
+## Complete Game Bible - The Baokalo Chronicles
+
+-----
+
+# TABLE OF CONTENTS
+
+1. Game Overview
+1. Historical Foundation (1900s-2025)
+1. World & Setting
+1. Complete Character Database
+1. The Ronda Family Saga
+1. Complete Gang Network (83 Gangs)
+1. Dhivehi Language & Slang Guide
+1. Complete Story Arc (10 Acts + Epilogue)
+1. Gameplay Mechanics
+1. Mission Structure
+1. Technical Implementation Notes
+
+-----
+
+# 1. GAME OVERVIEW
+
+**Title:** Raajje Theft Auto 1  
+**Genre:** Open-World Crime Simulation, Action-Adventure, Political Satire  
+**Setting:** Maldives Archipelago (Malé, Hulhumalé, Addu City, Remote Atolls)  
+**Time Period:** 2015-2025 (with historical flashbacks to 1900s)  
+**Platform:** Cross-platform (PC, Mobile, Console)  
+**Target Playtime:** 60-80 hours main story + endless free roam
+
+## Core Concept
+
+An epic crime saga following **Baokalo** (Ahmed Kipal Ronda), the black sheep of a respectable Addu family, as he rises from school troublemaker to gang enforcer to international crime lord to government asset, and finally leads a nationwide revolution to overthrow the corrupt president who betrayed him.
+
+## Unique Features
+
+- **125 Years of History:** Integrated real Maldivian history from 1900s to 2025
+- **83 Gangs Network:** All real gang structures with authentic names and territories
+- **Authentic Dhivehi:** Multiple dialects (Malé Bas, Addu Bas, Fuvahmulah Bas)
+- **Family Drama:** Black sheep protagonist vs. golden child sister, reformed gang mother, respected musician grandfather
+- **Political Satire:** Real scandals parodied (2012 coup, 2024 India boycott, Gang Act 2025)
+- **Moral Complexity:** Multiple endings based on choices, family relationships, minor protection
+- **International Scope:** From Maradhoo poverty to global crime networks (Pakistan, Sri Lanka, Afghanistan)
+
+## Core Themes
+
+1. **Paradise vs. Reality** - Tourism image hides narco-state dystopia
+1. **Family vs. Ambition** - Destroying those who love you for power
+1. **Cycles of Violence** - 1988 coup → 2012 coup → Your coup (2025)
+1. **Black Sheep Redemption** - Can the family failure become the family savior?
+1. **Small Nation, Big Corruption** - How 83 gangs control 500,000 people
+1. **Islamist Extremism** - Religion weaponized for crime (ISIS recruitment, jihadi gangs)
+
+-----
+
+# 2. HISTORICAL FOUNDATION (1900s-2025)
+
+## Era 1: Sultanate to Independence (1900-1978)
+
+### 1900-1931: Traditional Sultanate
+
+- Maldives ruled by sultans under Islamic law
+- Fishing and maritime trade economy
+- Small-scale opium use in Royal Palace (16th century travelers documented)
+- **1931:** First constitution drafted by Sultan Muhammad Shamsuddeen III
+- **1932:** Constitution implemented, first Majlis formed
+
+### 1953-1954: First Republic (Failed)
+
+- Mohamed Amin Didi becomes first president
+- Republic lasts only months before sultanate restoration
+- Muhammad Farid Didi elected 84th Sultan
+
+### 1959-1963: United Suvadive Republic
+
+- Three southern atolls break away (Huvadhoo, Fuvahmulah, Addu)
+- Abdullah Afif Didi leads secessionist movement
+- Economic benefits from British military base on Gan Island
+- **1962:** Ibrahim Nasir sends gunboats, crushes rebellion
+- Afif flees to Seychelles
+- **Game Connection:** Baokalo’s family witnessed southern rebellion
+
+### 1965: Independence from Britain
+
+- July 26, 1965: Full independence achieved
+- British base on Gan remains until 1976
+
+### 1968: Second Republic
+
+- Ibrahim Nasir becomes first president (1968-1978)
+- Sultanate permanently abolished
+- **1972:** First tourists arrive, Kurumba resort opens
+- **1977:** First hashish arrest (350 grams) - DRUG CRISIS BEGINS
+- Law on Narcotics passed
+- **1978:** Nasir flees to Singapore amid corruption allegations
+
+## Era 2: Gayoom Dynasty (1978-2008)
+
+### Maumoon Abdul Gayoom: 30-Year Rule
+
+- **1978:** Takes power, rules until 2008
+- Won 6 consecutive elections (sole candidate referendums)
+- Islamic nationalism policy
+- Tourism boom in 1980s-1990s brings prosperity and problems
+
+### 1980 & 1983: Minor Coup Attempts
+
+- Small, unorganized attempts against Gayoom
+- Easily suppressed
+
+### 1988: OPERATION CACTUS - Major Coup
+
+- **November 3:** Abdullah Luthufi (businessman) + PLOTE Tamil mercenaries
+- 80 armed mercenaries land in Malé before dawn
+- Seize government buildings, TV/radio stations
+- India launches Operation Cactus (9 hours response time)
+- Indian paratroopers rescue Gayoom, defeat coup
+- 19 killed including mercenaries
+- Luthufi imprisoned 35 years (released 2023)
+- **Game Connection:** Baokalo’s grandfather Mohamed Ronda witnesses chaos as young musician
+
+### 1990s: DRUG EPIDEMIC EXPLODES
+
+**1993: HEROIN ARRIVES**
+
+- First heroin case detected, youth abuse escalates
+- First major cocaine seizure (8kg at Malé Airport)
+- **Early 1990s:** GANGS FORM - proliferation linked to heroin introduction
+- Malé population explodes (180% growth 1995-2014)
+- Youth unemployment reaches 25-40%
+
+**Drug Routes Established:**
+
+- **Golden Triangle/Crescent** proximity (Afghanistan, Pakistan, Iran)
+- **Sri Lankan fishing vessels** (heroin via dhonis)
+- **Trivandrum-Malé route** (primary corridor)
+- **Velana International Airport** (luggage from India/Malaysia)
+- **Southern atolls** (tuna boat hides, Gan/Addu drops)
+
+**Gang Evolution (1990s-2000s):**
+
+- 20-30 gangs in Malé by 2011
+- Malé overcrowding: 103,693 people in tiny capital
+- High divorce rates, family breakdown
+- Unemployment + drugs = gang recruitment
+- **Drug-Gang-Politics Symbiosis:** Politicians offer drugs/alcohol for crimes
+- Members aged 12-25, exclusively male
+- **Game Connection:** Rippoo (Baokalo’s mother) joins gangs 1993-1998 as female enforcer
+
+**1997:** 1,372g hashish oil smuggled in corned beef cans from India
+
+## Era 3: Democracy & Chaos (2008-2018)
+
+### 2003-2004: Democratic Awakening
+
+- **September 2003:** Prison riots after inmate Hassan Evan Naseem tortured to death in Maafushi Prison
+- His mother exposes torture, triggers protests
+- Mohamed Nasheed (exiled journalist, imprisoned 16 times) founds MDP in 2003
+- **August 2004: “BLACK FRIDAY”** - 5,000 protesters, largest in history
+- Demand Gayoom’s resignation after 26 years
+- NSS uses tear gas, batons on civilians - 22 hours of violence
+- **Game Connection:** Baokalo age 4, earliest memory is chaos and screaming
+- **December 2004:** Tsunami devastates Maldives, sets development back 20 years
+- **2005:** Parliament votes for multi-party politics
+
+### 2008: First Democratic Election
+
+- **October:** Nasheed defeats Gayoom (first democratic president)
+- Promises carbon-neutral Maldives by 2019
+- 2009: Underwater cabinet meeting on climate change
+- Liberalizes tourism (local guesthouses allowed)
+- BUT: Opposition in judiciary/parliament loyal to Gayoom
+- **Game Connection:** Baokalo age 8, watches election with hope
+
+### 2010s: Gang-Politics Fusion
+
+- **Gangs become political enforcers** for campaign cash
+- Islamist radicalization grows (Salafism from Saudi Arabia)
+- Al-Qaeda active before 2008 elections
+- **2014: Salafi-Jihadi + Gang Fusion** confirmed
+- Gang leaders act as vigilante religious police
+- Politicians use gangs for violence, intimidation
+
+### 2012: THE COUP AGAINST NASHEED
+
+- **January 2012:** Nasheed arrests Criminal Court Judge Abdulla Mohamed (alleged Gayoom bias/corruption)
+- **February 1-6:** 22 days of protests, police join opposition
+- **February 7, 2012: FORCED RESIGNATION**
+- Police/military mutiny, corner Nasheed at army HQ
+- Nasheed resigns to avoid bloodshed
+- Mohamed Waheed Hassan (VP, Gayoom ally) becomes president
+- Nasheed calls it coup d’état; official inquiry says “voluntary”
+- **Game Connection:** Baokalo age 12, learns **politics = violence = power**
+
+### 2013-2018: Yameen Dictatorship
+
+- **September 2013:** Election - Nasheed wins plurality but not majority
+- **November 2013:** Abdulla Yameen (Gayoom’s half-brother) wins narrowly
+- **2015:** Nasheed arrested on terrorism charges for 2012 judge arrest
+- **March 2015:** 13-year sentence after closed trial (no defense counsel)
+- UN calls it “vastly unfair, arbitrary, disproportionate”
+- **2016:** Nasheed granted UK medical leave, flees, gets asylum
+- **Game Connection:** Baokalo joins gangs 2015, age 15, during Yameen peak
+
+**Yameen Era Abuses:**
+
+- Jails opposition leaders
+- Stuffs judiciary with loyalists
+- $80 million corruption scandal
+- Chinese mega-projects (debt trap)
+- Stifles media, threatens journalists
+- Gang-politician links deepen
+
+### 2014-2017: ISIS RECRUITMENT PEAK
+
+- **250 Maldivians join ISIS** (highest per capita in world)
+- Radicalization in prisons: gangs + extremists alliance
+- Extremists recruit addicted gang members, promise redemption via jihad
+- Justify crimes: “stealing from kafirs for jihad is halal”
+- **Ahmed Rilwan (journalist) disappearance** - gang/extremist murder
+- **Yamin Rasheed (blogger) murder 2017** - stabbed 16 times for exposing extremism
+- **May 2021: Nasheed assassination attempt** - IED outside home, critically injured
+- **Game Connection:** Baokalo witnesses journalist murders, learns media = dangerous
+
+### February 2018: Supreme Court Crisis
+
+- **Feb 1:** Supreme Court orders 12 opposition MPs reinstated, political prisoners released
+- Orders Nasheed’s release, overturns convictions
+- **Feb 4:** Yameen declares state of emergency
+- Arrests 2 Supreme Court justices on “coup plot” charges
+- 45-day emergency rule
+- **Game Connection:** Chaos creates opportunity for Baokalo’s gang operations
+
+### September 2018: Democratic Victory
+
+- Ibrahim Mohamed Solih (Nasheed’s childhood friend) wins landslide
+- 58% vs Yameen’s 42%, 89% voter turnout
+- Yameen concedes, then tries to challenge (court rejects)
+- November 2018: Solih sworn in, Nasheed returns from exile
+
+## Era 4: Modern Day (2018-2025)
+
+### 2019-2023: Solih Presidency
+
+- **May 2019:** Nasheed elected Parliament Speaker (unanimous)
+- Corruption probes against Yameen (money laundering conviction, later overturned)
+- India strengthens ties: $2 billion aid, infrastructure projects
+- **Gang problem persists:**
+  - 44-45 active gangs in Malé
+  - 12 in Addu City
+  - 26 in remote atolls
+  - **Total: 83 gangs**
+  - 8 “highly active” gangs monitored daily by police
+  - 97 child members (aged 12-13) documented
+  - 32 gang-related deaths
+- **Drug statistics:** 7,500+ users (2013), doubled to ~14,000 by 2021
+- Major busts: 300-355kg heroin/cocaine from tuna boats, Sri Lankan vessels
+
+### 2023: Muizzu Takes Power
+
+- Mohamed Muizzu (PNC, pro-China) wins presidency
+- Nasheed resigns as Speaker November 2023 (impeachment threat)
+- **Muizzu’s “No Gangs” Denial:**
+  - **2025 Gang Act (#7)** passed despite claiming “no gangs exist”
+  - PNC MPs Abdulla Rifau, Mohamed Musthafa claim “gangs don’t operate”
+  - Police confirm 83 gangs: 44-45 Malé, 12 Addu, 26 atolls
+  - ~3,050+ identified members
+  - Act gives police sweeping powers: 48hr detention without lawyer, warrantless searches
+- **Game Connection:** Baokalo becomes government asset 2024, betrayed 2025
+
+### Political Corruption (Current 2025)
+
+- **Suspended Deputies:** Mariyam Shiuna, Malsha Shareef, Mahzoom Majid (inflammatory statements)
+- **Gang-PNC Links:** Extortion rackets in Hulhumalé residential zones
+- **Ahmed Muaz Networks:** Islamist co-optation of gangs continues
+- **Drug photo scandals:** Ali Ihusaan (Homeland Security Minister)
+- **Land fraud:** PNC-linked resort deals
+- **Money laundering:** Moosa Zameer (Finance Minister)
+- **Arms smuggling:** Mohamed Ghassan Maumoon (Defense Minister)
+- **International drug ties:** Dr. Abdulla Khaleel (Foreign Affairs)
+
+-----
+
+# 3. WORLD & SETTING
+
+## Map Overview
+
+**Total Area:** ~90,000 km² ocean, 298 km² land across 26 atolls  
+**Population:** ~500,000 (2025)  
+**Capital:** Malé (103,693 people in 5.8 km²)
+
+## Playable Regions
+
+### MALÉ (Urban Hub)
+
+**Districts:**
+
+- Maafannu (slums, Baokalo’s starting tutorial area)
+- Henveiru (Kuda Henveiru gang territory)
+- Galolhu (commercial center)
+- Machchangolhi (political district, parliament)
+
+**Key Locations:**
+
+- Velana International Airport (smuggling hub)
+- Sultan Park (historical site, gang territory)
+- Fish Market (pickpocketing tutorial, trade)
+- Artificial Beach (tourist crimes, Beach Crew territory)
+- IGMH Hospital (Dr. Nunnu works here)
+- Raalhugandu (Wave Boys territory)
+- Maafushi Prison (off-island but accessible via boat)
+
+**Gang Control:** 44-45 active gangs, 8 highly active
+
+### HULHUMALÉ (Suburbs)
+
+**Character:** Modern planned city, less crowded than Malé  
+**Activities:**
+
+- Residential extortion missions
+- PNC-linked rackets
+- Kuda Henveiru young faction territory
+
+### ADDU CITY (Southern Stronghold - Baokalo’s Home)
+
+**Districts:**
+
+**GAN:**
+
+- International Airport (Ehnbandians gang, corrupt cops)
+- Former British base ruins (historical exploration)
+- Seaplane terminal (luxury resort access)
+
+**FEYDHOO:**
+
+- Bench gang territory
+- Gan Bridge (toll extortion point)
+- East Coast West gang turf
+
+**MARADHOO (THE CITY OF BAOKALO):**
+
+- Ronda family home (musician grandfather)
+- No gang affiliation initially (respectable neighborhood)
+- Mafa’s old Masodi territory (power vacuum)
+- 13 gangs: MFB, Fasganda, OTF, La Familia, Habeys, Lions, Eagle Boys, Bandhra Boys, RHankede, Tarfu Pitchers
+
+**HITHADHOO (City of Azalla - Deceased Overlord):**
+
+- Largest district, 250+ gang members (Eque Tasman’s alone)
+- Milo City (Masodi Nadhamaa)
+- D·T·S (Drug Trafficking Fishermen - tuna boat operations)
+- AEH Courts (escort service gang)
+- Xerafon, XepHier, Scoope (multi-city links to Malé)
+
+**Total Addu Gangs:** 12 documented, 250+ members
+
+### REMOTE ATOLLS (26 Gangs)
+
+**Accessible Islands:**
+
+- **Fuvahmulah** (unique dialect, Mulaku Bas)
+- **Huvadhu Atoll** (archaic Dhivehi, smuggling routes)
+- **Northern Atolls** (Haa Alif, Haa Dhaalu - isolated communities)
+- **Laamu Atoll** (southern smuggling corridor)
+
+**Activities:**
+
+- Drug drops via seaplane
+- Tuna boat smuggling (300-355kg hauls)
+- Minor recruitment (97 children across atolls)
+- Dot.Fall Islamist gang operations
+
+**Environmental Features:**
+
+- Procedural island generation (realistic coral atolls)
+- Dynamic weather (monsoons, cyclones disrupt smuggling)
+- Underwater diving (hidden drug stashes in reefs)
+- Seaplane travel (luxury resort access, aerial smuggling)
+
+## Luxury Resorts (Heist Locations)
+
+**Resort Islands:**
+
+- One&Only Reethi Rah (ultra-luxury, VIP targets)
+- Soneva Fushi (eco-resort, hidden arms deals)
+- Kurumba (first resort, historical significance)
+- Velaa Private Island (politician hideaways)
+- Fictional resorts based on real designs
+
+**Resort Missions:**
+
+- High-society heists (jewels, art, blackmail)
+- Influencer escorts (Aishath Nasheeda connections)
+- Politician meetings (eavesdrop, assassinate)
+- Money laundering fronts (Moosa Zameer operations)
+
+## Travel Methods
+
+- **Dhoni boats** (traditional, slow, smuggling-friendly)
+- **Speedboats** (fast, police chases)
+- **Seaplanes** (luxury, aerial drug drops)
+- **Ferries** (public, blend in crowds)
+- **Swimming/Diving** (underwater approaches)
+- **Cars** (Malé/Hulhumalé only, limited roads)
+- **Motorcycles** (quick escapes, narrow alleys)
+- **Bicycles** (stealth, common in Addu)
+
+-----
+
+# 4. COMPLETE CHARACTER DATABASE
+
+## PROTAGONIST & FAMILY
+
+### BAOKALO (Ahmed Kipal Ronda)
+
+**Birth:** 2000, Maradhoo, Addu City  
+**Age:** 25 (in 2025)  
+**Street Name:** **BAOKALO**
+
+- **Origin:** Addu Bas combining “Bao” (boss/head) + “Kalo” (black/dark)
+- **Meaning:** “The Dark Leader” / “Black Boss”
+- **Pronunciation:** BAH-oh-KAH-loh
+
+**Full Name:** Ahmed Kipal Ronda  
+**Family Position:** Black sheep (only criminal in respectable family)  
+**Dialect:** Addu Bas (sounds “country” to Malé gangs)  
+**Height:** 5’10” (178cm)  
+**Build:** Lean, athletic (dhoni fisherman build from youth)
+
+**Personality:**
+
+- Intelligent but rebellious
+- Inferiority complex (compared to sister Nunnu constantly)
+- Charismatic leader (unites 83 gangs)
+- Ruthless when necessary, merciful when strategic
+- Deep family love hidden under criminal exterior
+- Guilt-ridden over father Abuch’s death
+
+**Skills:**
+
+- Bat combat (BATS legacy, keeps father’s fishing knife)
+- Strategic planning (chess-like gang warfare)
+- Multilingual (Addu Bas, Malé Bas, English, some Urdu/Sinhala)
+- Dhoni piloting (childhood fishing experience)
+- Charisma (recruits internationally)
+
+**Character Arc:**
+
+- 2000-2015: Innocent child → troublemaker → expelled
+- 2015-2018: Gang recruit → enforcer (Yameen era)
+- 2018-2022: Rising boss → political connections
+- 2022-2024: International crime lord → government asset
+- 2024-2025: Betrayed → revolutionary → ???
+
+**Moral Choices Affect:**
+
+- Family relationships (reconciliation vs. destruction)
+- 97 minors (protect vs. exploit)
+- Civilian casualties (spare vs. massacre)
+- Ending type (4 variations)
+
+-----
+
+### GENERATION 1: THE HONORABLE ELDERS
+
+#### Mohamed Ronda Ibrahim (Grandfather)
+
+**Birth:** 1950, Maradhoo, Addu City  
+**Age:** 75 (in 2025)  
+**Nickname:** **“Ronda Masterah”** (Master Ronda - respectful)
+
+**Profession:**
+
+- Traditional boduberu drummer
+- Modern music producer
+- Addu City music band leader (50+ years)
+
+**Historical Context:**
+
+- Witnessed 1959-1963 Southern Suvadive Republic secession
+- Built career during Gayoom’s 30-year rule
+- Performed at presidential ceremonies (all 5 regimes)
+- Survived by staying apolitical
+
+**Personality:**
+
+- Traditional values, religious but moderate
+- Expects family honor and respectability
+- Ashamed of Baokalo: “You destroyed our name”
+- Secretly loves grandson, prays for redemption
+- Stubborn, proud, unwilling to bend
+
+**Game Role:**
+
+- Disowns Baokalo in Act 2
+- Optional reconciliation in Act 10 (affects ending)
+- His boduberu music = emotional score during family scenes
+- Flashback missions as young musician (1988 Operation Cactus)
+
+**Dialogue Style (Formal Dhivehi):**
+
+- Uses **“Alhugandakah”** (I, very formal)
+- Calls Baokalo **“Thilhen”** (you, offensive) when angry
+- **“Aharen family reputation destroy kuraane kaley! Uzaa!”**
+
+#### Aminath Nappey DiDi (Grandmother)
+
+**Birth:** 1953, Malé  
+**Age:** 72 (in 2025)  
+**Nickname:** **“Nappey Aunty”** (Community elder title)
+
+**Role:**
+
+- Traditional homemaker
+- Raised 5 children (Rippoo, DhoDho, Zadey + 2 others)
+- Community charity work (widows, orphans)
+- Devout Muslim (5 prayers daily, not extremist)
+
+**Personality:**
+
+- ONLY family member who never judges Baokalo
+- Unconditional love: “He is lost, not evil”
+- Secret strength of family (Ronda is face, she is heart)
+- Bakes huni roshi (traditional snack) when Baokalo visits
+- Knows Rippoo’s gang past, helped her reform
+
+**Game Role:**
+
+- Safe house provider (her house = no police raids)
+- Emotional anchor (cutscenes show her praying/crying)
+- Hidden item stashes: “Your grandfather’s old things”
+- Optional death scene (if player causes civilian casualties)
+- Her death = locks “Redemption” ending
+
+**Dialogue Style (Warm, Maternal):**
+
+- Uses **“Kalaa dhon darifulhaakah”** (My dear child)
+- **“Mashakah praying for you every day, Kipal. Come home safe.”**
+
+-----
+
+### GENERATION 2: THE SIBLINGS (Baokalo’s Parents/Aunts/Uncles)
+
+#### Rippoo Ahmed Didi (Mother)
+
+**Birth:** 1977, Malé  
+**Age:** 48 (in 2025)  
+**Street Name (1993-1998):** **“Rippoo the Razor”**
+
+**SECRET PAST (1993-1998):**
+
+- Joined gangs age 16 during heroin epidemic
+- ONE OF FEW FEMALE GANG MEMBERS in male-dominated world
+- Activities:
+  - Extortion (threatened female shop owners)
+  - Drug courier (police less suspicious of women)
+  - Intelligence gatherer (seduced rival gang members)
+- Worked with crew that became modern Malé Sharks
+- Peak: 1997-1998, major drug operations
+
+**TURNING POINT (1998):**
+
+- Age 21, discovered pregnant with Nunnu
+- **CHOSE TO LEAVE** gang life to protect unborn child
+- Met Abuch Rasily Bats (honest fisherman who knew her past)
+- Married 1998, moved districts to hide past
+- Career shift: Became social worker helping at-risk youth
+
+**REDEMPTION ARC (1998-2020):**
+
+- Worked NGOs, rehab centers
+- Prevented 100+ youth from joining gangs
+- Perfect mother to Nunnu, tried same with Baokalo (failed)
+- 2015: Discovers Baokalo joined gangs - DEVASTATED
+- **“I escaped this hell, why did you run into it?!”**
+- 2020: Abuch dies - blames herself for not protecting Baokalo better
+
+**PRESENT (2020-2025):**
+
+- Age 48, still social worker, burned out
+- Knows Baokalo is gang leader but powerless
+- Uses old contacts to feed him intel (conflicted loyalty)
+- **SECRET WEAPON:** Knows locations of 1990s gang weapon stashes
+- Drinks heavily, PTSD from both eras
+
+**Personality:**
+
+- Tough, street-smart, haunted
+- “I did terrible things so you wouldn’t have to”
+- Respects Baokalo’s intelligence, hates his choices
+- COMPLEX: Sometimes helps him, sometimes sabotages him
+
+**Game Role:**
+
+- Quest giver: “I know where old weapons are buried”
+- Moral compass: Argues with Baokalo in emotional cutscenes
+- Double agent: Tips police anonymously to prevent worst crimes
+- Act 5 revelation: Baokalo discovers her gang past
+- Act 8: Assassination attempt, critically injured
+- Final choice: Help Baokalo overthrow government OR betray him?
+
+**Dialogue Style (Malé Bas, Street Tough):**
+
+- Uses **“Mashakah”** (I, standard)
+- Switches to **“Kaley sodu”** (you bastard) when angry
+- **“Kipal, aharen dhimaa kuraanee this life escape. Kaley why choose?”**
+
+#### Abuch Rasily Bats (Father - Deceased)
+
+**Birth:** 1985, Malé  
+**Death:** 2020 (age 35), drowned in fishing accident  
+**Nickname:** **“Honest Abuch”** or **“Bats the Fisher”**
+
+**Profile:**
+
+- Simple dhoni fisherman, no education beyond grade 10
+- Met Rippoo 1998, learned her gang past, loved her anyway
+- **“I don’t care who you were, I love who you are”**
+- Worked brutal 18-hour shifts to support family + Nunnu’s medical school
+
+**Fatherhood (1998-2020):**
+
+- 1998: Nunnu born - pride and joy, “my princess”
+- 2000: Baokalo born - hoped for “respectable son”
+- Struggled to discipline while exhausted from work
+- Tried to teach fishing, Baokalo hated it: “I’m not like you”
+- 2015: Baokalo expelled, Abuch slapped him (only time he hit his son)
+- **“I’m breaking my back for this family and you throw it away?!”**
+
+**Death (2020):**
+
+- Storm at sea, dhoni capsized with 3 other fishermen
+- Body recovered 3 days later
+- Baokalo was 20, already in gang life
+- **Last words (week before death):**
+  - *“I failed you. I should have been home more. Please, leave gangs before it’s too late. I love you, son.”*
+- Baokalo didn’t respond, regrets forever
+
+**Impact on Baokalo:**
+
+- **Guilt:** “My father died thinking I was a failure”
+- **Rage:** “The system worked him to death for nothing”
+- **Justification:** “He was honest and poor, I’ll be dishonest and rich”
+- Keeps Abuch’s fishing knife as memento (melee weapon)
+
+**Game Role:**
+
+- Appears in flashbacks, dreams, hallucinations
+- Act 5 vision: “Are you proud of me now, father?” (ghost silent)
+- Optional grave visits: Baokalo talks to tombstone
+- Late-game choice: Honor his memory (redemption) OR betray it (dark path)
+
+**Dialogue Style (Simple, Honest):**
+
+- Used **“Darifulhaakah”** (my child, affectionate)
+- **“Kipal, aharen want better life for you. Not this. Please.”**
+
+#### Ibrahim DhoDho Ronda (Uncle)
+
+**Birth:** 1980, Addu City  
+**Age:** 45 (in 2025)  
+**Nickname:** **“DhoDho Airport”** (job-based nickname)
+
+**Profile:**
+
+- Velana International Airport employee (20+ years)
+- Position: Baggage Handler/Security
+- Hired 2005 (age 25), rose through ranks
+- **Access:** Luggage screening schedules, security shifts, customs patterns
+- Married to Aviation Security Head (Aishath DhoDho), 3 kids
+- Middle-class comfort: Mortgage, car loan, kids’ school fees
+
+**Personality:**
+
+- GOOD MAN trapped between family and law
+- “I worked too hard to throw it away for you”
+- Refuses direct smuggling but gives passive intel
+- “Don’t make me an accomplice”
+- Loves Baokalo but terrified of consequences
+
+**Game Role:**
+
+- Intel source: Airport schedules, VIP arrivals, police raids
+- Reluctant aid: “This is the LAST time I help you”
+- Act 6 blackmail: Baokalo threatens to expose his tips
+- Crisis: Wife discovers involvement, divorce threat
+- Betrayal path: Cooperates with police (one ending)
+- Loyalty path: Quits job, helps final assault (another ending)
+
+**Key Missions:**
+
+- “The Velana Job” - DhoDho provides shift schedules for heist
+- “Family Dinner” - Tense scene at Ronda’s house, DhoDho snaps
+- “Airport Siege” - Must choose: family or law
+
+**Dialogue Style (Nervous, Conflicted):**
+
+- Uses **“Thibeyfulhaa”** (you, respectful to Baokalo despite fear)
+- **“Bao, please. Mashakah kids need school, wife needs job. Don’t destroy us.”**
+
+#### Fathimath Zadey Ronda (Aunt)
+
+**Birth:** 1983, Addu City  
+**Age:** 42 (in 2025)  
+**Nickname:** **“Zadey Finance”** (job-based)
+
+**Profile:**
+
+- Ministry of Finance civil servant (15+ years)
+- Department: Budget allocation, audit records, minister’s office
+- **Access:** Corruption files, money laundering trails, PNC-gang payment records
+- Married to accountant, 2 teenage kids
+- Respected government employee, clean record
+
+**Personality:**
+
+- TERRIFIED of exposure: “If they know we’re related, I’m finished”
+- Refuses all contact with Baokalo after 2018
+- Changed last name on documents to hide connection
+- Avoids family events or attends separately
+- Panic attacks about being implicated
+
+**Game Role:**
+
+- Hostile informant: Gives files to make Baokalo go away
+- Leverage: Baokalo threatens to expose her if she doesn’t cooperate
+- Act 7: Minister Moosa Zameer discovers family link, blackmails her
+- Turning point: Realizes government MORE corrupt than Baokalo
+- Redemption: Leaks EVERYTHING in final act, destroys career
+- Ending variation: Arrested with Baokalo OR whistleblower hero
+
+**Key Missions:**
+
+- “The Audit” - Steal corruption files from her office (she reluctantly helps)
+- “Family Ties” - Moosa Zameer kidnaps Zadey’s kids as leverage
+- “The Leak” - Zadey dumps entire corruption database to media
+
+**Dialogue Style (Panicked, Formal):**
+
+- Uses **“Alhugandakah”** (I, very formal - keeping distance)
+- **“Please, aharen begging. Kaley destroy mashakah career, kids suffer. Go away!”**
+
+-----
+
+### GENERATION 3: THE SIBLINGS
+
+#### Dr. Nunnu Bats Ronda (Sister)
+
+**Birth:** 1998, Malé  
+**Age:** 27 (in 2025)  
+**Professional Name:** **Dr. Nunnu Rasheed** (uses husband’s name)  
+**Nickname:** **“Golden Child”** (family), **“Doctar Nunnu”** (public)
+
+**Timeline:**
+
+**1998-2016: Perfect Daughter**
+
+- Born into reformed family, Rippoo’s pride
+- Top student: Straight A’s, scholarship to Indian medical school
+- 2016 (age 18): MBBS program in Bangalore
+- Parents sacrificed everything for her education
+- Ronda’s favorite: “At least one grandchild succeeded”
+
+**2016-2022: Medical Career**
+
+- Graduated top 10% of class
+- 2022: Returned to Maldives, hired at IGMH (Indira Gandhi Memorial Hospital)
+- Specialization: Emergency medicine
+- Married lawyer Ahmed Rasheed (2022)
+- 2023: Had son Mohamed Rasheed (age 2 in game)
+
+**2022-2025: Double Life**
+
+**PUBLIC PERSONA:**
+
+- Dr. Nunnu Rasheed, respected ER doctor
+- Treats politicians, gang victims, everyone equally
+- Publicly denounces Baokalo in media: “I don’t know that criminal”
+- Charity galas, picture-perfect middle-class life
+
+**SECRET LIFE:**
+
+- Night shift: Treats gang members’ gunshot wounds off-record
+- Moral code: “I’m a doctor, I don’t judge patients”
+- **Doesn’t know Baokalo’s gang identity** until Act 6 revelation
+- Uses medical supplies to help criminals = hospital theft = crime
+- Husband unaware of illegal activities
+
+**Personality:**
+
+- Perfectionist, driven, exhausted
+- Guilt: “I got everything, Baokalo got nothing - is it my fault?”
+- Resentment: “Why should I pay for his choices?”
+- Love: Still her baby brother, childhood memories
+- Fear: Baokalo will destroy everything she built
+
+**Game Role:**
+
+**Act 1-5:** Distant figure
+
+- Mentioned by family, never seen
+- Newspaper: “Dr. Nunnu Rasheed honored for community service”
+- Baokalo sees her from afar at family event, she ignores him
+
+**Act 6: THE REVELATION**
+
+- Mission: Baokalo injured in gang war, stumbles into IGMH ER
+- Nunnu on duty, sees patient name: “Ahmed Kipal Ronda”
+- Removes mask: “Oh my God… Kipal?”
+- **10-MINUTE EMOTIONAL CUTSCENE**
+- Choice: She reports him OR helps him escape
+
+**Act 7-8: Secret Alliance (If Player Chooses Mercy)**
+
+- If Baokalo spares enemies and protects civilians, Nunnu helps covertly
+- Provides medical intel: “Minister has heart condition, threaten him”
+- Treats Baokalo’s crew injuries
+- Hacks hospital records to erase evidence
+
+**Act 9-10: Final Choice**
+
+- **Betrayal Path:** Testifies against Baokalo in court (if player was evil)
+- **Loyalty Path:** Joins crew as medic for government assault (if redeemed)
+- **Sacrifice Path:** Takes bullet for Baokalo in final shootout
+- **Ending:** Keeps medical license OR arrested as accomplice OR dies hero
+
+**Key Missions:**
+
+- “Blood Relative” - First encounter, medical emergency
+- “Hippocratic Oath” - Nunnu must choose: report or help
+- “Family Surgery” - Operate on Rippoo after assassination attempt
+- “The Diagnosis” - Nunnu reveals minister’s medical blackmail info
+
+**Dialogue Style (Educated, Emotional):**
+
+- Uses **“Aharen”** (I, formal)
+- Switches between English and Dhivehi when stressed
+- **“Kipal… aharen doctor. I save lives. Kaley… kaley destroying them. How can we be from same family?”**
+
+-----
+
+## POLITICIANS (Real Names → Parody Names)
+
+### CURRENT GOVERNMENT (2023-2025)
+
+#### “MOOIZBE” / “BOYAKAA” (Mohamed Muizzu Parody)
+
+**Real Position:** President of Maldives (2023-present)  
+**Game Name:** **Mooiz Tyaanee** (Mooiz the Tyrant)  
+**Street Nickname:** **Boyakaa** (Big Shot - ironic)
+
+**Background:**
+
+- PNC (People’s National Congress), pro-China
+- Former Housing Minister under Yameen
+- Defeated Ibrahim Solih (Ibu) 2023
+- “Dhiveheenge Raajje” campaign (Nation of Maldivians)
+- “India Out” movement supporter
+
+**In-Game Personality:**
+
+- Main antagonist
+- Corrupt, hypocritical (claims “no gangs exist”)
+- Uses Baokalo as enforcer 2024, betrays him 2025
+- Chinese debt-trap projects
+- Paranoid, eliminates threats
+
+**Crimes:**
+
+- Gang Act 2025 hypocrisy (laws against gangs while funding them)
+- Money laundering via resort deals
+- Political violence (hires gangs for intimidation)
+- International pressure cave-in (betrays Baokalo for UN/Interpol)
+
+**Game Role:**
+
+- Act 7-8: Makes Baokalo “official consultant”
+- Act 8: Betrayal - frames Baokalo for Nasheed assassination attempt
+- Act 10: Final boss fight at Velana Airport
+- Multiple ending options: Kill/Exile/Expose
+
+**Dialogue Style (Politician, Fake Friendliness):**
+
+- Uses **“Thibeyfulhaa”** (you, respectful but fake)
+- **“Baokalo, thibeyfulhaa very useful. But aharen president now. Gangs don’t exist, understand? Kaley don’t exist.”**
+
+#### “ALIBE DHONI” / “DHINEY ALI” (Ali Ihusaan Parody)
+
+**Real Position:** Minister of Homeland Security  
+**Game Name:** **Alibe** or **Dhoni Ali** (Boat Ali)  
+**Street Name:** **Dhiney Ali** (Corrupt Ali)
+
+**Background:**
+
+- Real scandal: Drug photo controversy
+- In-game: Family betrayer, distant relative to Baokalo
+- Funded hit on Baokalo’s father figure connections
+
+**Game Role:**
+
+- Act 7: Makes Baokalo official “consultant”
+- Knows Baokalo’s family secrets
+- Act 8: Orchestrates betrayal (fears Baokalo knows too much)
+
+**Dialogue:**
+
+- **“Mashakah protecting kaley, but kaley becoming problem. Too many people asking questions.”**
+
+#### “GHAASBE” / “HATHIYAARU GHAAS” (Mohamed Ghassan Maumoon Parody)
+
+**Real Position:** Minister of Defence  
+**Game Name:** **Ghaasbe** or **Hathiyaaru Ghaas** (Weapons Ghaas)
+
+**Background:**
+
+- Maumoon family lineage (Gayoom connection)
+- Arms supplier to gangs
+
+**Game Role:**
+
+- Provides weapons to Baokalo’s operations
+- Act 6-8 missions: Steal military shipments
+
+#### “FAISAA MOOSA” / “GANDUFANAA” (Moosa Zameer Parody)
+
+**Real Position:** Minister of Finance  
+**Game Name:** **Faisaa Moosa** (Money Moosa)  
+**Street:** **Gandufanaa** (The Counter)
+
+**Background:**
+
+- Money laundering specialist
+- Offshore accounts in tax havens
+
+**Game Role:**
+
+- Launders Baokalo’s drug money 2023-2024
+- Act 9: Kidnapped for account access codes
+
+**Dialogue:**
+
+- **“Bao, mashakah moving 50 million through Dubai accounts. Clean faisaa by Tuesday.”**
+
+#### “DOCTAR KHALEY” / “BAROAGU DOCTAR” (Dr. Abdulla Khaleel Parody)
+
+**Real Position:** Minister of Foreign Affairs  
+**Game Name:** **Doctar Khaley** or **Baroagu Doctar** (Foreign Doctor)
+
+**Background:**
+
+- International drug connections (India, Malaysia, Pakistan)
+
+**Game Role:**
+
+- Diplomatic immunity for drug shipments
+- Act 6: Facilitates international crew recruitment
+
+#### “NAAZIBE” / “BEYS NAAZIM” (Abdulla Nazim Ibrahim Parody)
+
+**Real Position:** Minister of Health  
+**Game Name:** **Naazibe** or **Beys Naazim** (Medicine Naazim)
+
+**Background:**
+
+- Covers up synthetic drug addiction statistics
+- Hospital corruption
+
+**Game Role:**
+
+- Pressures Nunnu to hide gang victim records
+- Act 8: Falsifies Baokalo’s “mental illness” diagnosis for arrest
+
+-----
+
+### STATE MINISTERS
+
+#### “VISHTHAA” (Mariyam Vishama Ahmed Parody)
+
+**Game Name:** **Vishthaa**  
+**Role:** Double agent in extortion operations
+
+#### “FATHUBE” (Uz Moosa Fathuhee Adam Parody)
+
+**Game Name:** **Fathube**  
+**Role:** Fixer for rackets
+
+#### “SHARAFBE” (Uz Sharafuddeen Aboobakur Parody)
+
+**Game Name:** **Sharafbe**  
+**Role:** Turf war mediator
+
+-----
+
+### SUSPENDED OFFICIALS (Real 2024 Scandal)
+
+#### “SHIUTHA KANDULAA” (Mariyam Shiuna Parody)
+
+**Real Scandal:** Called PM Modi “puppet” and “clown” on X/Twitter (January 2024)  
+**Game Name:** **Shiutha Kandulaa** (Shiutha the Loud Mouth)
+
+**In-Game:**
+
+- Quest-giver with inflammatory missions
+- “India Out” campaign supporter
+- Social media troll operations
+
+**Dialogue:**
+
+- **“Kaley want embarrass India? Mashakah expert! Post this, they explode!”**
+
+#### “MIYARU MALSHA” (Malsha Shareef Parody)
+
+**Game Name:** **Miyaru Malsha** (Shark Malsha)
+
+**In-Game:**
+
+- Shark-like extortion specialist
+- Resort shakedown expert
+
+#### “MAJIBE KAALE” (Mahzoom Majid Parody)
+
+**Game Name:** **Majibe Kaale** (Majibe the Screamer)
+
+**In-Game:**
+
+- Blackmail target
+- Loud, mouthy, makes enemies
+
+-----
+
+### OPPOSITION LEADERS
+
+#### “ANNI” (Mohamed Nasheed - REAL NICKNAME)
+
+**Keep as ANNI** - His actual nickname in Maldives  
+**Position:** Former President (2008-2012), Parliament Speaker (2019-2023)  
+**Party:** MDP (Maldivian Democratic Party)
+
+**Background:**
+
+- Democracy hero, imprisoned 16 times by Gayoom
+- 2012 coup forced resignation
+- 2015-2018 exile in UK
+- 2021 assassination attempt (IED, critically injured)
+- 2023 resigned as Speaker
+
+**In-Game Role:**
+
+- Late-game ally (Act 9-10)
+- Provides political legitimacy to Baokalo’s revolution
+- “Enemy of my enemy” alliance
+- Can become puppet president in one ending
+
+**Dialogue:**
+
+- **“Baokalo, aharen know kaley criminal. But Mooizbe destroyed my democracy. Help me, I give kaley pardon.”**
+
+#### “IBU” (Ibrahim Mohamed Solih - REAL NICKNAME)
+
+**Keep as IBU** - His actual nickname  
+**Position:** Former President (2018-2023)
+
+**Background:**
+
+- Nasheed’s childhood friend
+- Lost to Muizzu 2023
+- “India First” policy
+
+**In-Game Role:**
+
+- Provides intel on Muizzu’s China deals
+- Background character, less active than Anni
+
+#### “GOGO” (Mohamed Latheef - REAL NICKNAME)
+
+**Keep as GOGO** - His actual nickname  
+**Position:** MDP co-founder with Anni
+
+**In-Game Role:**
+
+- Underground resistance contact
+- Connects Baokalo to opposition network
+
+-----
+
+### HISTORICAL FIGURES (Flashbacks/Codex)
+
+#### “GAYOOM THAA BADHEYGANDU” (Maumoon Abdul Gayoom)
+
+**Game Name:** **Gayoom the Old Giant**  
+**Role:** Former dictator (1978-2008), 30-year rule
+
+**In-Game:**
+
+- Flashback missions (1988 Operation Cactus, 2004 Black Friday)
+- Elderly statesman, arrested by half-brother Yameen 2018
+- Grandfather Ronda performed for him
+
+#### “YAMEEN BURU” / “KADHURU YAMEEN” (Abdulla Yameen)
+
+**Game Name:** **Yameen the Crook**  
+**Role:** Former President (2013-2018), imprisoned for corruption
+
+**In-Game:**
+
+- Baokalo joins gangs during his dictatorship (2015)
+- Mentions in dialogue as cautionary tale
+- “Even presidents go to jail here”
+
+#### “LUTHUFI VERIYAA” (Abdullah Luthufi)
+
+**Game Name:** **Luthufi the Traitor**  
+**Role:** 1988 coup leader
+
+**In-Game:**
+
+- Grandfather Ronda witnessed Operation Cactus
+- Parallels to Baokalo’s coup attempt
+- “History repeats”
+
+-----
+
+### INFLUENCERS & MEDIA
+
+#### “RISHBE” / “HACK RISH” (Rishmy Rameez)
+
+**Game Name:** **Rishbe** or **Hacker Rish**  
+**Platform:** Tech/Hacking
+
+**Role:**
+
+- Provides police camera access
+- Hacks government databases
+- Act 6-10: Key ally
+
+**Dialogue:**
+
+- **“Bao, mashakah hacked CCTV. Kaley have 10 minutes before police see.”**
+
+#### “SHALUBE” / “THALHAA SHALABEE” (Shalabee Ibrahim)
+
+**Game Name:** **Shalube** or **Tips Shalabee**
+
+**Role:**
+
+- Informant on gang movements
+- Social media intelligence
+
+#### “MOYAMEEHAA” (Yamin Rasheed - MURDERED 2017)
+
+**Twitter Handle:** **Moyameehaa** (his actual handle)  
+**Role:** Blogger/journalist
+
+**In-Game:**
+
+- DECEASED character (murdered 2017 for exposing extremism)
+- Martyr whose legacy inspires Baokalo
+- Act 5 mission: Investigate his murder (gang + Islamist connection)
+- His blog posts unlock corruption evidence
+
+#### “YAHTHA” / “RAIVARU MARIYAM” (Mariyam Yahya)
+
+**Game Name:** **Yahtha** or **Song Mariyam**
+
+**Role:**
+
+- Musician, concert distraction missions
+- “The Festival” - provide cover for heist during her performance
+
+#### “AISHKKO” (Aishath Nasheeda)
+
+**Game Name:** **Aishkko**
+
+**Role:**
+
+- Lifestyle influencer
+- Resort escort quests in luxury areas
+
+#### “SIYAMBE” / “REETHI SIYAM” (Ahmed Siyam)
+
+**Game Name:** **Siyambe** or **Beautiful Siyam**
+
+**Role:**
+
+- Travel influencer
+- Smuggling route guides (knows seaplane schedules)
+
+#### “DHATHTHAA” (Aishath “Dhahtha Diva”)
+
+**Keep as DHATHTHAA** - Already Dhivehi-styled
+
+**Role:**
+
+- Viral dancer
+- Social media boosts (increase notoriety)
+
+#### “NAAFEY” / “GULHUN NAAFIU” (Naaphiiu)
+
+**Game Name:** **Naafey** or **Secret Naafiu**
+
+**Role:**
+
+- Content creator
+- Undercover operations specialist
+
+#### “SUHEY” (Suhail “SUHAEL”)
+
+**Game Name:** **Suhey**
+
+**Role:**
+
+- Filmmaker
+- Propaganda videos for Baokalo’s revolution
+
+-----
+
+### SPECIAL CHARACTER: ABDULLA JABIR (Real MP - PERFECT FOR GAME)
+
+#### “JABIBE” / “THE YACHT MAN”
+
+**Real Background:**
+
+- MDP member, Kaashidhoo Constituency MP
+- Close to Nasheed (Anni)
+- **Yacht Tours Maldives** owner
+
+**Real Scandals (ALL TRUE):**
+
+- **2012:** Arrested at Hondaidhoo Island with cannabis/hash oil, 10 people present
+- Sentenced 12 months, **pardoned by Yameen** after 5 months
+- **Seaplane assault:** Verbally assaulted pilot/crew, **banned from Maldivian Airlines**
+- **Parliament ejections:** Removed multiple times for disruptive conduct
+- **2017 bribery admission:** Mentioned **“carrying sacks of money”** to opposition MPs
+
+**In-Game Character:**
+**“JABIBE”** - Loud, aggressive, controversial politician
+
+**Role:**
+
+- Act 4-6: Baokalo’s early political contact (connects gangs to MDP)
+- Yacht-based missions (smuggling, offshore meetings)
+- Act 7-8: Government uses Jabir to control gangs, betrays both
+- Act 9-10: Jabir joins Baokalo’s revenge crew (has dirt on everyone)
+
+**Personality:**
+
+- Comic relief but dangerous (unpredictable)
+- Switches sides constantly (survival instinct)
+- Loud mouth, gets ejected from meetings
+- “I carried faisaa for everyone!”
+
+**Key Missions:**
+
+- “The Yacht Run” - Smuggling via his Yacht Tours business
+- “Parliament Chaos” - Disrupt session, Jabir creates distraction
+- “The Pardon” - Blackmail Yameen connection for leverage
+
+**Dialogue Style (Loud, Chaotic Dhivehi-English Mix):**
+
+- **“Kaley sodu, you think I don’t know? Mashakah carrying faisaa for Anni, for Yameen, for everyone! Now Kazzabu wants me dead too!”**
+- **“Bao, listen. Thibeyfulhaa needs this done quiet. No dhimaa, understand? Just faisaa and move.”**
+- **“Aharen yacht ready! Police can’t touch mashakah in international waters! Let’s go!”**
+
+-----
+
+# 5. THE RONDA FAMILY SAGA (COMPLETE TIMELINE)
+
+## 1950-1990: Foundation Generation
+
+**1950:** Mohamed Ronda born in Maradhoo, Addu City
+
+- Grows up during late Sultanate era
+- Learns traditional boduberu from father
+
+**1953:** Aminath Nappey born in Malé
+
+- Traditional upbringing, fishing family
+
+**1959-1963:** Ronda witnesses Southern Suvadive Republic secession
+
+- Age 9-13, formative political experience
+- Learns to stay apolitical to survive
+
+**1968:** Ronda (age 18) starts music career during Second Republic
+
+- Performs at cultural events
+
+**1970:** Ronda marries Nappey (arranged marriage)
+
+- Moves to Malé for better opportunities
+
+**1977:** First daughter **Rippoo** born in Malé
+
+- Born same year as first drug arrest (hashish)
+
+**1980:** Son **Ibrahim DhoDho** born
+
+**1983:** Daughter **Fathimath Zadey** born
+
+**1978-2008:** Ronda builds reputation during Gayoom’s 30-year rule
+
+- Performs at presidential ceremonies
+- Stays apolitical, survives regime
+- Raises 5 children (Rippoo, DhoDho, Zadey + 2 others unnamed)
+
+## 1990-1998: Rippoo’s Dark Era
+
+**1993 (Age 16):** Rippoo joins gangs
+
+- Heroin epidemic explodes
+- Father Ronda struggling financially
+- Rebellion against traditional family
+
+**1993-1998 (Age 16-21):** “Rippoo the Razor”
+
+- Female gang enforcer (rare)
+- Extortion, drug courier, intelligence
+- Works with crew that becomes Malé Sharks
+- Family thinks she’s studying, doesn’t know
+
+**1997-1998:** Peak gang activity
+
+- Major drug operations
+- Hashish oil smuggling from India
+
+**1998 (Age 21):** TURNING POINT
+
+- Discovers pregnant with Nunnu
+- Meets **Abuch Rasily Bats** (honest fisherman, age 23)
+- Abuch knows her past, loves her anyway
+- **CHOOSES** to leave gangs to protect unborn child
+- Marries Abuch, moves to different Malé district
+- Parents Ronda/Nappey heartbroken but support her
+
+## 1998-2015: Redemption & Hope
+
+**1998:** Nunnu born
+
+- Rippoo becomes social worker (rehabilitation centers)
+- Perfect mother, determined to break cycle
+
+**2000:** **Baokalo (Ahmed Kipal Ronda) born**
+
+- Born during late Gayoom era
+- Second chance for Rippoo
+
+**2000-2008:** Happy childhood (relatively)
+
+- Father Abuch works brutal fishing shifts
+- Mother Rippoo overprotective (hiding her past)
+- Sister Nunnu is brilliant student (straight A’s)
+- Grandfather Ronda teaches occasional music
+- Grandmother Nappey bakes, prays, loves unconditionally
+
+**2004 (Age 4):** BLACK FRIDAY
+
+- Baokalo’s earliest memory: Chaos, screaming, tear gas
+- 5,000 protesters demand Gayoom’s resignation
+- Formative trauma
+
+**2004 (December):** TSUNAMI
+
+- Maldives devastated
+- Family survives but resources scarce
+
+**2008 (Age 8):** First Democratic Election
+
+- Nasheed (Anni) defeats Gayoom
+- Baokalo watches with hope
+- “Democracy means opportunity”
+
+**2008-2012:** School years
+
+- Baokalo smart but increasingly rebellious
+- Compared to Nunnu constantly
+- “Why can’t you be like your sister?”
+- Father Abuch barely home (18-hour fishing shifts)
+- Mother Rippoo smothers him (overprotective)
+
+**2012 (Age 12):** NASHEED COUP
+
+- February 7: Police/military force Nasheed resignation
+- Baokalo watches coverage obsessively
+- **LESSON LEARNED:** “Politics = violence = power”
+- Starts petty theft (wallets, phones)
+
+**2014-2015:** ISIS Recruitment Peak
+
+- 250 Maldivians join ISIS (highest per capita)
+- Baokalo’s friends radicalized
+- Journalists murdered (Ahmed Rilwan disappearance)
+
+**2015 (Age 15):** THE BREAKING POINT
+
+- Expelled from school for fighting
+- Caught pickpocketing
+- Father Abuch slaps him (only time): “I’m breaking my back for this family and you throw it away?!”
+- Rippoo devastated: “I escaped this life, why did you choose it?!”
+- Grandfather Ronda disowns: “You’ve destroyed our family name”
+- Only Grandmother Nappey still loves unconditionally
+
+## 2015-2020: Descent into Crime
+
+**2015 (Age 15):** Joins **Hulhu Hustlers** gang
+
+- Pickpocketing in Malé fish markets
+- Bat combat training (street fights)
+- Yameen dictatorship peak (political violence normalized)
+
+**2016 (Age 16):** Nunnu goes to India for medical school
+
+- Family sacrifices everything for her education
+- Baokalo feels even more invisible
+- “They invested in her, gave up on me”
+
+**2016-2018:** Gang Rise
+
+- Infiltrates Malé Sharks (Rippoo’s old crew, doesn’t know connection)
+- Supreme Court crisis (Feb 2018) creates chaos = opportunity
+- Tuna route heist during emergency
+- Age 18: Positioned between old Yameen gangs and new Solih government
+
+**2020 (Age 20):** FATHER ABUCH DIES
+
+- Storm at sea, dhoni capsized
+- Drowned with 3 other fishermen
+- Body recovered 3 days later
+- **Last conversation week before death:**
+  - Abuch: “I failed you. I should have been home more. Please, leave gangs before it’s too late. I love you, son.”
+  - Baokalo: [Silent, didn’t respond]
+- **GUILT:** “My father died thinking I was a failure”
+- **RAGE:** “The system worked him to death for nothing”
+- Keeps Abuch’s fishing knife as weapon
+
+## 2020-2025: Rise to Power (Main Game Story)
+
+**2020-2022 (Age 20-22):** Building Empire
+
+- COVID lockdowns = less police = more operations
+- Expands from Malé to Addu (recruit from 12 southern gangs)
+- May 2021: Nasheed (Anni) bombing - learns politicians vulnerable
+- Connections with suspended deputies (Shiutha, Malsha, Majibe)
+
+**2022 (Age 22):** Nunnu returns from India
+
+- MBBS degree, hired at IGMH Hospital
+- Marries lawyer, picture-perfect life
+- Publicly denounces Baokalo: “I don’t know that criminal”
+- Baokalo sees newspaper photo, feels pain
+
+**2023 (Age 23):** MUIZZU TAKES POWER
+
+- Baokalo works for PNC as enforcer during campaign
+- Extorts voters, threatens opposition
+- Muizzu wins, promises Baokalo control of Malé
+- Controls 30+ gangs (out of 83 total)
+- Laundering through Moosa Zameer (Finance Minister)
+- Arms from Mohamed Ghassan Maumoon (Defense)
+
+**2024 (Age 24):** International Empire
+
+- Pakistan/Iran heroin routes established
+- India boycott crisis exploited for smuggling
+- China mega-projects hide drug shipments
+- Sri Lankan networks (grandfather’s old routes revived)
+- Malaysian connections via Velana Airport
+- Recruit from ISIS returnees
+- Islamist gang alliance with Ahmed Muaz (half-brother reveal)
+- Controls 60 of 83 gangs
+- Worth millions, connections worldwide
+
+**2024 (Late):** GOVERNMENT ASSET
+
+- Ali Ihusaan (Homeland Security) makes Baokalo official “consultant”
+- Crushes opposition protests for government
+- Silences journalists (threaten with gang violence)
+- Rigs local elections in atolls
+- Gang Act 2025: Helps draft while publicly “gangs don’t exist”
+- Becomes too powerful - knows everyone’s secrets
+
+**2025 (Mid):** THE BETRAYAL
+
+- **Why Government Turns:**
+  - International pressure (UN/Interpol notice narco-state)
+  - Muizzu needs scapegoat for failed “no gangs” policy
+  - Ali Ihusaan fears Baokalo will expose his role
+  - China demands crackdown (bad optics)
+- **The Frame:**
+  - Plant evidence tying Baokalo to Nasheed assassination attempt
+  - Fabricate ISIS connections (easy given Islamist gang allies)
+  - Charge under Gang Act 2025 + Terrorism Act
+  - Arrest warrant issued - “most wanted”
+
+**2025 (Late, Age 25):** REVENGE & REVOLUTION
+
+- Recruits international crew (Pakistan, Sri Lanka, Afghanistan, India)
+- Maldivian insiders: Nookko, Rippoo, reformed cops
+- Unites all 83 gangs under “Vagu Syndicate”
+- Exposes PNC-gang links to media
+- Financial warfare via crypto attacks
+- Blackmail campaign against all ministers
+- Resort sieges for leverage
+- Velana Airport seizure
+- Parliament assault
+- **FINAL CHOICE:** Kill/Exile/Expose Muizzu
+- Multiple endings based on morality
+
+## Family Reunion Moments (Gameplay)
+
+**Act 1:** Rippoo’s Plea - Mother confronts at tea shop, slaps him
+**Act 2:** Ronda’s Disownment - Grandfather cuts ties in Maradhoo
+**Act 3:** DhoDho’s Warning - Uncle threatened at airport
+**Act 3:** Zadey’s Panic - Aunt blocks his number
+**Act 5:** Rippoo’s Secret Revealed - Baokalo discovers her gang past
+**Act 6:** DhoDho’s Blackmail - Rescue uncle’s kids from kidnapping
+**Act 6:** Zadey’s Breakdown - Minister forces her to spy
+**Act 6:** Nunnu’s Discovery - Sister treats him in ER (MAJOR SCENE)
+**Act 8:** Rippoo’s Assassination Attempt - Car bomb, critically injured
+**Act 9:** Nappey’s Death (Optional) - If evil path, grandmother dies
+**Act 9:** Family Council - They debate: betray or help him?
+**Act 10:** Ronda’s Forgiveness (Optional) - If redemption path, grandfather reconciles
+
+-----
+
+# 6. COMPLETE GANG NETWORK (83 GANGS)
+
+## MALÉ GANGS (44-45 Active)
+
+### TIER 1: HIGHLY ACTIVE (8 Gangs - Daily Police Monitoring)
+
+#### 1. MASODI (Titans)
+
+**Leaders:** Shiru (Superman), Nadhamaa, Tarzan, Firassey, Midey  
+**Territory:** Malé Central, Hulhumalé young faction  
+**Links:** Addu Masodi (Mafa-deceased), Milo City (Hithadhoo)  
+**Activities:** Drug trafficking, extortion, PNC protection  
+**Members Call Themselves:** “Titans” or “Maso Crew”
+
+#### 2. KUDA HENVEIRU
+
+**Leaders:** Simba, Humam, Azlif, Chooty  
+**Territory:** Kuda Henveiru district, Malé  
+**Links:** Allied with Masodi  
+**Activities:** Pickpocketing, drug courier, street violence  
+**Characteristic:** Young, aggressive, growing fast
+
+#### 3. V K (Vaahu Vai Kanmathi)
+
+**Leaders:** Ravi (Lons family), Shafa, Lorippe, Aries, KNabbe  
+**Territory:** Corner/goalhi area, Malé  
+**Origins:** Split from RLC Kanmathi  
+**Blood Feud:** LONS gang (same origins)  
+**Activities:** Territory control, drug distribution, extortion
+
+#### 4. WANTED
+
+**Leaders:** Marn, Thaju  
+**Territory:** Multiple Malé districts  
+**Activities:** Assassination contracts, high-value theft, political violence for hire  
+**Reputation:** Professional criminals, organized hits
+
+#### 5. BURU SPORTS
+
+**Leaders:** Chika, Shifa, Jinni  
+**Funding:** PYG (rumored political/business backer)  
+**Territory:** Sports facilities, gyms, Malé  
+**Activities:** Gym recruitment, extortion, political muscle  
+**Protected:** Government connections via PYG
+
+#### 6. BROTHERHOOD
+
+**Leader:** Eman  
+**Territory:** Malé neighborhoods  
+**Emphasis:** Loyalty-based, blood oaths
+
+#### 7. EAGLES
+
+**Territory:** Malé  
+**Activities:** Drug running, street control
+
+#### 8. B G
+
+**Territory:** Malé  
+**Note:** Operates quietly, less public
+
+### TIER 2: ACTIVE MALÉ GANGS (Remaining 36+)
+
+1. **OYEHA HYENAS** - Oyeha district, pack tactics
+1. **VIENNA TOWN** - Leaders: Don Vidhson, Dhombe, Appe
+1. **LT** - Malé
+1. **PETREL PARK** - Park area
+1. **TC** - Malé
+1. **BLOOD BROTHERS** (“Dhimaa Khandhu”) - Oath-based, extreme loyalty
+1. **U N GOALHI** - UN Goalhi neighborhood
+1. **U N PARK** - UN Park area, related to UN Goalhi
+1. **ZEFROL** - Malé
+1. **LORENZO** - Italian-sounding name
+1. **N C PARK** - NC Park area
+1. **LONS** - Split from RLC Kanmathi, blood feud with VK
+1. **WILD DOGS** (“Dhon Crew”) - Pack hunters, aggressive
+1. **BOWS** - Malé
+1. **BISSBURU** - Bissburu district, linked to Scoope Goalhi
+1. **SCOOPE GOALHI** - Variant faction of VK/LONS/BissBuru
+1. **SULTANS PARK BOYS** - Sultans Park area, historical pride
+1. **GREEN STREET** - Green Street territory
+1. **BACHAPU BOYS** - Bachapu area
+1. **THE GOALHI** - The Goalhi neighborhood
+1. **R L C KANMATHI** - PARENT GANG of VK and LONS (origins)
+1. **RAALHUGANDU BOYS** (“Wave Crew”) - Raalhugandu area
+1. **ARTIFICIAL BEACH CREW** - Tourist hotspot, theft/drug sales
+
+-----
+
+## ADDU CITY GANGS (12 Gangs, 250+ Members)
+
+### GAN DISTRICT
+
+1. **EHNBANDIANS (Airport Brothers)**
+
+- **Territory:** Gan Airport area
+- **Links:** GAN Branch Corrupt Cops network
+- **Activities:** Airport smuggling, luggage theft, bribery
+- **Slang:** “Bandhiaa” (Brothers in Addu Bas), “Airport Gandu”
+
+1. **GCP**
+
+- **Territory:** Gan
+- **Note:** Possibly “Gan City” something
+
+-----
+
+### FEYDHOO DISTRICT
+
+1. **BENCH** - Bench hangout spot
+1. **EAST COAST WEST (ECW)** - East coast area
+1. **JOALIANS** - Feydhoo
+1. **GAN BRIDGE BOYS** - Bridge control, toll extortion
+1. **SONS OF LONS (Now LONS SPORTS)**
+
+- **Link:** Connected to Malé LONS lineage
+- **Status:** All Addu members JAILED, Malé heads safe
+- **Note:** First multi-city gang network
+
+-----
+
+### MARADHOO DISTRICT (THE CITY OF BAOKALO)
+
+**Context:** Baokalo’s home, NO gang ties initially (respectable family). To overthrow Mooizbe, he gathers nationwide crew and forms **“KO & THE CITY”** - his elite team.
+
+**Historical Gangs:**
+
+1. **MASODI (Addu Branch)**
+
+- **Head:** MAFA (Deceased) - Original Maradhoo leader
+- **Links:** Malé Masodi (Shiru), Milo City (Nadhamaa)
+- **Status:** Mafa’s death creates power vacuum
+
+1. **MFB** - Maradhoo
+1. **FASGANDA** - Maradhoo
+1. **OTF** (Possibly “Only The Family”) - Maradhoo
+1. **LA FAMILIA** - Maradhoo, Spanish name
+1. **HABEYS** - Maradhoo
+1. **LIONS (Formerly HAFUS CITY)**
+
+- **Historical:** Hafus City renamed after Mafa’s death
+- **Links:** Masodi origins
+
+1. **EAGLE BOYS (Teens)** - Teenage gang, recruitment pool
+1. **BANDHRA BOYS (Teens)** - Teenage gang, part of 97 child members
+1. **RHANKEDE** - Maradhoo
+1. **TARFU PITCHERS** - Maradhoo
+
+-----
+
+### HITHADHOO DISTRICT (City of Azalla - Deceased Overlord)
+
+**Historical:** Azalla managed entire Hithadhoo crime network before death, similar to Baokalo’s future role.
+
+1. **MILO CITY**
+
+- **Head:** MASODI NADHAMAA (same as Malé Masodi member)
+- **Links:** Confirms Masodi is nationwide network
+
+1. **WISS WISS**
+
+- **Heads:** Two Brothers (Unknown identities)
+- **Slang:** “Wiss” = quiet/sneaky
+
+1. **D·T·S (Drug Trafficking Fishermen)**
+
+- **Activities:** Sri Lankan dhoni routes, tuna boat drug hides
+- **Real Method:** 300-355kg hauls in fishing vessels
+- **Slang:** “Dhoni Sodu” (Boat Bastards)
+
+1. **USGANDA** - Masodi links
+1. **FORELAND** - Hithadhoo
+1. **SCOOPE (Hithadhoo Branch)**
+
+- **Links:** Multi-city network with Malé VK, LONS, Scoope Goalhi, BissBuru
+
+1. **XERAFON** - Hithadhoo
+1. **XEPHIER** - Hithadhoo
+1. **AEH COURTS**
+
+- **Activities:** ESCORT SERVICE with Maldivian girls
+- **Type:** Sex trafficking/prostitution gang
+- **Slang:** “Reethi Dhikuru” (Beautiful Girls), “Sodu Escorts”
+
+1. **SARUSHAKAA** - Hithadhoo
+1. **MULAH DHANDI** (Possibly “Money Stick”) - Hithadhoo
+1. **GANDIYA LAURA** - Hithadhoo
+1. **EQUE TASMAN’S**
+
+- **Members:** 250+ members (LARGEST GANG)
+- **Note:** Accounts for “250+ thugs in Addu” statistic
+- **Slang:** “Equu”, “Tasman Boyzz”
+
+-----
+
+## ATOLL GANGS (26 Gangs Across Remote Islands)
+
+### KNOWN ISLAMIST GANG
+
+1. **DOT.FALL**
+
+- **Type:** Islamist fusion gang, Salafi-jihadi aligned
+- **Territory:** Remote atolls
+- **Activities:**
+  - Religious radicalization of gang members
+  - Justify crimes: “Stealing from kafirs for jihad is halal”
+  - Co-opt addicted gang members (promise redemption via jihad)
+- **Context:** Connected to Ahmed Muaz networks, 2014-2017 ISIS peak (250 Maldivians joined ISIS)
+- **Prison Recruitment:** Gangs + extremists alliance
+- **Slang:** Call themselves “Mujahid Crew” (Holy Warriors), rivals call them “Laadheenee Sodu” (Godless Bastards)
+
+### ADDITIONAL ATOLL GANGS (64-89)
+
+**26 gangs total across atolls:**
+
+- **Fuvahmulah** (Mulaku Bas dialect)
+- **Huvadhu Atoll** (archaic Dhivehi)
+- **Northern Atolls** (Haa Alif, Haa Dhaalu)
+- **Laamu Atoll** (southern smuggling)
+
+**Activities:**
+
+- Remote drug drops (seaplane, dhoni)
+- Local extortion (fishing communities)
+- Minor recruitment (97 children across atolls)
+- Isolated operations
+
+-----
+
+## BAOKALO’S CREW: “KO & THE CITY”
+
+**Formation:** Act 9 (2025), Baokalo recruits elite crew to overthrow Mooizbe
+
+**“KO” Meaning:**
+
+- **“Knock Out”** (boxing term - overthrow government)
+- **“Kipal Original”** (personal brand)
+- **Addu Bas slang** for crew/squad
+
+**“THE CITY”:**
+
+- References Maradhoo as home base
+- “City of Baokalo” reputation
+- Elevated status above traditional gangs
+
+**Recruitment Sources:**
+
+**International (Act 9 Missions):**
+
+- **Pakistan:** Ex-Taliban smuggler (hates government)
+- **Sri Lanka:** PLOTE descendant (1988 coup connection)
+- **India:** RAW agent turned rogue (knows Muizzu-China secrets)
+- **Afghanistan:** Opium warlord (grudge against corrupt regimes)
+- **Syria:** ISIS returnee, female hacker from camps
+
+**Maldivian Insiders:**
+
+- **Nookko** (sister - hacker)
+- **Rippoo** (mother - uses 1990s gang knowledge)
+- **Reformed cops** (tired of corruption)
+- **Select gang defectors** (from 83 gangs)
+
+**Final Form:** Controls ALL 83 gangs as **“Vagu Syndicate”** (Act 10)
+
+**Slang:**
+
+- Members: “KO Boyzz” or “City Crew”
+- Baokalo: “The Bao” (The Boss)
+- Rivals: “Kazzabu Crew” (Liar Crew - ironic)
+
+-----
+
+# 7. DHIVEHI LANGUAGE & SLANG GUIDE
+
+## Regional Dialects
+
+### MALÉ BAS (Capital Dialect - Standard)
+
+**Characteristics:**
+
+- Most common, official contexts
+- Softer sounds, less archaic
+- **Example:** “Fannu” (rope)
+- Used by government, media, education
+
+**In-Game:** Most NPCs speak this
+
+### ADDU BAS (Southern Dialect - Baokalo’s Home)
+
+**Characteristics:**
+
+- Most archaic and distinct
+- Retroflex ‘ṇ’ sound preserved (Ṇaviyani ޱ)
+- Replaces final sounds
+- **Example:** “Fanno” instead of “Fannu”
+- Sounds “country” to Malé residents
+
+**In-Game:**
+
+- Baokalo speaks this natively
+- Malé gangs sometimes mock him: “Kaley Addu tha?” (You’re Addu?)
+- Code-switches to English when frustrated
+
+### FUVAHMULAH BAS (Mulaku Bas)
+
+**Characteristics:**
+
+- Word-final ‘l’ sound unique
+- **Example:** “Gedharo” (home, like Sinhalese)
+- Poetic, rhythmic to other Maldivians
+
+**In-Game:** NPCs in Fuvahmulah atoll missions
+
+### HUVADHU BAS
+
+**Characteristics:**
+
+- Most use of retroflex ‘Ţ’ sound
+- Retains old Sinhala words
+- Closest to original Maldivian linguistically
+
+**In-Game:** Remote atoll NPCs, elderly characters
+
+-----
+
+## Curse Words & Insults (REAL DHIVEHI)
+
+**Extremely Offensive:**
+
+- **Sodu** - Bastard, most common curse
+- **Hoshifa** - Strong insulting curse
+- **Thilhen** - “You” but extremely offensive form
+- **Kaley** - “You” very informal, disrespectful to strangers
+
+**Usage In-Game:**
+
+- Gang fights: “Kaley sodu!”
+- Rivals: “Thilhen vaahaka eh dhakkaabalaa!” (I won’t talk to you - extremely rude)
+- Insults: “Maa sodu kuda ibilaa” (Don’t talk like a bastard)
+
+-----
+
+## Pronouns (Respect Levels)
+
+**Formal (Politicians, Elders):**
+
+- **Aharen** - I (formal)
+- **Alhugandakah** - I (very formal, to superiors)
+- **Thibeyfulhaa** - You (respectful, to elders/bosses)
+
+**Standard:**
+
+- **Mashakah** - Me (standard)
+- **Ahannakee** - I am (standard)
+
+**Disrespectful (Gang Usage):**
+
+- **Kaley** - You (disrespectful)
+- **Thilhen** - You (extremely offensive)
+
+**In-Game Examples:**
+
+- Baokalo to grandfather: “Alhugandakah sorry” (very formal)
+- Gang member to rival: “Kaley sodu!” (disrespectful)
+- Politician to Baokalo: “Thibeyfulhaa very useful” (respectful but fake)
+
+-----
+
+## Political Slang (Real 2024 Social Media)
+
+**From India-Maldives Twitter Controversy:**
+
+- **Kazzabu** - Liar (common political insult)
+- **Appathurey** - Puppet (Shiutha used this for Modi)
+- **Beyfulhi** - Elite snob, aristocrat (against Nasheed supporters)
+- **Laadheenee** - Secular/godless (Islamist insult against liberals)
+- **“Dhiveheenge Raajje”** - “Nation of Maldivians” (Muizzu campaign slogan)
+- **“India Out”** - Real 2020-2023 campaign slogan (anti-India sentiment)
+
+**In-Game Usage:**
+
+- Shiutha Kandulaa: “Kaley want embarrass India? Mashakah expert!”
+- Protesters: “India Out! Dhiveheenge Raajje!”
+- Jabibe: “Everyone kazzabu in politics!”
+
+-----
+
+## Gang/Crime Slang
+
+**Southern Addu Slang (Baokalo’s Crew):**
+
+- **Bao** - Boss/head/chief
+- **Kalo/Kaalaa** - Dark/black (reputation)
+- **Dhimaa** - Blood
+- **Miyaru** - Shark
+- **Faru** - Reef/coral
+- **Dhoni** - Traditional boat (smuggling)
+- **Hendhun** - Seizer/taker
+- **Kandulaa** - Loud mouth/screamer
+- **Reygandu** - Night person
+- **Gulhun** - Secret/hidden
+
+**Malé Gang Slang:**
+
+- **Kuda** - Small (ironic for big gangs)
+- **Bodhu** - Big/great
+- **Dhari** - Knife/blade
+- **Faisaa** - Money/cash
+- **Beys** - Medicine/drugs
+- **Raalhu** - Wave/trouble
+- **Gandu** - Person/man (suffix)
+
+**Crime Activities:**
+
+- **Dhoni Sodu** - Boat Bastards (smugglers)
+- **Masdheygandu** - Tuna Man (smuggler)
+- **Saikuraa** - Teapot (drop point, like poet Saikura Naeem)
+- **Hathiyaaru** - Weapons
+- **Baroagu** - Foreign/outside
+
+**Disrespectful Combat:**
+
+- **“Uzaa sodu!”** - “Go away, bastard!” (fight starter)
+- **“Kaley sodu eku”** - “You’re one bastard” (major insult)
+- **“Huttaala dhee!”** - “Please stop!” (panic before violence)
+
+-----
+
+## Common Phrases (Game Dialogue)
+
+**Greetings/Casual:**
+
+- **“Assalaamu alaikum”** - Peace be upon you (formal)
+- **“Kihineh?”** - How are you? (informal)
+- **“Rangalhu”** - Good (standard reply)
+
+**Commands/Requests:**
+
+- **“Govaala dhee”** - Go, please
+- **“Huttaala dhee”** - Stop, please
+- **“Dhevvaana”** - Give (imperative)
+
+**Combat/Threats:**
+
+- **“Mashakah raalhu genvaan”** - I’m bringing trouble
+- **“Kaley dhimaa dhevey”** - You give blood (threat)
+- **“Uzaa!”** - Go away! (aggressive)
+
+**Money/Business:**
+
+- **“Faisaa dhevey”** - Give money
+- **“Gandufanaa”** - Money counter (corrupt official)
+- **“Beys dhevey”** - Give drugs
+
+**Family/Respect:**
+
+- **“Kalaa dhon darifulhaakah”** - My dear child
+- **“Darifulhaakah”** - My child (affectionate)
+- **“Masterah”** - Master/teacher (respect)
+
+-----
+
+## Code-Switching (Dhivehi-English Mix)
+
+**In-Game:** Many characters mix Dhivehi and English naturally, especially younger generation
+
+**Examples:**
+
+**Baokalo (Addu Bas + English):**
+
+- *“Ahannakee Baokalo, Maradhoo gandu. Kaley sodu, mashakah faisaa dhevey, kaley dhimaa dhevey. Understand?”*
+- Translation: “I am Baokalo, person from Maradhoo. You bastard, I give money, you give blood. Understand?”
+
+**Jabibe (Chaotic Mix):**
+
+- *“Kaley sodu, you think I don’t know? Mashakah carrying faisaa for Anni, for Yameen, for everyone! Now Kazzabu wants me dead too!”*
+- Translation: “You bastard, you think I don’t know? I carried money for Anni, for Yameen, for everyone! Now the Liar wants me dead too!”
+
+**Rippoo (Emotional, Street):**
+
+- *“Kipal… aharen sodu libigenvunehun kury. Mashakah past dhimaa, but kaley future dhimaa too. Why?”*
+- Translation: “Kipal… what bastard behavior did I show? My past was blood, but your future is blood too. Why?”
+
+**Nunnu (Educated, Formal):**
+
+- *“Kipal, aharen doctor. I save lives. Kaley… kaley destroying them. How can we be from same family?”*
+- Translation: “Kipal, I’m a doctor. I save lives. You… you’re destroying them. How can we be from same family?”
+
+**DhoDho (Nervous):**
+
+- *“Bao, please. Mashakah kids need school, wife needs job. Don’t destroy us.”*
+- Translation: “Boss, please. My kids need school, wife needs job. Don’t destroy us.”
+
+**Mooizbe (Fake Friendly):**
+
+- *“Baokalo, thibeyfulhaa very useful. But aharen president now. Gangs don’t exist, understand? Kaley don’t exist.”*
+- Translation: “Baokalo, you’re very useful. But I’m president now. Gangs don’t exist, understand? You don’t exist.”
+
+-----
+
+## Nickname Construction (Traditional Patterns)
+
+**Suffix Patterns:**
+
+**-be (Older Male):**
+
+- Moosabe, Nasheyb (Nasheed), Khaleyb e, Ghaasbe, Ronda becomes “Rondabe”
+
+**-tha (Older Female):**
+
+- Rihtha (Rippoo), Vishthaa, Shiutha, Yahtha
+
+**-ko (Younger Sibling):**
+
+- Nookko (Noora), Aishkko
+
+**-ey/-u (Abbreviated):**
+
+- Naafey, Suhey, Kudey, Rashey
+
+**Associative (Job/Trait/Item):**
+
+- Saikuraa (Teapot), Masdheygandu (Tuna Man), Beys Naazim (Medicine), Miyaru (Shark), Dhoni (Boat), Faisaa (Money)
+
+**In-Game Usage:**
+
+- NPCs address each other by nicknames, not full names
+- Formal situations: Full names (court, parliament)
+- Street: Nicknames only
+
+-----
+
+# 8. COMPLETE STORY ARC (10 ACTS + EPILOGUE)
+
+## ACT 1: MAAFANNU AWAKENING (2015, Age 15) - 4 Hours
+
+**Setting:** Malé slums, Maafannu district  
+**Context:** Baokalo expelled from school, joins Hulhu Hustlers during Yameen dictatorship
+
+### Main Missions (12):
+
+**Mission 1: “The First Score” (Tutorial)**
+
+- **Objective:** Pickpocket 3 wallets in fish market
+- **Teaches:** Movement, stealth, targeting
+- **Dialogue:** Hulhu Hustlers member: “Kaley new? Easy job, just snatch and run.”
+
+**Mission 2: “Bat Initiation”**
+
+- **Objective:** Fight Kuda Henveiru thugs in alley (bat combat)
+- **Teaches:** Melee combat, dodging, counters
+- **Flashback:** Remembers father Abuch’s disappointment
+
+**Mission 3: “Mother’s Business”**
+
+- **Objective:** Deliver package for Rippoo’s tea shop (unknowingly drugs)
+- **Introduces:** Velana Airport drop system
+- **Teaches:** Vehicle driving (motorcycle)
+
+**Mission 4-6: “Territory Wars”**
+
+- **Objective:** Help Hulhu Hustlers fight Masodi scouts
+- **Introduce:** Shalabee Ibrahim (influencer informant tips off rivals)
+- **Escalation:** Petty fights → serious violence
+
+**Mission 7: “Sister’s Shadow”**
+
+- **Cutscene:** See newspaper about Nunnu’s scholarship to India
+- **Emotion:** Baokalo feels inferior, anger builds
+- **No gameplay, pure story**
+
+**Mission 8-9: “Bail Money”**
+
+- **Objective:** Extort local shop for bail money (minor arrested)
+- **Moral Choice:** Threaten owner OR do job for payment (affects karma)
+- **Consequence:** If kind, owner helps later; if cruel, calls police
+
+**Mission 10: “The Recruit”**
+
+- **Objective:** Recruit 3 minors for Hulhu Hustlers
+- **Introduces:** 97 child members issue
+- **Moral Impact:** Recruiting children = evil karma
+
+**Mission 11-12: “Maafannu Claimed”**
+
+- **Objective:** Turf war vs Wanted gang, claim street corner
+- **Boss Fight:** Marn (Wanted leader) in bat duel
+- **Victory:** Hulhu Hustlers control Maafannu corner
+
+### Act 1 Climax: “Family Dinner Disaster”
+
+**Cutscene:**
+
+- Mandatory family dinner at Ronda’s Addu home
+- Grandfather Ronda plays boduberu, traditional music
+- Baokalo arrives late, bruised from fight
+- Rippoo confronts: *“Kipal, aharen sodu libigenvunehun kury. Mashakah escaped this life!”*
+- Baokalo: *“Kaley don’t understand! Nunnu gets everything, I get nothing!”*
+- Ronda: *“Thilhen destroy family name. Uzaa from my house!”*
+- Grandmother Nappey crying: *“He’s still our grandson!”*
+- Baokalo storms out
+
+**Twist Revelation:**
+
+- After leaving, Rippoo talks to Nappey
+- **Rippoo:** *“He’s becoming like I was… in the ’90s.”*
+- **Nappey:** *“Then you must tell him. He deserves to know.”*
+- **Rippoo:** *“Not yet. He’s not ready.”*
+- Player wonders: What is Rippoo hiding?
+
+**Side Content (20 missions):**
+
+- 10 pickpocketing challenges (high scores)
+- 5 street races (motorcycle)
+- 3 hidden package deliveries
+- 2 bat fight tournaments
+
+**Unlocks:**
+
+- Malé Central map area
+- Motorcycle travel
+- Bat combat mastery
+- Hulhu Hustlers safehouse
+
+-----
+
+## ACT 2: MALÉ CORE WARS (2016-2017, Age 16-17) - 5 Hours
+
+**Setting:** Expand to full Malé, infiltrate Malé Sharks  
+**Context:** Yameen dictatorship peak, Supreme Court crisis chaos (Feb 2018)
+
+### Main Missions (14):
+
+**Mission 1: “Shark Recruitment”**
+
+- **Objective:** Impress Malé Sharks with daring heist
+- **Target:** Steal weapons from police armory
+- **Introduces:** Stealth gameplay, alarm systems
+
+**Mission 2-4: “Resort Extortion”**
+
+- **Objective:** Threaten resort managers for protection money vs Masodi
+- **Ally:** Rishmy Rameez (hacker) provides security camera access
+- **Locations:** 3 different resorts
+- **Moral Choice:** Rough up staff OR negotiate peacefully
+
+**Mission 5: “The Yamin Case”**
+
+- **Context:** April 2017, blogger Yamin Rasheed murdered (real event)
+- **Objective:** Investigate his murder (gang + Islamist connection discovered)
+- **Introduces:** Dot.Fall Islamist gang threat
+- **Emotional:** Baokalo sees journalist’s body, 16 stab wounds
+- **Reflection:** “Media is dangerous, power is everything”
+
+**Mission 6-7: “Child Soldiers”**
+
+- **Objective:** Recruit minors from Buru Sports gym
+- **Meet:** Ahmed Muaz (Islamist gang leader, hints at connection)
+- **Moral Weight:** More child recruitment = darker path
+
+**Mission 8-10: “The Tuna Run” (Major Heist)**
+
+- **Objective:** Hijack Sri Lankan vessel with heroin hide
+- **Dhoni Chase:** High-speed boat pursuit, police speedboats
+- **Combat:** Board vessel, fight D·T·S fishermen gang
+- **Reward:** Major cash payout, Sharks respect
+
+**Mission 11-12: “Supreme Court Chaos”**
+
+- **Context:** February 2018, Yameen declares emergency
+- **Objective:** Use chaos to ambush Wanted gang members
+- **Rescue:** Free Hulhu Hustlers kids from police detention (48hr rule)
+- **Setting:** Riots, tear gas, mayhem in streets
+
+**Mission 13-14: “Family Secrets”**
+
+- **Revelation:** Old Malé Sharks member recognizes Rippoo
+- **NPC:** *“Rippoo the Razor! Thought you were dead!”*
+- **Confrontation Mission:** Chase down NPC before he spreads word
+- **Choice:** Kill him (hide secret) OR let him live (Rippoo’s past revealed later)
+
+### Act 2 Climax: “The Ali Ihusaan Connection”
+
+**Major Story Mission:**
+
+- **Discover:** Minister Ali Ihusaan funded hit on grandfather’s associate
+- **Revelation:** Alibe Dhoni controls Velana Airport bribes
+- **Twist:** Baokalo realizes politicians control gangs, not other way around
+- **Cutscene:** Baokalo to Sharks: *“We’re not free. We’re puppets. Appathurey.”*
+
+**Father’s Death Flashback (2020):**
+
+- Playable memory: Storm at sea, trying to save Abuch
+- Fails, watches father drown
+- Wakes up in 2018, realizes 2 years passed (time jump)
+
+**Side Content (30 missions):**
+
+- 15 gang skirmishes (Wanted, Masodi, Kuda Henveiru)
+- 10 resort extortion (each unique location)
+- 5 drug courier runs (Velana to Malé drops)
+
+**Unlocks:**
+
+- Malé Sharks safehouse
+- Dhoni boat piloting
+- Resort heist mechanics
+- Hacking mini-game (via Rishmy)
+
+-----
+
+## ACT 3: SYNTHETIC SURGE (2018-2020, Age 18-20) - 5 Hours
+
+**Setting:** Focus on drug smuggling empire, Addu expansion  
+**Context:** Solih presidency (2018), COVID lockdowns (2020), father Abuch dies
+
+### Main Missions (15):
+
+**Mission 1-5: “Dhoni Dash Series”**
+
+- **Objective:** Evade Mohamed Ghassan Maumoon’s coast guard patrols
+- **Locations:** 5 different smuggling routes (Malé → Addu → Atolls)
+- **Mechanics:** Day/night cycles affect patrol patterns
+- **Introduces:** Weather system (cyclones disrupt routes)
+
+**Mission 6: “The Muaz Alliance”**
+
+- **Meet:** Ahmed Muaz (Kuda Shadows Islamist boss)
+- **Objective:** Negotiate meth supply from Sri Lankan vessels
+- **Revelation:** Muaz hints at family connection (foreshadowing)
+- **Tension:** Muaz’s jihadi rhetoric vs Baokalo’s secular approach
+
+**Mission 7-10: “Mother’s Relapse”**
+
+- **Story Arc:** Rippoo relapses into drug use (stress from Abuch’s death)
+- **Mission 7:** Find clean drugs for mother (ironic)
+- **Mission 8:** Protect her from rival gang collecting debt
+- **Mission 9:** Raid pharmacy for antidote supplies
+- **Mission 10:** Emotional intervention scene (cutscene)
+- **Rippoo:** *“Aharen failed kaley. Failed Abuch. I’m sorry.”*
+- **Baokalo:** *“No. Mashakah failed you. Let me fix this.”*
+
+**Mission 11-12: “The COVID Opportunity”**
+
+- **Context:** March 2020 lockdowns begin
+- **Objective:** Use empty streets for major shipment (300kg heroin)
+- **Stealth:** Avoid rare police checkpoints
+- **Storage:** Hide in Nappey’s house (she doesn’t know)
+
+**Mission 13: “Father’s Funeral”**
+
+- **Cutscene Mission:** Abuch dies in storm (age 35)
+- **Funeral:** Baokalo attends, family blames him
+- **Ronda:** *“Your father died disappointed because of you.”*
+- **Baokalo:** *“He died because system killed him! 18-hour shifts for nothing!”*
+- **Takes:** Abuch’s fishing knife (equipped as weapon)
+- **Guilt:** Permanent mental state, affects dialogue
+
+**Mission 14-15: “Nookko’s Flip”**
+
+- **Twist:** Sister Nookko (age 15) “joins” Atoll Blades
+- **Actually:** Undercover, feeds intel to Baokalo
+- **Mission 14:** Rescue her from fake kidnapping
+- **Mission 15:** Use her hacking skills for bank heist
+
+### Act 3 Climax: “The 60-Gang Summit”
+
+**Major Mission:**
+
+- **Location:** Secret atoll island, neutral territory
+- **Objective:** Convince 60 gang leaders to form loose alliance
+- **Challenges:**
+  - VK vs LONS blood feud (must mediate)
+  - Masodi demands leadership (must outmaneuver)
+  - Dot.Fall Islamists want Sharia law (must compromise)
+- **Speech:** Baokalo’s charisma check
+  - *“Aharen not asking kaley to be friends. Mashakah asking don’t kill each other while we get rich. Politicians using us. Time we use them.”*
+- **Result:** 60 of 83 gangs agree to non-aggression pact
+- **Remaining 23:** Hostile, must be conquered later
+
+**Side Content (40 missions):**
+
+- 20 drug trafficking runs (various routes)
+- 10 atoll exploration (discover hidden caches)
+- 5 Nookko hacking jobs
+- 5 RiRi detox support missions
+
+**Unlocks:**
+
+- Addu City map fully accessible
+- Seaplane travel
+- Weather-dependent missions
+- Gang alliance system (60 gangs partially friendly)
+
+-----
+
+## ACT 4: HULHUMALÉ HEIST (2021-2022, Age 21-22) - 4 Hours
+
+**Setting:** Hulhumalé suburbs, build extortion empire  
+**Context:** Post-COVID recovery, Nasheed bombing (May 2021)
+
+### Main Missions (12):
+
+**Mission 1-4: “Eco-Resort Blackmail”**
+
+- **Objective:** Extort 4 eco-resorts hiding arms shipments
+- **Locations:** Luxury islands (underwater approach)
+- **Evidence:** Photograph illegal weapons, use for leverage
+- **Moral Choice:** Expose to media OR take bribe
+
+**Mission 5-8: “The Zameer Raid”**
+
+- **Target:** Moosa Zameer (Finance Minister) offshore accounts
+- **Mission 5:** Infiltrate Ministry of Finance (Aunt Zadey reluctantly helps)
+- **Mission 6:** Steal encrypted hard drives
+- **Mission 7:** Rishmy cracks encryption
+- **Mission 8:** Use evidence to blackmail Zameer into laundering Baokalo’s money
+- **Zameer:** *“Kaley playing dangerous game, boy. But mashakah playing it too. Welcome to big leagues.”*
+
+**Mission 9-11: “Suspended Deputies”**
+
+- **Context:** January 2024, Shiutha/Malsha/Majibe suspended for Modi tweets
+- **Mission 9:** Extort Shiutha Kandulaa (she enjoys chaos, cooperates)
+- **Mission 10:** Threaten Miyaru Malsha (shark tactics, she respects strength)
+- **Mission 11:** Blackmail Majibe Kaale (loud mouth, easy target)
+- **Reward:** Political connections, can call for favors
+
+**Mission 12: “Nasheed’s Bomb”**
+
+- **Context:** May 6, 2021, IED explodes outside Anni’s home (real event)
+- **Cutscene:** Baokalo watches news, sees Nasheed critically injured
+- **Realization:** *“Even presidents aren’t safe. No one is safe except those with power.”*
+- **Decision Point:** Respect Nasheed (democracy hero) OR see as weakness
+- **Affects:** Act 9-10 alliance options
+
+### Act 4 Climax: “Mother’s Revelation”
+
+**Story Mission:**
+
+- **Setup:** Baokalo’s crew relaxing at RiRi’s tea shop
+- **Interruption:** Old Malé Sharks member enters
+- **Recognition:** *“Rippoo the Razor! 1990s, you were legend!”*
+- **Rippoo tries to deny, fails**
+- **FLASHBACK SEQUENCE (Playable):**
+  - Play as young Rippoo (1997, age 20)
+  - Mission 1: Extort female shop owner (brutal)
+  - Mission 2: Courier heroin in corned beef cans (1997 real method)
+  - Mission 3: Seduce rival gang member for intel
+  - Mission 4: Escape police raid (parkour chase)
+  - Final scene: Discover pregnancy, decide to leave
+
+**Back to Present:**
+
+- **Confrontation:** Baokalo to Rippoo
+  - *“Kaley were gang lord and kaley judge ME?! Hypocrite!”*
+- **Rippoo:** *“Aharen left! For you and Nunnu! That’s the difference!”*
+- **Baokalo:** *“Maybe I’ll leave too… after I finish.”*
+- **Rippoo:** *“That’s what they all say. No one leaves.”*
+
+**Side Content (30 missions):**
+
+- 15 extortion rackets (various businesses)
+- 10 political favors (for suspended deputies)
+- 5 Zadey’s Ministry heists
+
+**Unlocks:**
+
+- Hulhumalé residential area
+- Ministry of Finance access (Zadey’s help)
+- Political favor system
+- Rippoo as informant (her 1990s contacts)
+
+-----
+
+## ACT 5: PARLIAMENT PLAGUE (2022-2023, Age 22-23) - 5 Hours
+
+**Setting:** Political corruption deep dive, hack scandals  
+**Context:** Muizzu wins presidency (September 2023), Nasheed resigns as Speaker (November 2023)
+
+### Main Missions (15):
+
+**Mission 1-5: “The Khaleel Ledgers”**
+
+- **Target:** Dr. Abdulla Khaleel (Foreign Affairs Minister)
+- **Objective:** Steal ledgers proving international drug ties (India/Malaysia/Pakistan)
+- **Mission 1:** Tail Khaleel’s diplomatic convoy
+- **Mission 2:** Bug his office (plant listening devices)
+- **Mission 3:** Seduce his secretary for access codes (optional: blackmail instead)
+- **Mission 4:** Infiltrate Ministry during gala (disguise as waiter)
+- **Mission 5:** Escape with ledgers, chase scene through Malé
+
+**Mission 6-10: “Deputy Assassinations”**
+
+- **Context:** Suspended deputies become targets
+- **Clients:** Various politicians want them silenced
+- **Mission 6:** Protect Shiutha from assassin (moral choice: save or let die)
+- **Mission 7:** Frame Malsha’s husband for corruption (plant evidence)
+- **Mission 8:** Intimidate Majibe into silence (threaten family)
+- **Mission 9:** Discover assassination plot is from Mooizbe’s camp
+- **Mission 10:** Warn deputies OR use for leverage
+
+**Mission 11-13: “Blogger’s Ghost”**
+
+- **Context:** Yamin Rasheed (Moyameehaa) murdered 2017, case unsolved
+- **Mission 11:** Access his old blog files (Rishmy hacks archives)
+- **Mission 12:** Follow leads to gang-Islamist connection
+- **Mission 13:** Confront Dot.Fall members, combat mission
+- **Revelation:** Muizzu’s camp paid gangs to kill journalist
+- **Evidence:** Can be used in Act 10 finale
+
+**Mission 14-15: “Nasheed’s Offer”**
+
+- **Context:** November 2023, Anni forced out as Speaker
+- **Secret Meeting:** Anni contacts Baokalo via Gogo (Mohamed Latheef)
+- **Anni’s Proposal:** *“Kaley criminal, aharen politician. But we both hate Mooizbe. Maybe we help each other someday?”*
+- **Mission 14:** Prove loyalty - steal documents from Mooizbe’s office
+- **Mission 15:** Deliver to Anni, establish alliance
+- **Anni:** *“Mashakah remember this. When time comes, call me.”*
+
+### Act 5 Climax: “Juvie Raid”
+
+**Major Mission:**
+
+- **Context:** Police raid on juvenile detention center (holding 30 minors from gangs)
+- **Objective:** Break them out before they’re transferred to Maafushi Prison
+- **Challenge:** Heavily guarded, timed mission (before dawn)
+- **Team:** Bring 10 gang members, choose loadout
+- **Combat:** Largest gunfight yet, police vs gang army
+- **Escape:** Seaplane extraction from rooftop
+- **Casualties:** Some minors don’t make it (player choices affect who survives)
+- **Aftermath:** 30 rescued minors join Baokalo’s crew (loyalty boost)
+
+**Side Content (50 missions):**
+
+- 20 political assassinations/protections
+- 15 document theft operations
+- 10 Anni alliance missions
+- 5 Moyameehaa investigation side quests
+
+**Unlocks:**
+
+- Parliament building access
+- Political scandal database
+- Anni as contact (call for intel)
+- Minor army (30 child soldiers - darkest gameplay element)
+
+-----
+
+## ACT 6: ATOLL ANARCHY (2023-2024, Age 23-24) - 5 Hours
+
+**Setting:** Southern Addu City conquest, international expansion  
+**Context:** Muizzu presidency established, Baokalo becomes government asset
+
+### Main Missions (14):
+
+**Mission 1-5: “Addu Invasion”**
+
+- **Objective:** Conquer 12 Addu gangs (250+ members)
+- **Mission 1:** Underwater heist at Gan Airport (Ehnbandians territory)
+- **Mission 2:** Infiltrate Reef Reapers via seaplane drop
+- **Mission 3:** Negotiate with Maradhoo gangs (home territory advantage)
+- **Mission 4:** Crush Eque Tasman’s (250 members - largest battle)
+- **Mission 5:** Install puppet leaders OR absorb gangs entirely
+
+**Mission 6-9: “Influencer Ops”**
+
+- **Mission 6:** Escort Aishath Nasheeda to luxury resort (protect from rivals)
+- **Mission 7:** Use Ahmed Siyam for smuggling route intel (seaplane schedules)
+- **Mission 8:** Collaborate with Dhaththaa (viral dancer) for social media distraction
+- **Mission 9:** Naafey (content creator) films fake police brutality (propaganda)
+- **Result:** Public opinion shifts, media covers for Baokalo
+
+**Mission 10-12: “The Azalla Legacy”**
+
+- **Context:** Hithadhoo formerly ruled by crime lord Azalla (deceased)
+- **Mission 10:** Meet with Azalla’s former lieutenants
+- **Mission 11:** Compete in “trials” to prove worthiness (combat/racing/heist)
+- **Mission 12:** Conquer Milo City (Masodi Nadhamaa boss fight)
+- **Victory:** Hithadhoo gangs bend knee
+
+**Mission 13-14: “Half-Brother Revelation”**
+
+- **Setup:** Ahmed Muaz (Islamist gang leader) invites Baokalo to meeting
+- **Revelation:** Muaz is half-brother (same father, different mothers)
+- **Muaz:** *“Ahannakee your brother. Our father was Islamist fighter, died in Afghanistan. We share dhimaa.”*
+- **Baokalo Shocked:** Father was Abuch… or was he?
+- **Truth:** Biological father was jihadi, Abuch adopted/raised him (mother’s secret)
+- **Choice:** Accept Muaz as brother OR reject (affects Dot.Fall gang loyalty)
+
+### Act 6 Climax: “Hospital Reunion”
+
+**MAJOR STORY MISSION:**
+
+- **Setup:** Baokalo injured in Addu gang war (gunshot, critical)
+- **Stumbles:** Into IGMH Hospital, Malé, collapses
+- **Doctor On-Duty:** Dr. Nunnu Rasheed (sister)
+- **Recognition:** Nurse reads chart: “Ahmed Kipal Ronda”
+- **Nunnu removes mask:** *“Oh my God… Kipal?”*
+
+**10-MINUTE EMOTIONAL CUTSCENE:**
+
+- **Nunnu:** *“Kaley… kaley the gang lord? All those gunshot wounds I treated… kaley sent them?”*
+- **Baokalo:** *“Aharen sorry. Didn’t want you involved.”*
+- **Nunnu:** *“Involved?! I’m treating criminals every night! Stealing hospital supplies! I’m already complicit!”*
+- **Flashback:** Childhood memories (playing together, Nunnu protecting him)
+- **Present:** Nunnu crying, conflicted
+
+**PLAYER CHOICE:**
+
+- **Option A:** *“Report me. I deserve it. Clear your conscience.”* (Honor path)
+- **Option B:** *“Help me this once. Please. For family.”* (Manipulation path)
+- **Option C:** *“You’re in too deep already. We’re both criminals now.”* (Dark path)
+
+**Consequences:**
+
+- **Option A:** Nunnu hesitates, ultimately helps, secret alliance begins (best outcome)
+- **Option B:** Nunnu helps but resents manipulation (neutral outcome)
+- **Option C:** Nunnu disgusted, reports anonymously later (betrayal path unlocked)
+
+**Aftermath:**
+
+- If helped: Nunnu becomes secret medic, provides hospital intel
+- If betrayed: Police investigation begins (Act 8 betrayal comes sooner)
+
+**Side Content (40 missions):**
+
+- 20 Addu conquest battles
+- 10 influencer collaboration missions
+- 5 Ahmed Muaz Islamist gang joint operations
+- 5 underwater diving treasure hunts (hidden drug stashes)
+
+**Unlocks:**
+
+- Full Addu City control (12 gangs)
+- Nunnu as ally (if chose right)
+- Ahmed Muaz brother bond (if accepted)
+- Hospital heist mechanics
+- Underwater exploration zones
+
+-----
+
+## 
