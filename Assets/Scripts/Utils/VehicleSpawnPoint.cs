@@ -1,23 +1,27 @@
 using UnityEngine;
+using RVA.TAC.Vehicles;
 
-/// <summary>
-/// Defines a point in the world where vehicles can be spawned.
-/// </summary>
-public class VehicleSpawnPoint : MonoBehaviour
+namespace RVA.TAC.Utils
 {
-    public VehicleController.VehicleType spawnType; // Land or Boat
-    public bool isOccupied = false;
-    public GameObject currentVehicle;
-
-    public void SetOccupied(GameObject vehicle)
+    /// <summary>
+    /// Defines a point in the world where vehicles can be spawned.
+    /// </summary>
+    public class VehicleSpawnPoint : MonoBehaviour
     {
-        isOccupied = true;
-        currentVehicle = vehicle;
-    }
+        public VehicleController.VehicleType spawnType; // Land or Boat
+        public bool isOccupied = false;
+        public GameObject currentVehicle;
 
-    public void SetUnoccupied()
-    {
-        isOccupied = false;
-        currentVehicle = null;
+        public void SetOccupied(GameObject vehicle)
+        {
+            isOccupied = true;
+            currentVehicle = vehicle;
+        }
+
+        public void SetUnoccupied()
+        {
+            isOccupied = false;
+            currentVehicle = null;
+        }
     }
 }

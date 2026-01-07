@@ -45,7 +45,9 @@ using System.Text;
 /// JSON uses Arrays and Objects. These correspond here to the datatypes IList and IDictionary.
 /// All numbers are parsed to doubles.
 /// </summary>
-public static class MiniJSON
+namespace RVA.TAC.Utils
+{
+    public static class MiniJSON
 {
     private const int TOKEN_NONE = 0;
     private const int TOKEN_CURLY_OPEN = 1;
