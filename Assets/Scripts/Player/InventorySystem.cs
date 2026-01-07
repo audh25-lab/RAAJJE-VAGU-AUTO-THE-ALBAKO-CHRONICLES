@@ -1,10 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-namespace RVA.TAC.Procedural
+namespace RVA.TAC.Player
 {
-    public class CulturalValidationEngine : MonoBehaviour
+    public class InventorySystem : MonoBehaviour
     {
-        public static CulturalValidationEngine Instance { get; private set; }
+        public static InventorySystem Instance { get; private set; }
 
         private void Awake()
         {
@@ -18,10 +19,9 @@ namespace RVA.TAC.Procedural
             }
         }
 
-        public bool Validate(object data)
+        public void AddItem(string itemName)
         {
-            Debug.Log("CulturalValidationEngine: Validated data.");
-            return true;
+            Debug.Log($"InventorySystem: Added item {itemName}");
         }
     }
 }

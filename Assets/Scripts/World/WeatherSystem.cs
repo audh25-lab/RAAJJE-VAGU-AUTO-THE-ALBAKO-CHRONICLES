@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace RVA.TAC.Procedural
+namespace RVA.TAC.World
 {
-    public class CulturalValidationEngine : MonoBehaviour
+    public class WeatherSystem : MonoBehaviour
     {
-        public static CulturalValidationEngine Instance { get; private set; }
+        public static WeatherSystem Instance { get; private set; }
 
         private void Awake()
         {
@@ -18,10 +18,9 @@ namespace RVA.TAC.Procedural
             }
         }
 
-        public bool Validate(object data)
+        public void SetWeather(string weatherType)
         {
-            Debug.Log("CulturalValidationEngine: Validated data.");
-            return true;
+            Debug.Log($"WeatherSystem: Set weather to {weatherType}");
         }
     }
 }

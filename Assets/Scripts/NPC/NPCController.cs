@@ -373,15 +373,7 @@ namespace RVA.TAC.NPC
             yield return new WaitForSeconds(delay);
             if (_currentTarget != null && Vector3.Distance(transform.position, _currentTarget.position) <= AttackRadius * 1.1f)
             {
-                // This is where a proper combat system would handle the damage
-                if (_currentTarget.TryGetComponent<PlayerController>(out var player))
-                {
-                    player.TakeDamage(AttackDamage);
-                }
-                else if (_currentTarget.TryGetComponent<NPCController>(out var npc))
-                {
-                    npc.TakeDamage(AttackDamage);
-                }
+                RVA.TAC.Core.CombatSystem.Instance.ProcessAttack(gameObject, _currentTarget.gameObject);
             }
         }
 

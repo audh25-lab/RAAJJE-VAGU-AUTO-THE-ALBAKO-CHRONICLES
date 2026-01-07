@@ -335,6 +335,7 @@ namespace RVA.TAC.Player
             #region Boat Boarding/Exiting
             if (_inputSystem?.GetActionInput() == true)
             {
+                InteractionSystem.Instance.Interact();
                 if (!_isInBoat)
                 {
                     TryBoardBoat();

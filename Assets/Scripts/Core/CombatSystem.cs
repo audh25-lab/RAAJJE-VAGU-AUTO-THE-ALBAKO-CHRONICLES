@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace RVA.TAC.Procedural
+namespace RVA.TAC.Core
 {
-    public class CulturalValidationEngine : MonoBehaviour
+    public class CombatSystem : MonoBehaviour
     {
-        public static CulturalValidationEngine Instance { get; private set; }
+        public static CombatSystem Instance { get; private set; }
 
         private void Awake()
         {
@@ -18,10 +18,9 @@ namespace RVA.TAC.Procedural
             }
         }
 
-        public bool Validate(object data)
+        public void ProcessAttack(GameObject attacker, GameObject target)
         {
-            Debug.Log("CulturalValidationEngine: Validated data.");
-            return true;
+            Debug.Log($"CombatSystem: {attacker.name} attacked {target.name}");
         }
     }
 }

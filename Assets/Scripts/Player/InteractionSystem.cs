@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace RVA.TAC.Procedural
+namespace RVA.TAC.Player
 {
-    public class CulturalValidationEngine : MonoBehaviour
+    public class InteractionSystem : MonoBehaviour
     {
-        public static CulturalValidationEngine Instance { get; private set; }
+        public static InteractionSystem Instance { get; private set; }
 
         private void Awake()
         {
@@ -18,10 +18,9 @@ namespace RVA.TAC.Procedural
             }
         }
 
-        public bool Validate(object data)
+        public void Interact()
         {
-            Debug.Log("CulturalValidationEngine: Validated data.");
-            return true;
+            Debug.Log("InteractionSystem: Interacted");
         }
     }
 }

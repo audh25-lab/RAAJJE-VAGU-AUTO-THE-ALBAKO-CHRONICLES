@@ -1,62 +1,36 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.IO;
 
-/// <summary>
-/// VehicleGenerator is a simplified system for creating varied vehicle appearances.
-/// It customizes base vehicle prefabs by applying random colors and attaching
-/// simple cosmetic props like spoilers or decals.
-/// </summary>
-public class VehicleGenerator : MonoBehaviour
+namespace RVA.TAC.Procedural
 {
-    [Header("Customization Options")]
-    [Tooltip("A list of possible colors to apply to the vehicle's body.")]
-    [SerializeField] private List<Color> vehicleColors;
-    [Tooltip("A list of optional cosmetic attachments (e.g., spoilers, roof racks).")]
-    [SerializeField] private List<GameObject> cosmeticAttachments;
-
-    /// <summary>
-    /// Generates a customized vehicle from a base prefab.
-    /// </summary>
-    /// <param name="basePrefab">The base vehicle prefab to customize.</param>
-    /// <param name="position">The position to spawn the new vehicle at.</param>
-    /// <returns>The newly created and customized vehicle GameObject.</returns>
-    public GameObject GenerateVehicle(GameObject basePrefab, Vector3 position)
+    public class VehicleGenerator : MonoBehaviour
     {
-        if (basePrefab == null)
-        {
-            Debug.LogError("Base vehicle prefab is not assigned.");
-            return null;
-        }
+        public static VehicleGenerator Instance { get; private set; }
 
-        GameObject newVehicle = Instantiate(basePrefab, position, Quaternion.identity);
-
-        // --- Apply a Random Color ---
-        if (vehicleColors != null && vehicleColors.Count > 0)
+        private void Awake()
         {
-            // This assumes the prefab has a 'Body' child with a SpriteRenderer to color.
-            SpriteRenderer bodyRenderer = newVehicle.transform.Find("Body")?.GetComponent<SpriteRenderer>();
-            if (bodyRenderer != null)
+            if (Instance != null && Instance != this)
             {
-                bodyRenderer.color = vehicleColors[Random.Range(0, vehicleColors.Count)];
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
             }
         }
 
-        // --- Add a Random Cosmetic Attachment ---
-        if (cosmeticAttachments != null && cosmeticAttachments.Count > 0)
+        public void GenerateVehicles()
         {
-            // 30% chance to add a cosmetic item
-            if (Random.value < 0.3f)
+            List<object> vehicles = new List<object>();
+            for (int i = 0; i < 50; i++)
             {
-                GameObject attachmentPrefab = cosmeticAttachments[Random.Range(0, cosmeticAttachments.Count)];
-                // This assumes the prefab has an 'AttachmentPoint' transform to parent the cosmetic to.
-                Transform attachmentPoint = newVehicle.transform.Find("AttachmentPoint");
-                if (attachmentPoint != null)
-                {
-                    Instantiate(attachmentPrefab, attachmentPoint.position, attachmentPoint.rotation, newVehicle.transform);
-                }
+                vehicles.Add(new { type = $"Vehicle_{i}", color = "Red" });
             }
-        }
 
-        return newVehicle;
+            string json = MiniJSON.Encode(new Dictionary<string, object> { { "vehicles", vehicles } });
+            File.WriteAllText(Path.Combine(Application.streamingAssetsPath, "Procedural/vehicles.json"), json);
+            Debug.Log("Generated 50 vehicles.");
+        }
     }
 }
